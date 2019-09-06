@@ -15,7 +15,7 @@ plugins {
 
     id 'jacoco'
 
-    id 'checkstyle'
+    // id 'checkstyle'
 }
 
 jacocoTestReport {
@@ -35,10 +35,13 @@ dependencies {
     // This dependency is used by the application.
     implementation 'com.google.guava:guava:28.0-jre'
 
+    compile group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
+
     // Use JUnit test framework
     testImplementation 'junit:junit:4.12'
 
 }
+
 
 application {
     // Define the main class for the application
