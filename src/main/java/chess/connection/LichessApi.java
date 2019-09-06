@@ -6,6 +6,7 @@
 package chess.connection;
 
 import java.io.IOException;
+import java.util.HashMap;
 import org.json.*;
 
 public class LichessApi {
@@ -13,7 +14,11 @@ public class LichessApi {
     private String gameId;
     
     public LichessApi(String token) {
+        HashMap<String, String> headers = new HashMap<>();
         
+        headers.put("Authorization", "Bearer " + token);
+        
+        this.http = new HTTPHandler(headers);
     }
     
     public String getAccount() throws IOException {
