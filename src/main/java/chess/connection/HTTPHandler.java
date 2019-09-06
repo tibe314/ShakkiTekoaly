@@ -1,4 +1,4 @@
-package chess;
+package chess.connection;
 
 import java.io.*;
 import java.net.*;
