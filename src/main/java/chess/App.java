@@ -3,12 +3,39 @@
  */
 package chess;
 
-public class App {
-    public String getGreeting() {
-        return "Hello world.";
-    }
+import chess.connection.EventPump;
+import chess.connection.LichessApi;
+import java.io.IOException;
+import java.util.ArrayDeque;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
+public class App {
     public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
+        LichessApi api = new LichessApi("0d8DjrXzr4FFiPxe");
+        
+        ArrayDeque<String> eventQueue = new ArrayDeque<>();
+        
+        EventPump pump = new EventPump("0d8DjrXzr4FFiPxe", "https://lichess.org/api/stream/event", eventQueue);
+        
+        Thread eventPumpThread = new Thread(pump, "pump");
+        
+        eventPumpThread.start();
+        
+        try {
+            System.out.println("Account details:");
+            System.out.println(api.getAccount());
+            
+            System.out.println("Events:");
+            
+            while (true) {
+                if (pump.hasNext()) {
+                    System.out.println(pump.next());
+                }
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
 }
