@@ -8,13 +8,14 @@ public class HTTPHandler {
     
     private Map<String, String> headerFields;
     
-    HTTPHandler(Map<String, String> headerFields){
+    public HTTPHandler(Map<String, String> headerFields){
         this.headerFields = headerFields;
     }
 
     public String get(String urlString) throws IOException {
         URL url = new URL(urlString);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        this.setHeader(conn); //Set header fields
         String body = parseGetBody(conn.getInputStream());
         conn.disconnect();
         return body;
@@ -23,13 +24,13 @@ public class HTTPHandler {
     public String post(String urlString, String postData) throws IOException {
         URL url = new URL(urlString);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        this.setHeader(conn); //Set header fields
         conn.setRequestMethod("POST"); //Default method is GET
         conn.setDoOutput(true); //False by default
         writePost(conn.getOutputStream(),postData);
         String body = parseGetBody(conn.getInputStream());
         conn.disconnect();
         return body;
-
     }
 
     private String parseGetBody(InputStream is) throws IOException {
@@ -47,6 +48,10 @@ public class HTTPHandler {
             output.flush();
             output.close();
         }
+    }
+    
+    private void setHeader(HttpURLConnection conn) throws IOException {
+        this.headerFields.forEach((key, value) -> conn.setRequestProperty(key, value));
     }
 
 }
