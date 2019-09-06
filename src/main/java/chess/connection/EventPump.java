@@ -20,13 +20,11 @@ import java.util.logging.Logger;
 public class EventPump implements Runnable {
 
     private ArrayDeque<String> eventQueue;
-    private String token;
-    private String urlString;
+    private InputStream inputStream;
     
-    public EventPump(String token, String url, ArrayDeque<String> eventQueue) {
+    public EventPump(InputStream stream, ArrayDeque<String> eventQueue) {
         this.eventQueue = eventQueue;
-        this.urlString = url;
-        this.token = token;
+        this.inputStream = stream;
     }
     
     public synchronized boolean hasNext() {
@@ -43,36 +41,22 @@ public class EventPump implements Runnable {
     
     @Override
     public void run() {
-        URL url;
+        String line;
         
-        String line = "";
+        BufferedReader jsonStream;
         
         try {
-            url = new URL(urlString);
-            HttpURLConnection conn;
-            try {
-                conn = (HttpURLConnection) url.openConnection();
-                conn.setRequestProperty("Authorization", "Bearer " + token);
-                BufferedReader jsonStream;
-                try {
-                    jsonStream = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            jsonStream = new BufferedReader(new InputStreamReader(inputStream));
                     
-                    while (jsonStream.ready()) {
-                        line = jsonStream.readLine();
+            while (jsonStream.ready()) {
+                line = jsonStream.readLine();
                         
-                        pushEvent(line);
-                    }
-                } catch (IOException ex) {
-                    Logger.getLogger(EventPump.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            } catch (IOException ex) {
-                Logger.getLogger(EventPump.class.getName()).log(Level.SEVERE, null, ex);
+                pushEvent(line);
             }
-            
-            
-        } catch (MalformedURLException ex) {
+        } catch (IOException ex) {
             Logger.getLogger(EventPump.class.getName()).log(Level.SEVERE, null, ex);
         }
+         
     }
     
 }
