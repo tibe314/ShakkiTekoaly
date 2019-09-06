@@ -9,14 +9,14 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayDeque;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
+/**
+ * Asynchronous line reader
+ * 
+ */
 public class EventPump implements Runnable {
 
     private ArrayDeque<String> eventQueue;
@@ -27,14 +27,27 @@ public class EventPump implements Runnable {
         this.inputStream = stream;
     }
     
+    /**
+     * Check if the queue contains a line
+     * @return true if queue is not empty, false otherwise
+     */
     public synchronized boolean hasNext() {
         return !eventQueue.isEmpty();
     }
     
+    /**
+     * Return the next line in the queue
+     * 
+     * @return 
+     */
     public synchronized String next() {
         return eventQueue.removeFirst();
     }
     
+    /**
+     * Synchronously push a new event into the queue
+     * @param event 
+     */
     private synchronized void pushEvent(String event) {
         eventQueue.add(event);
     }
