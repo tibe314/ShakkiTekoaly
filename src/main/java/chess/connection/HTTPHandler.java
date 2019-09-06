@@ -2,8 +2,15 @@ package chess.connection;
 
 import java.io.*;
 import java.net.*;
+import java.util.Map;
 
 public class HTTPHandler {
+    
+    private Map<String, String> headerFields;
+    
+    HTTPHandler(Map<String, String> headerFields){
+        this.headerFields = headerFields;
+    }
 
     public String get(String urlString) throws IOException {
         URL url = new URL(urlString);
