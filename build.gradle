@@ -15,7 +15,7 @@ plugins {
 
     id 'jacoco'
 
-    id 'checkstyle'
+    // id 'checkstyle'
 }
 
 jacocoTestReport {
@@ -28,7 +28,7 @@ jacocoTestReport {
 repositories {
     // Use jcenter for resolving dependencies.
     // You can declare any Maven/Ivy/file repository here.
-    jcenter()
+    mavenCentral()
 }
 
 dependencies {
@@ -37,7 +37,7 @@ dependencies {
 
     // Use JUnit test framework
     testImplementation 'junit:junit:4.12'
-
+    compile group: 'org.json', name: 'json', version: '20190722'
 }
 
 application {
