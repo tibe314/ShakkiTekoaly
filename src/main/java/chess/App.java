@@ -12,7 +12,7 @@ import java.util.logging.Logger;
 
 public class App {
     public static void main(String[] args) {
-        LichessApi api = new LichessApi("0d8DjrXzr4FFiPxe");
+        LichessApi api = new LichessApi("<Insert Token Here>");
         
     }
 }
