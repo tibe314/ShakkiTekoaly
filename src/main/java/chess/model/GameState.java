@@ -33,10 +33,13 @@ public class GameState {
         if (jsonGameState.getString("type").equals("gameFull")) {
             gameState.id = jsonGameState.getString("id");
             
-            gameState.playingWhite = jsonGameState.getJSONObject("white").getString("id");
-            gameState.playingBlack = jsonGameState.getJSONObject("black").getString("id");
+            gameState.playingWhite = jsonGameState
+                    .getJSONObject("white").getString("id");
+            gameState.playingBlack = jsonGameState
+                    .getJSONObject("black").getString("id");
             
-            String[] moves = jsonGameState.getJSONObject("state").getString("moves").split(" ");
+            String[] moves = jsonGameState
+                    .getJSONObject("state").getString("moves").split(" ");
             
             gameState.moves = new ArrayList<>(Arrays.asList(moves));
         }
@@ -54,7 +57,8 @@ public class GameState {
         if (jsonGameState.getString("type").equals("gameFull")) {
             this.id = jsonGameState.getString("id");
             
-            String[] moves = jsonGameState.getJSONObject("state").getString("moves").split(" ");
+            String[] moves = jsonGameState
+                    .getJSONObject("state").getString("moves").split(" ");
             
             this.moves = new ArrayList<>(Arrays.asList(moves));
         } else if (jsonGameState.getString("type").equals("gameState")) {

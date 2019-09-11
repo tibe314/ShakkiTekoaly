@@ -25,8 +25,7 @@ public class Event {
             JSONObject jsonChallenge = jsonEvent.getJSONObject("challenge");
             
             event.id = jsonChallenge.getString("id");
-        }
-        else { 
+        } else { 
             event.type = EventType.GameStart;
             JSONObject jsonGame = jsonEvent.getJSONObject("game");
             

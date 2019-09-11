@@ -37,8 +37,20 @@ public class EventTest {
     public void tearDown() {
     }
 
-    public String testJson = "{\"type\":\"challenge\",\"challenge\":{\"id\":\"7pGLxJ4F\",\"status\":\"created\",\"challenger\":{\"id\":\"lovlas\",\"name\":\"Lovlas\",\"title\":\"IM\",\"rating\":2506,\"patron\":true,\"online\":true,\"lag\":24},\"destUser\":{\"id\":\"thibot\",\"name\":\"thibot\",\"title\":null,\"rating\":1500,\"provisional\":true,\"online\":true,\"lag\":45},\"variant\":{\"key\":\"standard\",\"name\":\"Standard\",\"short\":\"Std\"},\"rated\":true,\"timeControl\":{\"type\":\"clock\",\"limit\":300,\"increment\":25,\"show\":\"5+25\"},\"color\":\"random\",\"perf\":{\"icon\":\"#\",\"name\":\"Rapid\"}}}";
-    public String testJson2 = "{\"type\":\"gameStart\",\"game\":{\"id\":\"1lsvP62l\"}}";
+    public String testJson = "{\"type\":\"challenge\","
+            + "\"challenge\":{\"id\":\"7pGLxJ4F\",\"status\":\"created\","
+            + "\"challenger\":{\"id\":\"lovlas\",\"name\":\"Lovlas\","
+            + "\"title\":\"IM\",\"rating\":2506,\"patron\":true,"
+            + "\"online\":true,\"lag\":24},\"destUser\":{\"id\":\"thibot\","
+            + "\"name\":\"thibot\",\"title\":null,\"rating\":1500,"
+            + "\"provisional\":true,\"online\":true,\"lag\":45},"
+            + "\"variant\":{\"key\":\"standard\",\"name\":\"Standard\","
+            + "\"short\":\"Std\"},\"rated\":true,"
+            + "\"timeControl\":{\"type\":\"clock\",\"limit\":300,"
+            + "\"increment\":25,\"show\":\"5+25\"},\"color\":\"random\","
+            + "\"perf\":{\"icon\":\"#\",\"name\":\"Rapid\"}}}";
+    public String testJson2 = "{\"type\":\"gameStart\","
+            + "\"game\":{\"id\":\"1lsvP62l\"}}";
     
     // TODO add test methods here.
     // The methods must be annotated with annotation @Test. For example:
@@ -50,7 +62,7 @@ public class EventTest {
         event = Event.parseFromJson(testJson);
         event = Event.parseFromJson(testJson2);
         
-        assert(true);
+        assert (true);
     }
     
     @Test
@@ -59,7 +71,7 @@ public class EventTest {
         
         event = Event.parseFromJson(testJson);
         
-        assert(event.type == EventType.Challenge);
+        assert (event.type == EventType.Challenge);
     }
     
     @Test
@@ -68,7 +80,7 @@ public class EventTest {
         
         event = Event.parseFromJson(testJson2);
         
-        assert(event.type == EventType.GameStart);
+        assert (event.type == EventType.GameStart);
     }
     
     @Test

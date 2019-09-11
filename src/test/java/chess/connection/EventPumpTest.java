@@ -6,7 +6,7 @@
 package chess.connection;
 
 import java.io.ByteArrayInputStream;
-import java.io.IOException;
+// import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayDeque;
 import java.util.logging.Level;
@@ -35,7 +35,8 @@ public class EventPumpTest {
     public static void tearDownClass() {
     }
     
-    private InputStream testStream = new ByteArrayInputStream("test\n test2\n test3\n".getBytes());
+    private InputStream testStream = 
+            new ByteArrayInputStream("test\n test2\n test3\n".getBytes());
     private ArrayDeque<String> testQueue;
     
     private EventPump pump;
@@ -76,7 +77,8 @@ public class EventPumpTest {
         try {
             Thread.sleep(1000);
         } catch (InterruptedException ex) {
-            Logger.getLogger(EventPumpTest.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(EventPumpTest.class.getName())
+                    .log(Level.SEVERE, null, ex);
         }
         
         assertEquals(pump.hasNext(), true);
@@ -89,13 +91,14 @@ public class EventPumpTest {
         try {
             Thread.sleep(1000);
         } catch (InterruptedException ex) {
-            Logger.getLogger(EventPumpTest.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(EventPumpTest.class.getName())
+                    .log(Level.SEVERE, null, ex);
         }
         
         String first = pump.next();
         String second = pump.next();
         String third = pump.next();
         
-        assert(true);
+        assert (true);
     }
 }

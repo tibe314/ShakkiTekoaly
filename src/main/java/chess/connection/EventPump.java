@@ -67,7 +67,8 @@ public class EventPump implements Runnable {
                 pushEvent(line);
             }
         } catch (IOException ex) {
-            Logger.getLogger(EventPump.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(EventPump.class.getName())
+                    .log(Level.SEVERE, null, ex);
         }
          
     }

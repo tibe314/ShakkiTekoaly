@@ -30,14 +30,17 @@ public class LichessApi {
     }
     
     public String acceptChallenge(String challengeId) throws IOException {
-        return this.http.post("https://lichess.org/api/challenge/%s/accept".format(challengeId), "");
+        return this.http.post("https://lichess.org/api/challenge/%s/accept"
+                .format(challengeId), "");
     }
     
     public String getGamestate() throws IOException {
-        return this.http.get("https://lichess.org/api/bot/game/stream/" + gameId);
+        return this.http.get("https://lichess.org/api/bot/game/stream/" 
+                + gameId);
     }
     
     public String makeMove(String move) throws IOException {
-        return this.http.post("https://lichess.org/api/bot/game/%s/move/%s".format(gameId, move), "offeringDraw=false");
+        return this.http.post("https://lichess.org/api/bot/game/%s/move/%s"
+                .format(gameId, move), "offeringDraw=false");
     }
 }

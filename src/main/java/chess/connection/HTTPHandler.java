@@ -8,7 +8,7 @@ public class HTTPHandler {
     
     private Map<String, String> headerFields;
     
-    public HTTPHandler(Map<String, String> headerFields){
+    public HTTPHandler(Map<String, String> headerFields) {
         this.headerFields = headerFields;
     }
 
@@ -27,7 +27,7 @@ public class HTTPHandler {
         this.setHeader(conn); //Set header fields
         conn.setRequestMethod("POST"); //Default method is GET
         conn.setDoOutput(true); //False by default
-        writePost(conn.getOutputStream(),postData);
+        writePost(conn.getOutputStream(), postData);
         String body = parseGetBody(conn.getInputStream());
         conn.disconnect();
         return body;
@@ -37,11 +37,13 @@ public class HTTPHandler {
         BufferedReader bReader = new BufferedReader(
                 new InputStreamReader(is));
         return bReader.lines()
-                .reduce((all, newLine) -> all.concat(newLine)) //Parse lines to single line, i.e. no new-lines
+                .reduce((all, newLine) -> all.concat(newLine))
+                                //Parse lines to single line, i.e. no new-lines
                 .orElse(""); //Return empty string if input was empty
     }
 
-    private void writePost(OutputStream output, String postBody) throws IOException {
+    private void writePost(OutputStream output, 
+            String postBody) throws IOException {
         try {
             output.write(postBody.getBytes("UTF-8"));
         } finally {
@@ -51,7 +53,8 @@ public class HTTPHandler {
     }
     
     private void setHeader(HttpURLConnection conn) throws IOException {
-        this.headerFields.forEach((key, value) -> conn.setRequestProperty(key, value));
+        this.headerFields.forEach((key, value) 
+            -> conn.setRequestProperty(key, value));
     }
 
 }
