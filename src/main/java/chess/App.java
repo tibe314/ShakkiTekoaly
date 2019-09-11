@@ -3,12 +3,16 @@
  */
 package chess;
 
-public class App {
-    public String getGreeting() {
-        return "Hello world.";
-    }
+import chess.connection.EventPump;
+import chess.connection.LichessApi;
+import java.io.IOException;
+import java.util.ArrayDeque;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
+public class App {
     public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
+        LichessApi api = new LichessApi("<Insert Token Here>");
+        
     }
 }
