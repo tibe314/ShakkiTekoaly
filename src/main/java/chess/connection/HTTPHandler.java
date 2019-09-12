@@ -1,8 +1,9 @@
 package chess.connection;
 
-import com.mashape.unirest.http.Unirest;
-import com.mashape.unirest.request.HttpRequest;
+
 import java.util.Map;
+import kong.unirest.HttpRequest;
+import kong.unirest.Unirest;
 
 public class HTTPHandler {
     private Map<String, String> headerFields;

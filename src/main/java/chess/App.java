@@ -13,10 +13,12 @@ import chess.model.Profile;
 
 public class App {
     public static void main(String[] args) {
-        LichessAPI api = new LichessAPI("6iqx5TbL0QsFyqxR");
+        LichessAPI api = new LichessAPI("0mK291CAd6ljJNhD");
         
         Profile myProfile = api.getAccount();
         
         System.out.println("Profile ID: " + myProfile.id);
+        
+        api.getEvents();
     }
 }
