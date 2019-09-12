@@ -4,7 +4,8 @@
 package chess;
 
 // import chess.connection.EventPump;
-import chess.connection.LichessApi;
+import chess.connection.LichessAPI;
+import chess.model.Profile;
 // import java.io.IOException;
 // import java.util.ArrayDeque;
 // import java.util.logging.Level;
@@ -12,7 +13,10 @@ import chess.connection.LichessApi;
 
 public class App {
     public static void main(String[] args) {
-        LichessApi api = new LichessApi("<Insert Token Here>");
+        LichessAPI api = new LichessAPI("6iqx5TbL0QsFyqxR");
         
+        Profile myProfile = api.getAccount();
+        
+        System.out.println("Profile ID: " + myProfile.id);
     }
 }
