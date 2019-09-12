@@ -82,6 +82,6 @@ public class LichessAPI {
     public String makeMove(String move) {
         return Unirest.post("https://lichess.org/api/bot/game/{gameId}/move/" + move)
                 .header("Authorization", "Bearer " + token)
-                .field("offeringDraw", "false").asString().getBody();
+                .field("offeringDraw", "false").asEmpty().getStatusText();
     }
 }

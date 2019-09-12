@@ -13,7 +13,7 @@ import chess.model.Profile;
 
 public class App {
     public static void main(String[] args) {
-        LichessAPI api = new LichessAPI("0mK291CAd6ljJNhD");
+        LichessAPI api = new LichessAPI("<Insert Token Here>");
         
         Profile myProfile = api.getAccount();
         
