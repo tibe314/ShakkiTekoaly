@@ -9,13 +9,11 @@ import chess.model.Event;
 import chess.model.EventType;
 import chess.model.Profile;
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import kong.unirest.Unirest;
 import kong.unirest.UnirestException;
-import org.json.*;
 
 public class LichessAPI {
     private HTTPHandler http;
@@ -35,7 +33,8 @@ public class LichessAPI {
     public Profile getAccount() {
         String json;
         try {
-            json = (String) this.http.get("https://lichess.org/api/account").asString().getBody();
+            json = (String) this.http.get("https://lichess.org/api/account")
+                    .asString().getBody();
             
             Profile profile = Profile.parseFromJson(json);
         
@@ -49,21 +48,23 @@ public class LichessAPI {
     
     // This is mainly just for show now, calling it results in infinite loop
     public void getEvents() {
-        Unirest.get("https://lichess.org/api/stream/event").header("Authorization", "Bearer " + token).thenConsume(r -> {
-            BufferedReader reader = new BufferedReader(r.getContentReader());
+        Unirest.get("https://lichess.org/api/stream/event")
+                .header("Authorization", "Bearer " + token)
+                .thenConsume(r -> {
+                    BufferedReader reader = new BufferedReader(r.getContentReader());
             
-            reader.lines().forEach(line -> {
-                Event event = Event.parseFromJson(line);
+                    reader.lines().forEach(line -> {
+                        Event event = Event.parseFromJson(line);
                 
-                System.out.println("New event: " + event.type + " id: " + event.id);
+                        System.out.println("New event: " + event.type + " id: " + event.id);
                 
-                if (event.type == EventType.Challenge) {
-                    System.out.println("Accepting challenge: " + event.id);
-                    System.out.println(acceptChallenge(event.id));
-                }
-            });
+                        if (event.type == EventType.Challenge) {
+                            System.out.println("Accepting challenge: " + event.id);
+                            System.out.println(acceptChallenge(event.id));
+                        }
+                    });
             
-        });
+                });
     }
     
     public String acceptChallenge(String id) {
