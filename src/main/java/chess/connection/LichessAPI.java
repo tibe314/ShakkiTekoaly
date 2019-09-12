@@ -17,8 +17,8 @@ import kong.unirest.UnirestException;
 
 public class LichessAPI {
     private HTTPHandler http;
+    private final String token;
     private String gameId;
-    private String token;
     
     public LichessAPI(String token) {
         HashMap<String, String> headers = new HashMap<>();
@@ -29,7 +29,10 @@ public class LichessAPI {
         this.token = token;
     }
     
-    
+    /**
+     * Get Lichess account information
+     * @return Profile for the account associated with the given Lichess token
+     */
     public Profile getAccount() {
         String json;
         try {
@@ -47,6 +50,10 @@ public class LichessAPI {
     }
     
     // This is mainly just for show now, calling it results in infinite loop
+    /**
+     * Read events from Lichess and react to them
+     * Will accept all Challenges
+     */
     public void getEvents() {
         Unirest.get("https://lichess.org/api/stream/event")
                 .header("Authorization", "Bearer " + token)
@@ -57,30 +64,55 @@ public class LichessAPI {
                         Event event = Event.parseFromJson(line);
                 
                         System.out.println("New event: " + event.type + " id: " + event.id);
-                
-                        if (event.type == EventType.Challenge) {
-                            System.out.println("Accepting challenge: " + event.id);
-                            System.out.println(acceptChallenge(event.id));
+                        
+                        switch (event.type) {
+                            case Challenge:
+                                System.out.println("Accepting challenge: " + event.id);
+                                System.out.println(acceptChallenge(event.id));
+                                break;
+                            case GameStart:
+                                System.out.println("Game starting...");
+                                
+                                this.gameId = event.id;
+                                
+                                // TODO: begin the game handling code here
+                                
+                                break;
                         }
                     });
             
                 });
     }
     
+    /**
+     * Accept a Lichess challenge
+     * @param id The ID of the challenge event
+     * @return The HTTP status text of the POST request response
+     */
     public String acceptChallenge(String id) {
         return Unirest.post("https://lichess.org/api/challenge/" + id + "/accept")
                 .header("Authorization", "Bearer " + token)
                 .asEmpty().getStatusText();
     }
     
+    /**
+     * Decline a Lichess challenge
+     * @param id The ID of the challenge event
+     * @return The HTTP status text of the POST request response
+     */
     public String declineChallenge(String id) {
         return Unirest.post("https://lichess.org/api/challenge/" + id + "/decline")
                 .header("Authorization", "Bearer " + token)
                 .asEmpty().getStatusText();
     }
     
+    /**
+     * Make a move in the current Lichess game
+     * @param move The chess move in UCI format
+     * @return The HTTP status text of the POST request response
+     */
     public String makeMove(String move) {
-        return Unirest.post("https://lichess.org/api/bot/game/{gameId}/move/" + move)
+        return Unirest.post("https://lichess.org/api/bot/game/" + this.gameId + "/move/" + move)
                 .header("Authorization", "Bearer " + token)
                 .field("offeringDraw", "false").asEmpty().getStatusText();
     }
