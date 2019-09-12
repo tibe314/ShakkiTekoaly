@@ -21,6 +21,7 @@ public class LichessApi {
         this.http = new HTTPHandler(headers);
     }
     
+    /*
     public String getAccount() throws IOException {
         return this.http.get("https://lichess.org/api/account");
     }
@@ -43,4 +44,5 @@ public class LichessApi {
         return this.http.post("https://lichess.org/api/bot/game/%s/move/%s"
                 .format(gameId, move), "offeringDraw=false");
     }
+*/
 }
