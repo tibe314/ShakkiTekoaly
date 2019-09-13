@@ -18,6 +18,10 @@ public class GameState {
     
     public ArrayList<String> moves;
     
+    public GameState() {
+        
+    }
+    
     /**
      * Parses a full game state from a gameFull JSON object
      * <b>Note:</b> Use only to gain the initial game state,
@@ -56,6 +60,11 @@ public class GameState {
         
         if (jsonGameState.getString("type").equals("gameFull")) {
             this.id = jsonGameState.getString("id");
+            
+            this.playingWhite = jsonGameState
+                    .getJSONObject("white").getString("id");
+            this.playingBlack = jsonGameState
+                    .getJSONObject("black").getString("id");
             
             String[] moves = jsonGameState
                     .getJSONObject("state").getString("moves").split(" ");
