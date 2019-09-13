@@ -10,6 +10,7 @@ import chess.model.Event;
 import chess.model.GameState;
 import chess.model.Profile;
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -91,14 +92,20 @@ public class LichessAPI {
         String playerId = this.getAccount().id;
         
         System.out.println("Game starting...");
-        
+        while(true){
         Unirest.get("https://lichess.org/api/bot/game/stream/" + gameId)
                 .header("Authorization", "Bearer " + token)
                 .thenConsume(r -> {
                     BufferedReader reader = new BufferedReader(r.getContentReader());
                     GameState gs = new GameState();
-                    reader.lines().forEach(line -> {
-                        gs.updateFromJson(line);
+
+            try {
+                gs.updateFromJson(reader.readLine());
+//                    reader.lines().forEach(line -> {
+//                        gs.updateFromJson(line);
+            } catch (IOException ex) {
+                Logger.getLogger(LichessAPI.class.getName()).log(Level.SEVERE, null, ex);
+            }
                         
                         System.out.println("Received update.");
                         
@@ -119,8 +126,9 @@ public class LichessAPI {
                         } else {
                             System.out.println("Not my turn.");
                         }
-                    });
+//                    });
                 });
+        }
     }
     
     /**
