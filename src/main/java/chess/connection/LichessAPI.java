@@ -104,12 +104,16 @@ public class LichessAPI {
                             // Call the bot
                             String move = bot.nextMove(gs);
                             
-                            makeMove(move);
+                            System.out.println("Making move: " + move);
+                            
+                            System.out.println(makeMove(move));
                         } else if (gs.moves.size() % 2 != 0 && gs.playingBlack.equals(playerId)) {
                             // Call the bot
                             String move = bot.nextMove(gs);
                             
-                            makeMove(move);
+                            System.out.println("Making move: " + move);
+                            
+                            System.out.println(makeMove(move));
                         }
                     });
                 });
