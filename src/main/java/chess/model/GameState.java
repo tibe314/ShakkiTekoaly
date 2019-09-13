@@ -7,6 +7,9 @@ package chess.model;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import chess.engine.Engine;
+import com.github.bhlangonijr.chesslib.Square;
+import com.github.bhlangonijr.chesslib.move.Move;
 
 import org.json.JSONObject;
 
@@ -17,6 +20,8 @@ public class GameState {
     public String playingWhite;
     
     public ArrayList<String> moves;
+    
+    public Engine engine = new Engine();
     
     public GameState() {
         
@@ -76,6 +81,18 @@ public class GameState {
             this.moves = new ArrayList<>(Arrays.asList(moves));
         } else {
             // This would only have chat stuff, we probably don't need it.
+        }
+        parseLatestMove();
+    }
+    
+    private void parseLatestMove(){
+        if(!this.moves.isEmpty()){
+           String startingString = this.moves.get(this.moves.size() - 1).substring(0, 2).toUpperCase();
+           String endingString = this.moves.get(this.moves.size() - 1).substring(2, 4).toUpperCase();
+           Move latestMove = new Move(
+                 Square.fromValue(startingString),
+                   Square.valueOf(endingString));
+         this.engine.getBoard().doMove(latestMove);
         }
     }
 }
