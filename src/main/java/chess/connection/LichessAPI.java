@@ -5,8 +5,9 @@
  */
 package chess.connection;
 
+import chess.TestBot;
 import chess.model.Event;
-import chess.model.EventType;
+import chess.model.GameState;
 import chess.model.Profile;
 import java.io.BufferedReader;
 import java.util.HashMap;
@@ -18,15 +19,19 @@ import kong.unirest.UnirestException;
 public class LichessAPI {
     private HTTPHandler http;
     private final String token;
+    private TestBot bot;
     private String gameId;
     
-    public LichessAPI(String token) {
+    public LichessAPI(TestBot bot) {
+        this.bot = bot;
+        
+        this.token = bot.getToken();
+        
         HashMap<String, String> headers = new HashMap<>();
         
         headers.put("Authorization", "Bearer " + token);
         
         this.http = new HTTPHandler(headers);
-        this.token = token;
     }
     
     /**
@@ -75,12 +80,38 @@ public class LichessAPI {
                                 
                                 this.gameId = event.id;
                                 
-                                // TODO: begin the game handling code here
+                                playGame();
                                 
                                 break;
                         }
                     });
             
+                });
+    }
+    
+    public void playGame() {
+        String playerId = this.getAccount().id;
+        
+        Unirest.get("https://lichess.org/api/bot/game/stream/" + gameId)
+                .header("Authorization", "Bearer " + token)
+                .thenConsume(r -> {
+                    BufferedReader reader = new BufferedReader(r.getContentReader());
+                    GameState gs = new GameState();
+                    reader.lines().forEach(line -> {
+                        gs.updateFromJson(line);
+                        
+                        if (gs.moves.size() % 2 == 0 && gs.playingWhite.equals(playerId)) {
+                            // Call the bot
+                            String move = bot.nextMove(gs);
+                            
+                            makeMove(move);
+                        } else if (gs.moves.size() % 2 != 0 && gs.playingBlack.equals(playerId)) {
+                            // Call the bot
+                            String move = bot.nextMove(gs);
+                            
+                            makeMove(move);
+                        }
+                    });
                 });
     }
     
