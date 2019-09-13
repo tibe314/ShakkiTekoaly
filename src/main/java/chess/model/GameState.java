@@ -76,7 +76,7 @@ public class GameState {
             
             String[] moves;
             
-            if (!jsonGameState.getJSONObject("state").getString("moves").isBlank()) {
+            if (!jsonGameState.getJSONObject("state").getString("moves").isEmpty()) {
                 moves = jsonGameState
                     .getJSONObject("state").getString("moves").trim().split(" ");
             } else {
