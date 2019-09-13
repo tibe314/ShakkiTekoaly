@@ -76,8 +76,6 @@ public class LichessAPI {
                                 System.out.println(acceptChallenge(event.id));
                                 break;
                             case GameStart:
-                                System.out.println("Game starting...");
-                                
                                 this.gameId = event.id;
                                 
                                 playGame();
@@ -92,6 +90,8 @@ public class LichessAPI {
     public void playGame() {
         String playerId = this.getAccount().id;
         
+        System.out.println("Game starting...");
+        
         Unirest.get("https://lichess.org/api/bot/game/stream/" + gameId)
                 .header("Authorization", "Bearer " + token)
                 .thenConsume(r -> {
@@ -99,6 +99,8 @@ public class LichessAPI {
                     GameState gs = new GameState();
                     reader.lines().forEach(line -> {
                         gs.updateFromJson(line);
+                        
+                        System.out.println("Received update.");
                         
                         if (gs.moves.size() % 2 == 0 && gs.playingWhite.equals(playerId)) {
                             // Call the bot
@@ -114,6 +116,8 @@ public class LichessAPI {
                             System.out.println("Making move: " + move);
                             
                             System.out.println(makeMove(move));
+                        } else {
+                            System.out.println("Not my turn.");
                         }
                     });
                 });
