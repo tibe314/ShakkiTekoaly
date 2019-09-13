@@ -43,12 +43,12 @@ public class GameState {
 
         if (jsonGameState.getString("type").equals("gameFull")) {
             gameState.id = jsonGameState.getString("id");
-
+            
             gameState.playingWhite = jsonGameState
-                    .getJSONObject("white").getString("id");
+                    .getJSONObject("white").optString("id");
             gameState.playingBlack = jsonGameState
-                    .getJSONObject("black").getString("id");
-
+                    .getJSONObject("black").optString("id");
+            
             String[] moves = jsonGameState
                     .getJSONObject("state").getString("moves").split(" ");
 
@@ -70,14 +70,25 @@ public class GameState {
             this.id = jsonGameState.getString("id");
 
             this.playingWhite = jsonGameState
-                    .getJSONObject("white").getString("id");
+                    .getJSONObject("white").optString("id");
             this.playingBlack = jsonGameState
-                    .getJSONObject("black").getString("id");
-
-            String[] moves = jsonGameState
-                    .getJSONObject("state").getString("moves").split(" ");
-
+                    .getJSONObject("black").optString("id");
+            
+            String[] moves;
+            
+            if (!jsonGameState.getJSONObject("state").getString("moves").isBlank()) {
+                moves = jsonGameState
+                    .getJSONObject("state").getString("moves").trim().split(" ");
+            } else {
+                moves = new String[0];
+            }
+            
             this.moves = new ArrayList<>(Arrays.asList(moves));
+            
+            for (String i : this.moves) {
+                System.out.println(i);
+            }
+            
         } else if (jsonGameState.getString("type").equals("gameState")) {
             String[] moves = jsonGameState.getString("moves").split(" ");
 
@@ -85,6 +96,7 @@ public class GameState {
         } else {
             // This would only have chat stuff, we probably don't need it.
         }
+        
         parseLatestMove();
     }
 

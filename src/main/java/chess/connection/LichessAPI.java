@@ -100,15 +100,15 @@ public class LichessAPI {
                     GameState gs = new GameState();
 
             try {
-                gs.updateFromJson(reader.readLine());
+                String line = reader.readLine();
+                        
+                gs.updateFromJson(line);
+                    
 //                    reader.lines().forEach(line -> {
 //                        gs.updateFromJson(line);
             } catch (IOException ex) {
                 Logger.getLogger(LichessAPI.class.getName()).log(Level.SEVERE, null, ex);
-            }
-                        
-                        System.out.println("Received update.");
-                        
+            }                   
                         if (gs.moves.size() % 2 == 0 && gs.playingWhite.equals(playerId)) {
                             // Call the bot
                             String move = bot.nextMove(gs);
