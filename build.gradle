@@ -50,3 +50,5 @@ application {
 checkstyle {
     ignoreFailures = true
 }
+
+check.dependsOn jacocoTestReport
