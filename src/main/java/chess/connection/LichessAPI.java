@@ -111,7 +111,7 @@ public class LichessAPI {
                         String line = gameEvents.next();
                         String move = getNextMove(line, gs, playerId);
 
-                        if (move.equals("nomove"){
+                        if (move.equals("nomove")){
                             System.out.println("Not my turn.");
                         } else if (move != null){
                             System.out.println(makeMove(move));
