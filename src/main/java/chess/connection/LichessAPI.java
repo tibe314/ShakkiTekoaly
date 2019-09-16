@@ -23,7 +23,7 @@ public class LichessAPI {
     private final String token;
     private TestBot bot;
     private String gameId;
-    
+    private String playerId;
     public LichessAPI(TestBot bot) {
         this.bot = bot;
         
@@ -91,7 +91,7 @@ public class LichessAPI {
     }
     
     public void playGame() {
-        String playerId = this.getAccount().id;
+        this.playerId = this.getAccount().id;
         
         System.out.println("Game starting...");
         
@@ -110,7 +110,7 @@ public class LichessAPI {
 
                         String line = gameEvents.next();
                         String move = getNextMove(line, gs, playerId);
-                        
+
                         if (move != null){
                             System.out.println(makeMove(move));
                         } else {
@@ -119,7 +119,7 @@ public class LichessAPI {
                     }
                 });
     }
-    private String getNextMove(String line, GameState gs, String playerId){
+    public String getNextMove(String line, GameState gs, String playerId){
         if (!line.isEmpty()) {
             gs.updateFromJson(line);
         }
@@ -174,5 +174,12 @@ public class LichessAPI {
         return Unirest.post("https://lichess.org/api/bot/game/" + this.gameId + "/move/" + move)
                 .header("Authorization", "Bearer " + token)
                 .field("offeringDraw", "false").asEmpty().getStatusText();
+    }
+
+    public void setPlayerId(String newPlayerId){
+        this.playerId = newPlayerId;
+    }
+    public String getPlayerId(){
+        return this.playerId;
     }
 }
