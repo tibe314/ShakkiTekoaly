@@ -41,10 +41,10 @@ public class LichessApiTest {
     }
 
     @Test
-    public void getNextMoveReturnsNullIfMissingLine(){
+    public void getNextMoveReturnsNoMoveIfMissingLine(){
         GameState gameState = GameState.parseFromJson(Testdata.gameStateFullJson);
         String botmove = api.getNextMove("", gameState, api.getPlayerId());
-        assertNull(botmove);
+        assertEquals(botmove, "nomove");
     }
 
     @Test

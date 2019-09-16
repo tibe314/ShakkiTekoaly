@@ -111,7 +111,9 @@ public class LichessAPI {
                         String line = gameEvents.next();
                         String move = getNextMove(line, gs, playerId);
 
-                        if (move != null){
+                        if (move.equals("nomove"){
+                            System.out.println("Not my turn.");
+                        } else if (move != null){
                             System.out.println(makeMove(move));
                         } else {
                             gameRunning = false;
@@ -137,7 +139,7 @@ public class LichessAPI {
                 return move;
             }
         } else {
-            System.out.println("Not my turn.");
+            return "nomove";
         }
     
         
