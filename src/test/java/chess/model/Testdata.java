@@ -75,5 +75,15 @@ public class Testdata {
             + "\n"
             + "}";
 
-    public static String gameStateJsonShort = "{\"id\":\"eNKgUPQ6\",\"variant\":{\"key\":\"standard\",\"name\":\"Standard\",\"short\":\"Std\"},\"clock\":null,\"speed\":\"correspondence\",\"perf\":{\"name\":\"Correspondence\"},\"rated\":false,\"createdAt\":1568371854075,\"white\":{\"id\":\"samsai\",\"name\":\"samsai\",\"title\":\"BOT\",\"rating\":1500,\"provisional\":true},\"black\":{\"aiLevel\":1},\"initialFen\":\"startpos\",\"type\":\"gameFull\",\"state\":{\"type\":\"gameState\",\"moves\":\"\",\"wtime\":2147483647,\"btime\":2147483647,\"winc\":0,\"binc\":0,\"bdraw\":false,\"wdraw\":false}}";
+    public static String gameStateJsonShort = "{\"id\":\"eNKgUPQ6\","
+            + "\"variant\":{\"key\":\"standard\",\"name\":\"Standard\","
+            + "\"short\":\"Std\"},\"clock\":null,\"speed\":\"correspondence\","
+            + "\"perf\":{\"name\":\"Correspondence\"},\"rated\":false,"
+            + "\"createdAt\":1568371854075,\"white\":{\"id\":\"samsai\","
+            + "\"name\":\"samsai\",\"title\":\"BOT\",\"rating\":1500,"
+            + "\"provisional\":true},\"black\":{\"aiLevel\":1},"
+            + "\"initialFen\":\"startpos\",\"type\":\"gameFull\","
+            + "\"state\":{\"type\":\"gameState\",\"moves\":\"\","
+            + "\"wtime\":2147483647,\"btime\":2147483647,"
+            + "\"winc\":0,\"binc\":0,\"bdraw\":false,\"wdraw\":false}}";
 }

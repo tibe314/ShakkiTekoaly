@@ -41,14 +41,14 @@ public class LichessApiTest {
     }
 
     @Test
-    public void getNextMoveReturnsNoMoveIfMissingLine(){
+    public void getNextMoveReturnsNoMoveIfMissingLine() {
         GameState gameState = GameState.parseFromJson(Testdata.gameStateFullJson);
         String botmove = api.getNextMove("", gameState, api.getPlayerId());
         assertEquals(botmove, "nomove");
     }
 
     @Test
-    public void getNextMoveReturnsValidMove(){
+    public void getNextMoveReturnsValidMove() {
         GameState gameState = GameState.parseFromJson(Testdata.gameStateFullJson);
         api.setPlayerId("leela");
         String botmove = api.getNextMove(Testdata.gameStateJson, gameState, api.getPlayerId());

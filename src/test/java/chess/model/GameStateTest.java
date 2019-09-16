@@ -105,6 +105,6 @@ public class GameStateTest {
         
         gameState.updateFromJson(gameStateFullJson);
         
-        assert(true);
+        assert (true);
     }
 }

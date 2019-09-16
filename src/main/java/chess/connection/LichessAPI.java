@@ -10,7 +10,7 @@ import chess.model.Event;
 import chess.model.GameState;
 import chess.model.Profile;
 import java.io.BufferedReader;
-import java.io.IOException;
+// import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.logging.Level;
@@ -84,6 +84,7 @@ public class LichessAPI {
                                     playGame();
                                 
                                     break;
+                                default: break;
                             }   
                         }
                     });
@@ -111,9 +112,9 @@ public class LichessAPI {
                         String line = gameEvents.next();
                         String move = getNextMove(line, gs, playerId);
 
-                        if (move.equals("nomove")){
+                        if (move.equals("nomove")) {
                             System.out.println("Not my turn.");
-                        } else if (move != null){
+                        } else if (move != null) {
                             System.out.println(makeMove(move));
                         } else {
                             gameRunning = false;
@@ -121,13 +122,13 @@ public class LichessAPI {
                     }
                 });
     }
-    public String getNextMove(String line, GameState gs, String playerId){
+    public String getNextMove(String line, GameState gs, String playerId) {
         if (!line.isEmpty()) {
             gs.updateFromJson(line);
         }
         
-        if ((gs.moves.size() % 2 == 0 && gs.playingWhite.equals(playerId)) || 
-             (gs.moves.size() % 2 != 0 && gs.playingBlack.equals(playerId))){
+        if ((gs.moves.size() % 2 == 0 && gs.playingWhite.equals(playerId)) 
+                || (gs.moves.size() % 2 != 0 && gs.playingBlack.equals(playerId))) {
             // Call the bot
             String move = bot.nextMove(gs);
             
@@ -178,10 +179,10 @@ public class LichessAPI {
                 .field("offeringDraw", "false").asEmpty().getStatusText();
     }
 
-    public void setPlayerId(String newPlayerId){
+    public void setPlayerId(String newPlayerId) {
         this.playerId = newPlayerId;
     }
-    public String getPlayerId(){
+    public String getPlayerId() {
         return this.playerId;
     }
 }
