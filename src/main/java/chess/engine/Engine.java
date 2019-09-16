@@ -25,25 +25,4 @@ public class Engine {
             return null;
         }
     }
-
-    public static void main(String[] args) {
-        Engine engine = new Engine();
-        Board b = engine.getBoard();   
-        for (int i = 0; i < 20; i++) {
-            try {
-                Move move = engine.getMove();
-                b.doMove(move);   
-               
-            } catch (Exception e) {
-                System.out.println("Error while generating moves: " 
-                        + e.getMessage() + " at index " + i);
-            }
-         
-            
-        }   
-        System.out.println(b.toString());
-    
-    }
-
-    
 }
