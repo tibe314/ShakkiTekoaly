@@ -1,4 +1,4 @@
-# Chess [![Build Status](https://travis-ci.org/TiraLabra/chess.svg?branch=master)](https://travis-ci.org/TiraLabra/chess)
+# Chess [![Build Status](https://travis-ci.org/TiraLabra/chess.svg?branch=master)](https://travis-ci.org/TiraLabra/chess) [![codecov](https://codecov.io/gh/TiraLabra/chess/branch/master/graph/badge.svg)](https://codecov.io/gh/TiraLabra/chess)
 
 Chess template for data structures and algorithms project
 
