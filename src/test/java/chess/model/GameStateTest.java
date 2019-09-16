@@ -172,4 +172,13 @@ public class GameStateTest {
         
         assertEquals(gameState.moves, moves);
     }
+    
+    @Test
+    public void gameStateUpdateFromGameFullWorks() {
+        GameState gameState = GameState.parseFromJson(gameStateFullJson);
+        
+        gameState.updateFromJson(gameStateFullJson);
+        
+        assert(true);
+    }
 }
