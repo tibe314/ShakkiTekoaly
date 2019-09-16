@@ -107,32 +107,42 @@ public class LichessAPI {
                     Iterator<String> gameEvents = reader.lines().iterator();
                     
                     while (gameRunning && gameEvents.hasNext()) {
+
                         String line = gameEvents.next();
+                        String move = getNextMove(line, gs, playerId);
                         
-                        if (!line.isEmpty()) {
-                            gs.updateFromJson(line);
-                        }
-                        
-                        if ((gs.moves.size() % 2 == 0 && gs.playingWhite.equals(playerId)) || 
-                             (gs.moves.size() % 2 != 0 && gs.playingBlack.equals(playerId))){
-                            // Call the bot
-                            String move = bot.nextMove(gs);
-                            
-                            if (move == null) {
-                                System.out.println("Out of moves");
-                                gameRunning = false;
-                            } else {
-                                System.out.println("Making move: " + move);
-                            
-                                System.out.println(makeMove(move));    
-                            }
+                        if (move != null){
+                            System.out.println(makeMove(move));
                         } else {
-                            System.out.println("Not my turn.");
+                            gameRunning = false;
                         }
                     }
                 });
     }
+    private String getNextMove(String line, GameState gs, String playerId){
+        if (!line.isEmpty()) {
+            gs.updateFromJson(line);
+        }
+        
+        if ((gs.moves.size() % 2 == 0 && gs.playingWhite.equals(playerId)) || 
+             (gs.moves.size() % 2 != 0 && gs.playingBlack.equals(playerId))){
+            // Call the bot
+            String move = bot.nextMove(gs);
+            
+            if (move == null) {
+                System.out.println("Out of moves");
+               
+            } else {
+                System.out.println("Making move: " + move);
+                return move;
+            }
+        } else {
+            System.out.println("Not my turn.");
+        }
     
+        
+        return null;
+    }
     /**
      * Accept a Lichess challenge
      * @param id The ID of the challenge event
