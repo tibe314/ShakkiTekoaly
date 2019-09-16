@@ -22,7 +22,11 @@ public class TestBot {
         try {
             myMove = gs.engine.getMove();
             
-            return myMove.toString();
+            if (myMove != null) {
+                return myMove.toString();
+            }
+            
+            
         } catch (Exception ex) {
             Logger.getLogger(TestBot.class.getName()).log(Level.SEVERE, null, ex);
         }

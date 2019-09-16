@@ -18,8 +18,12 @@ public class Engine {
     public Move getMove() throws Exception {
         MoveList moves = MoveGenerator.generateLegalMoves(b);
         System.out.println(moves);
-        Move move = moves.get(random.nextInt(moves.size()));
-        return move;
+        
+        if (moves.size() > 0) {
+            return moves.get(random.nextInt(moves.size()));
+        } else {
+            return null;
+        }
     }
 
     public static void main(String[] args) {

@@ -101,6 +101,8 @@ public class GameState {
     }
 
     private void parseLatestMove() {
+        this.engine = new Engine();
+        
         if (!this.moves.isEmpty()) {
             this.moves.forEach(moveString -> {
                 String startingString = moveString.substring(0, 2).toUpperCase();

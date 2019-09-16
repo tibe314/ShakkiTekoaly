@@ -12,6 +12,7 @@ import chess.model.Profile;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import kong.unirest.Unirest;
@@ -67,24 +68,25 @@ public class LichessAPI {
                     BufferedReader reader = new BufferedReader(r.getContentReader());
             
                     reader.lines().forEach(line -> {
-                        Event event = Event.parseFromJson(line);
+                        if (!line.isEmpty()) {
+                            Event event = Event.parseFromJson(line);
                 
-                        System.out.println("New event: " + event.type + " id: " + event.id);
+                            System.out.println("New event: " + event.type + " id: " + event.id);
                         
-                        switch (event.type) {
-                            case Challenge:
-                                System.out.println("Accepting challenge: " + event.id);
-                                System.out.println(acceptChallenge(event.id));
-                                break;
-                            case GameStart:
-                                this.gameId = event.id;
+                            switch (event.type) {
+                                case Challenge:
+                                    System.out.println("Accepting challenge: " + event.id);
+                                    System.out.println(acceptChallenge(event.id));
+                                    break;
+                                case GameStart:
+                                    this.gameId = event.id;
                                 
-                                playGame();
+                                    playGame();
                                 
-                                break;
+                                    break;
+                            }   
                         }
                     });
-            
                 });
     }
     
@@ -92,43 +94,43 @@ public class LichessAPI {
         String playerId = this.getAccount().id;
         
         System.out.println("Game starting...");
-        while(true){
+        
+        
         Unirest.get("https://lichess.org/api/bot/game/stream/" + gameId)
                 .header("Authorization", "Bearer " + token)
                 .thenConsume(r -> {
                     BufferedReader reader = new BufferedReader(r.getContentReader());
                     GameState gs = new GameState();
-
-            try {
-                String line = reader.readLine();
-                        
-                gs.updateFromJson(line);
                     
-//                    reader.lines().forEach(line -> {
-//                        gs.updateFromJson(line);
-            } catch (IOException ex) {
-                Logger.getLogger(LichessAPI.class.getName()).log(Level.SEVERE, null, ex);
-            }                   
-                        if (gs.moves.size() % 2 == 0 && gs.playingWhite.equals(playerId)) {
+                    boolean gameRunning = true;
+                    
+                    Iterator<String> gameEvents = reader.lines().iterator();
+                    
+                    while (gameRunning && gameEvents.hasNext()) {
+                        String line = gameEvents.next();
+                        
+                        if (!line.isEmpty()) {
+                            gs.updateFromJson(line);
+                        }
+                        
+                        if ((gs.moves.size() % 2 == 0 && gs.playingWhite.equals(playerId)) || 
+                             (gs.moves.size() % 2 != 0 && gs.playingBlack.equals(playerId))){
                             // Call the bot
                             String move = bot.nextMove(gs);
                             
-                            System.out.println("Making move: " + move);
+                            if (move == null) {
+                                System.out.println("Out of moves");
+                                gameRunning = false;
+                            } else {
+                                System.out.println("Making move: " + move);
                             
-                            System.out.println(makeMove(move));
-                        } else if (gs.moves.size() % 2 != 0 && gs.playingBlack.equals(playerId)) {
-                            // Call the bot
-                            String move = bot.nextMove(gs);
-                            
-                            System.out.println("Making move: " + move);
-                            
-                            System.out.println(makeMove(move));
+                                System.out.println(makeMove(move));    
+                            }
                         } else {
                             System.out.println("Not my turn.");
                         }
-//                    });
+                    }
                 });
-        }
     }
     
     /**
