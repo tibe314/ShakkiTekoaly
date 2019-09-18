@@ -10,19 +10,19 @@ By no means, this guideline will not replace the API Reference. We hope that thi
 
 Now you have two options. You can play as a bot, as you will do with the Tiralabra chess bot app, or you can play ourself as a player. You cannot do the two with the same registered account.
 
-4. You may first want to try Lichess chess as yourself. (If you want to get your chess bot playing, go directly to step 5.)
+## If you want to play Lichess chess as human
 
-You can, for example, select all but the last options at https://lichess.org/account/oauth/token/create.
+You can, for example, select all but the last options in [New personal API access token](https://lichess.org/account/oauth/token/create).
 
-You will receive a confirmation email. After your confirmation, you will receive your token and find it at https://lichess.org/account/oauth/token.
+You will receive a confirmation email. After your confirmation, you will receive your token and find it in [Personal API access tokens](https://lichess.org/account/oauth/token).
 
-Note: Never put your personal token on github or other public files.
+**Note:** Never put your personal token on github or other public files.
 
-Note: if you copy your access token to a Word document (or another similar text processing document), and from there to your chess bot program, a hidden character may be added in the end of your token. If your token does not work, check with backspace if a hidden character was added.
+**Note:** if you copy your access token to a Word document (or another similar text processing document), and from there to your chess bot program, a hidden character may be added in the end of your token. If your token does not work, check with backspace if a hidden character was added.
 
 Now you can play chess games in different ways. You can also try direct communication with the Lichess API, either through a computer program or directly from the command line. For example
 
-$ curl https://lichess.org/api/account -H "Authorization: Bearer BQPxDrjq1vDqilaR"
+$ curl https://lichess.org/api/account -H "Authorization: Bearer <INSERT PERSONAL TOKEN HERE>"
 
 should display your account information in JSON format. (Replace the token above with your personal access token.)
 
