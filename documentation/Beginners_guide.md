@@ -1,10 +1,12 @@
-## Beginner's guide for chess bot setup
+# Beginner's guide for chess bot setup
 
-The following minimum actions are necessary to run the Tiralabra chess bot app with the Lichess.org application program interface (API). See https://lichess.org/api for the full API Reference. By no means, this guideline will not replace the API Reference. We hope that this guideline will save your valuable time when getting started.
+The following minimum actions are necessary to run the Tiralabra chess bot app with the Lichess.org application program interface (API). See [Lichess API](https://lichess.org/api) for the full API Reference. 
+
+By no means, this guideline will not replace the API Reference. We hope that this guideline will save your valuable time when getting started.
 
 1. Download, clone or pull the app from git@github.com:TiraLabra/chess.git into your /chess folder or other suitable location.
-2. Register to Lichess at https://lichess.org/signup. Here, you need to agree to the four given points.
-3. Click “Generate a personal API token” at https://lichess.org/api#section/Authentication
+2. Register to [Lichess](https://lichess.org/signup). Here, you need to agree to the four given points.
+3. Click “Generate a personal API token” and create [token](https://lichess.org/api#section/Authentication)
 
 Now you have two options. You can play as a bot, as you will do with the Tiralabra chess bot app, or you can play ourself as a player. You cannot do the two with the same registered account.
 
