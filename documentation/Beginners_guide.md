@@ -4,11 +4,7 @@ The following minimum actions are necessary to run the Tiralabra chess bot app w
 
 By no means, this guideline will not replace the API Reference. We hope that this guideline will save your valuable time when getting started.
 
-1. Download, clone or pull the app from 
-
-*git@<span></span>github.com:TiraLabra/chess.git*
-
-into your /chess folder or other suitable location.
+1. Download, clone or pull the app from *git@<span></span>github.com:TiraLabra/chess.git* into your /chess folder or other suitable location.
 
 2. Register to [Lichess](https://lichess.org/signup). Here, you need to agree to the four given points.
 
