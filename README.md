@@ -8,6 +8,7 @@ It is done as part of the course [TKT20007 Ohjelmistotuotantoprojekti](https://g
 
 ## Documentation
 - [Definition of Done](https://helsinkifi-my.sharepoint.com/:w:/g/personal/strajama_ad_helsinki_fi/EQPacc0Mp4hPirx8vVx9E2cBfRAHCI4sSgrW84yxIUl_rw)
+- [Beginner's guide for chess bot setup](https://github.com/TiraLabra/chess/blob/master/documentation/User_guideline.md)
 
 ## Project progress
 - Product backlog link will be added later

@@ -1,6 +1,6 @@
-## User guideline
+## Beginner's guide for chess bot setup
 
-The following minimum actions are necessary to run the Tiralabra chess bot app with the Lichess.org application program interface (API). See https://lichess.org/api for the full API Reference. By no means, this guideline will not replace the API Reference. We hope that this guideline will save your valuable time in getting started.
+The following minimum actions are necessary to run the Tiralabra chess bot app with the Lichess.org application program interface (API). See https://lichess.org/api for the full API Reference. By no means, this guideline will not replace the API Reference. We hope that this guideline will save your valuable time when getting started.
 
 1. Download, clone or pull the app from git@github.com:TiraLabra/chess.git into your /chess folder or other suitable location.
 2. Register to Lichess at https://lichess.org/signup. Here, you need to agree to the four given points.
