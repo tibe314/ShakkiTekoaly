@@ -4,7 +4,7 @@ The following minimum actions are necessary to run the Tiralabra chess bot app w
 
 By no means, this guideline will not replace the API Reference. We hope that this guideline will save your valuable time when getting started.
 
-1. Download, clone or pull the app from **/git@github.com:TiraLabra/chess.git** into your /chess folder or other suitable location.
+1. Download, clone or pull the app from **git@<span></span>github.com:TiraLabra/chess.git** into your /chess folder or other suitable location.
 2. Register to [Lichess](https://lichess.org/signup). Here, you need to agree to the four given points.
 3. Click “Generate a personal API token” and create [token](https://lichess.org/api#section/Authentication)
 
@@ -22,7 +22,7 @@ You will receive a confirmation email. After your confirmation, you will receive
 
 Now you can play chess games in different ways. You can also try direct communication with the Lichess API, either through a computer program or directly from the command line. For example:
 
-*$ curl /https://lichess.org/api/account -H "Authorization: Bearer <INSERT PERSONAL TOKEN HERE>"*
+*$ curl https<span></span>://lichess.org/api/account -H "Authorization: Bearer <INSERT PERSONAL TOKEN HERE>"*
 
 should display your account information in JSON format. (Replace the token above with your personal access token.)
 
