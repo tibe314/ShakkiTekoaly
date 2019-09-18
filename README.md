@@ -7,7 +7,9 @@ It is done as part of the course [TKT20007 Ohjelmistotuotantoprojekti](https://g
 ## Workhours in DK107
 
 Monday 10-13.30
+
 Wednesday 14.30-18
+
 Friday 10-16
 
 ## Documentation
