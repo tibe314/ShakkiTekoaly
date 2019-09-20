@@ -18,12 +18,17 @@ import java.util.logging.Logger;
 import kong.unirest.Unirest;
 import kong.unirest.UnirestException;
 
+/**
+ * Java implementation of the Lichess.org HTTP API for chess bots
+ * 
+ */
 public class LichessAPI {
     private HTTPHandler http;
     private final String token;
     private TestBot bot;
     private String gameId;
     private String playerId;
+    
     public LichessAPI(TestBot bot) {
         this.bot = bot;
         
@@ -56,12 +61,13 @@ public class LichessAPI {
         return null;
     }
     
-    // This is mainly just for show now, calling it results in infinite loop
     /**
-     * Read events from Lichess and react to them
-     * Will accept all Challenges
+     * Starts reading Lichess events
+     * 
+     * Accepts all received Challenge events, on GameStart event
+     * enters gameplay loop
      */
-    public void getEvents() {
+    public void beginEventLoop() {
         Unirest.get("https://lichess.org/api/stream/event")
                 .header("Authorization", "Bearer " + token)
                 .thenConsume(r -> {
@@ -91,6 +97,9 @@ public class LichessAPI {
                 });
     }
     
+    /**
+     * Opens the game event stream and starts playing moves from the bot
+     */
     public void playGame() {
         this.playerId = this.getAccount().id;
         
@@ -122,19 +131,27 @@ public class LichessAPI {
                     }
                 });
     }
-    public String getNextMove(String line, GameState gs, String playerId) {
-        if (!line.isEmpty()) {
-            gs.updateFromJson(line);
+    
+    /**
+     * Updates gamestate based on given JSON and plays a bot move
+     * @param jsonLine A line of JSON data according to https://lichess.org/api#operation/botGameStream
+     * @param gamestate The state of the currently running game
+     * @param playerId The Lichess ID of the bot
+     * @return The move made by the bot in UCI format or "nomove" if the bot cannot make a move
+     */
+    public String getNextMove(String jsonLine, GameState gamestate, String playerId) {
+        if (!jsonLine.isEmpty()) {
+            gamestate.updateFromJson(jsonLine);
         }
         
-        if ((gs.moves.size() % 2 == 0 && gs.playingWhite.equals(playerId)) 
-                || (gs.moves.size() % 2 != 0 && gs.playingBlack.equals(playerId))) {
+        if ((gamestate.moves.size() % 2 == 0 && gamestate.playingWhite.equals(playerId)) 
+                || (gamestate.moves.size() % 2 != 0 && gamestate.playingBlack.equals(playerId))) {
             // Call the bot
-            String move = bot.nextMove(gs);
+            String move = bot.nextMove(gamestate);
             
             if (move == null) {
-                System.out.println("Out of moves");
-               
+                System.out.println("Bot returned no moves.");
+                
             } else {
                 System.out.println("Making move: " + move);
                 return move;

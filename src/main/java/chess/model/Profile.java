@@ -7,10 +7,18 @@ package chess.model;
 
 import org.json.*;
 
+/**
+ * Lichess profile data
+ */
 public class Profile {
     public String id;
     public String username;
     
+    /**
+     * Parses a Profile from Lichess JSON data according to https://lichess.org/api#operation/accountMe
+     * @param json A string of JSON data
+     * @return A Profile containing the ID and username of the user
+     */
     public static Profile parseFromJson(String json) {
         Profile newProfile = new Profile();
         

@@ -19,6 +19,6 @@ public class App {
         
         logger.logMessage("Profile ID: " + myProfile.id);
         
-        api.getEvents();
+        api.beginEventLoop();
     }
 }

@@ -7,6 +7,10 @@ package chess.model;
 
 import org.json.JSONObject;
 
+/**
+ * Java representation of a Lichess event 
+ * Event types handled 
+ */
 public class Event {
     public EventType type;
     

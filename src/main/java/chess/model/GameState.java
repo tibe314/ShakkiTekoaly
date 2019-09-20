@@ -13,6 +13,10 @@ import com.github.bhlangonijr.chesslib.move.Move;
 
 import org.json.JSONObject;
 
+/**
+ * Stores the state of a game of chess
+ * Provides access to currently available moves
+ */
 public class GameState {
 
     public String id;
@@ -33,7 +37,7 @@ public class GameState {
      * <b>Note:</b> Use only to gain the initial game state, game state should
      * be updated via updateFromJson()
      *
-     * @param json
+     * @param json String of JSON data according to https://lichess.org/api#operation/botGameStream
      * @return A full, initial game state
      */
     public static GameState parseFromJson(String json) {
@@ -61,7 +65,7 @@ public class GameState {
     /**
      * Update a GameState object from JSON
      *
-     * @param json
+     * @param json String of JSON data according to https://lichess.org/api#operation/botGameStream
      */
     public void updateFromJson(String json) {
         JSONObject jsonGameState = new JSONObject(json);
@@ -99,10 +103,16 @@ public class GameState {
         
         parseLatestMove();
     }
-
+    
+    /**
+     * Parses a move in UCI move into the chess engine's move data type and
+     * updates the engine's board state
+     */
     private void parseLatestMove() {
         this.engine = new Engine();
         
+        // We play all of the moves onto a new board to ensure a previously
+        // started game can be resumed correctly, inefficient but it works
         if (!this.moves.isEmpty()) {
             this.moves.forEach(moveString -> {
                 String startingString = moveString.substring(0, 2).toUpperCase();
