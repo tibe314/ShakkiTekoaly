@@ -40,7 +40,7 @@ public class HTTPStream implements Iterator<String>, Closeable {
         return this;
     }
 
-    public HTTPStream setHeaders(String urlString, Map<String, String> headerFields) {
+    public HTTPStream setHeaders(Map<String, String> headerFields) {
         try {
             headerFields.entrySet().forEach((entry) -> {
                 this.conn.setRequestProperty(entry.getKey(), entry.getValue());
@@ -62,6 +62,15 @@ public class HTTPStream implements Iterator<String>, Closeable {
             System.out.println(e);
         }
         return this;
+    }
+    
+    public int getHTTPStatus() {
+        try {
+            return this.conn.getResponseCode();
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+        return 999;
     }
 
     @Override
