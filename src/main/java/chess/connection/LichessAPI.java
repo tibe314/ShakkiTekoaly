@@ -9,13 +9,10 @@ import chess.TestBot;
 import chess.model.Event;
 import chess.model.GameState;
 import chess.model.Profile;
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.logging.Level;
-import kong.unirest.Unirest;
-import kong.unirest.UnirestException;
 import logging.Logger;
 
 /**
@@ -56,32 +53,27 @@ public class LichessAPI {
      */
     public Profile getAccount() {
         String json;
+        HTTPStream stream = new HTTPStream()
+                .get("https://lichess.org/api/account")
+                .setHeaders(headers)
+                .connect();
+
+        json = stream.toString();
+
         try {
-            HTTPStream stream = new HTTPStream()
-                    .get("https://lichess.org/api/account")
-                    .setHeaders(headers)
-                    .connect();
-
-            json = stream.toString();
-
-            try {
-                stream.close();
-            } catch (IOException ex) {
-                java.util.logging.Logger.getLogger(LichessAPI.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-            Profile profile = Profile.parseFromJson(json);
-
-            if (profile.id.isEmpty()) {
-                logger.logError("Returned profile does not have an ID, is your Lichess token valid?");
-            }
-
-            return profile;
-        } catch (UnirestException ex) {
-            logger.logError(LichessAPI.class.getName() + " - " + ex.toString());
+            stream.close();
+        } catch (IOException ex) {
+            java.util.logging.Logger.getLogger(LichessAPI.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        return null;
+        Profile profile = Profile.parseFromJson(json);
+
+        if (profile.id.isEmpty()) {
+            logger.logError("Returned profile does not have an ID, is your Lichess token valid?");
+        }
+
+        return profile;
+
     }
 
     /**
@@ -144,9 +136,9 @@ public class LichessAPI {
                 .get("https://lichess.org/api/bot/game/stream/" + gameId)
                 .setHeaders(headers)
                 .connect();
-        
+
         playGame(gameStream);
-        
+
         try {
             gameStream.close();
         } catch (IOException ex) {
@@ -158,7 +150,7 @@ public class LichessAPI {
         GameState gs = new GameState();
 
         boolean gameRunning = true;
-        
+
         while (gameRunning && gameStream.hasNext()) {
             String line = gameStream.next();
             String move = getNextMove(line, gs, playerId);
@@ -218,9 +210,12 @@ public class LichessAPI {
      * @return The HTTP status code of the POST request response
      */
     public int acceptChallenge(String id) {
-        return Unirest.post("https://lichess.org/api/challenge/" + id + "/accept")
-                .header("Authorization", "Bearer " + token)
-                .asEmpty().getStatus();
+        HTTPStream stream = new HTTPStream()
+                .post("https://lichess.org/api/challenge/" + id + "/accept", "")
+                .setHeaders(headers)
+                .connect();
+
+        return stream.getHTTPStatus();
     }
 
     /**
@@ -230,9 +225,12 @@ public class LichessAPI {
      * @return The HTTP status code of the POST request response
      */
     public int declineChallenge(String id) {
-        return Unirest.post("https://lichess.org/api/challenge/" + id + "/decline")
-                .header("Authorization", "Bearer " + token)
-                .asEmpty().getStatus();
+        HTTPStream stream = new HTTPStream()
+                .post("https://lichess.org/api/challenge/" + id + "/decline", "")
+                .setHeaders(headers)
+                .connect();
+
+        return stream.getHTTPStatus();
     }
 
     /**
@@ -242,9 +240,12 @@ public class LichessAPI {
      * @return The HTTP status code of the POST request response
      */
     public int makeMove(String move) {
-        return Unirest.post("https://lichess.org/api/bot/game/" + this.gameId + "/move/" + move)
-                .header("Authorization", "Bearer " + token)
-                .field("offeringDraw", "false").asEmpty().getStatus();
+        HTTPStream stream = new HTTPStream()
+                .post("https://lichess.org/api/bot/game/" + this.gameId + "/move/" + move, "")
+                .setHeaders(headers)
+                .connect();
+
+        return stream.getHTTPStatus();
     }
 
     public void setPlayerId(String newPlayerId) {
