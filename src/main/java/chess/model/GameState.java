@@ -8,10 +8,6 @@ package chess.model;
 import java.util.ArrayList;
 import java.util.Arrays;
 import chess.engine.Engine;
-import com.github.bhlangonijr.chesslib.Piece;
-import com.github.bhlangonijr.chesslib.PieceType;
-import com.github.bhlangonijr.chesslib.Square;
-import com.github.bhlangonijr.chesslib.move.Move;
 
 import org.json.JSONObject;
 
