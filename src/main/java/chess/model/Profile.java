@@ -24,8 +24,8 @@ public class Profile {
         
         JSONObject jsonProfile = new JSONObject(json);
         
-        newProfile.id = jsonProfile.getString("id");
-        newProfile.username = jsonProfile.getString("username");
+        newProfile.id = jsonProfile.optString("id");
+        newProfile.username = jsonProfile.optString("username");
         
         return newProfile;
     }
