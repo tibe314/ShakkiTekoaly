@@ -5,6 +5,9 @@
  */
 package chess.model;
 
+/**
+ * Represents different Lichess event types
+ */
 public enum EventType {
     Challenge,
     GameStart,
