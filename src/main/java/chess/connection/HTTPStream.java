@@ -87,5 +87,14 @@ public class HTTPStream implements Iterator<String>, Closeable {
     public void close() throws IOException {
         this.conn.disconnect();
     }
-
+    
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        
+        while (iterator.hasNext()) {
+            builder.append(iterator.next() + "\n");
+        }
+        
+        return builder.toString();
+    }
 }
