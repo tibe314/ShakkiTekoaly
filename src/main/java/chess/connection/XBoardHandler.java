@@ -1,10 +1,12 @@
 package chess.connection;
 import java.util.Scanner;
 import chess.TestBot;
+import chess.model.GameState;
 
 public class XBoardHandler {
     private Scanner scanner;
     private TestBot bot;
+    private GameState gamestate;
 
     public XBoardHandler(TestBot bot) {
         this.bot = bot;
@@ -21,31 +23,32 @@ public class XBoardHandler {
     }
 
     public void run() {
+        this.gamestate = new GameState();
         while (true) {
             String command = scanner.nextLine();
             switch (command){
                 case "new":
-                //play as white
+                //tells the engine the match has started and it plays as black, may not require implementation at all.
                 break;
                 
-                case "go":
-                //play as black
+                case "go": 
+                //tells the engine to start playing as white
+                nextMove(); 
                 break;
 
                 default:
-                //assume is a move
-                //update internal gamestate
-                //make next move
+                handleMove(command);
+                nextMove();
                 break;
             }
         }
     }
 
     public void handleMove(String move){
-        
+        this.gamestate.moves.add(command);
     }
 
-    public String makeMove(){
-        return "";
+    public String nextMove(){
+        return gamestate.moves.add(bot.makeMove());
     }
 }
