@@ -71,14 +71,14 @@ public class LoggerTest {
     public void afterWritingLogFileExists() {
         logger.logMessage("Hello World");
             
-        assert(new File("log.txt").exists());
+        assert (new File("log.txt").exists());
     }
     
     @Test
     public void afterWritingErrorLogFileExists() {
         logger.logError("Hello World");
             
-        assert(new File("log.txt").exists());
+        assert (new File("log.txt").exists());
     }
     
     @Test
@@ -87,7 +87,7 @@ public class LoggerTest {
         try {
             logger.logMessage("Hello World");
             reader = new BufferedReader(new FileReader("log.txt"));
-            assert(reader.lines().anyMatch(line -> line.contains("Hello World")));
+            assert (reader.lines().anyMatch(line -> line.contains("Hello World")));
         } catch (FileNotFoundException ex) {
             java.util.logging.Logger.getLogger(LoggerTest.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
@@ -105,7 +105,7 @@ public class LoggerTest {
         try {
             logger.logError("Hello World");
             reader = new BufferedReader(new FileReader("log.txt"));
-            assert(reader.lines().anyMatch(line -> line.contains("Hello World")));
+            assert (reader.lines().anyMatch(line -> line.contains("Hello World")));
         } catch (FileNotFoundException ex) {
             java.util.logging.Logger.getLogger(LoggerTest.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
