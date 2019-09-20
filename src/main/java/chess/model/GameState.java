@@ -8,6 +8,8 @@ package chess.model;
 import java.util.ArrayList;
 import java.util.Arrays;
 import chess.engine.Engine;
+import com.github.bhlangonijr.chesslib.Piece;
+import com.github.bhlangonijr.chesslib.PieceType;
 import com.github.bhlangonijr.chesslib.Square;
 import com.github.bhlangonijr.chesslib.move.Move;
 
@@ -18,18 +20,18 @@ import org.json.JSONObject;
  * Provides access to currently available moves
  */
 public class GameState {
-
+    
     public String id;
-
+    
     public String playingBlack;
     public String playingWhite;
-
+    
     public ArrayList<String> moves;
-
+    
     public Engine engine = new Engine();
-
+    
     public GameState() {
-
+        
     }
 
     /**
@@ -42,9 +44,9 @@ public class GameState {
      */
     public static GameState parseFromJson(String json) {
         GameState gameState = new GameState();
-
+        
         JSONObject jsonGameState = new JSONObject(json);
-
+        
         if (jsonGameState.getString("type").equals("gameFull")) {
             gameState.id = jsonGameState.getString("id");
             
@@ -55,10 +57,10 @@ public class GameState {
             
             String[] moves = jsonGameState
                     .getJSONObject("state").getString("moves").split(" ");
-
+            
             gameState.moves = new ArrayList<>(Arrays.asList(moves));
         }
-
+        
         return gameState;
     }
 
@@ -69,10 +71,10 @@ public class GameState {
      */
     public void updateFromJson(String json) {
         JSONObject jsonGameState = new JSONObject(json);
-
+        
         if (jsonGameState.getString("type").equals("gameFull")) {
             this.id = jsonGameState.getString("id");
-
+            
             this.playingWhite = jsonGameState
                     .getJSONObject("white").optString("id");
             this.playingBlack = jsonGameState
@@ -82,7 +84,7 @@ public class GameState {
             
             if (!jsonGameState.getJSONObject("state").getString("moves").isEmpty()) {
                 moves = jsonGameState
-                    .getJSONObject("state").getString("moves").trim().split(" ");
+                        .getJSONObject("state").getString("moves").trim().split(" ");
             } else {
                 moves = new String[0];
             }
@@ -95,7 +97,7 @@ public class GameState {
             
         } else if (jsonGameState.getString("type").equals("gameState")) {
             String[] moves = jsonGameState.getString("moves").split(" ");
-
+            
             this.moves = new ArrayList<>(Arrays.asList(moves));
         } else {
             // This would only have chat stuff, we probably don't need it.
@@ -110,17 +112,15 @@ public class GameState {
      */
     private void parseLatestMove() {
         this.engine = new Engine();
-        
         // We play all of the moves onto a new board to ensure a previously
         // started game can be resumed correctly, inefficient but it works
+        this.engine = new Engine();
         if (!this.moves.isEmpty()) {
             this.moves.forEach(moveString -> {
                 String startingString = moveString.substring(0, 2).toUpperCase();
                 String endingString = moveString.substring(2, 4).toUpperCase();
-                Move latestMove = new Move(
-                        Square.fromValue(startingString),
-                        Square.valueOf(endingString));
-                this.engine.getBoard().doMove(latestMove);
+                String promoteString = moveString.length() > 4 ? moveString.substring(4).toUpperCase() : "".toUpperCase();
+                this.engine.setMove(startingString, endingString, promoteString);
             });
         }
     }

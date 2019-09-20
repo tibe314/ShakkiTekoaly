@@ -42,4 +42,23 @@ public class Engine {
             return null;
         }
     }
+    public void setMove(String starting, String ending, String promote){
+        String promotionPiece = "";
+        if(promote.length() > 0){
+            Piece piece = b.getPiece(Square.valueOf(starting));
+            String side = piece.getPieceSide().value();
+            switch(promote){
+                case "R" : promotionPiece = side + "_ROOK"; break;
+                case "B" : promotionPiece = side + "_BISHOP"; break;
+                case "N" : promotionPiece = side + "_KNIGHT"; break;
+                case "Q" : promotionPiece = side + "_QUEEN"; break;
+                default: throw new Error("Something went wrong parsing the promoted piece");   
+            }
+        }
+        Move latestMove = promote.isEmpty() ? new Move(
+                        Square.fromValue(starting),
+                        Square.valueOf(ending)) : new Move(Square.fromValue(starting),
+                        Square.valueOf(ending), Piece.fromValue(promotionPiece));
+        this.b.doMove(latestMove);
+    }
 }
