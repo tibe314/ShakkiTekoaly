@@ -23,7 +23,6 @@ import kong.unirest.UnirestException;
  * 
  */
 public class LichessAPI {
-    private HTTPHandler http;
     private final String token;
     private TestBot bot;
     private String gameId;
@@ -38,7 +37,6 @@ public class LichessAPI {
         
         headers.put("Authorization", "Bearer " + token);
         
-        this.http = new HTTPHandler(headers);
     }
     
     /**
@@ -48,7 +46,8 @@ public class LichessAPI {
     public Profile getAccount() {
         String json;
         try {
-            json = (String) this.http.get("https://lichess.org/api/account")
+            json = Unirest.get("https://lichess.org/api/account")
+                    .header("Authorization", "Bearer " + token)
                     .asString().getBody();
             
             Profile profile = Profile.parseFromJson(json);
