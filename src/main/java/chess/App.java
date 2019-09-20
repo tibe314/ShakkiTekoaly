@@ -6,20 +6,18 @@ package chess;
 // import chess.connection.EventPump;
 import chess.connection.LichessAPI;
 import chess.model.Profile;
-// import java.io.IOException;
-// import java.util.ArrayDeque;
-// import java.util.logging.Level;
-// import java.util.logging.Logger;
+import logging.Logger;
 
 public class App {
     public static void main(String[] args) {
         TestBot bot = new TestBot("INSERT TOKEN HERE");
         
         LichessAPI api = new LichessAPI(bot);
+        Logger logger = new Logger().useStdOut();
         
         Profile myProfile = api.getAccount();
         
-        System.out.println("Profile ID: " + myProfile.id);
+        logger.logMessage("Profile ID: " + myProfile.id);
         
         api.beginEventLoop();
     }

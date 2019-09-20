@@ -10,35 +10,39 @@ import chess.model.Event;
 import chess.model.GameState;
 import chess.model.Profile;
 import java.io.BufferedReader;
-// import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import kong.unirest.Unirest;
 import kong.unirest.UnirestException;
-
+import logging.Logger;
 /**
  * Java implementation of the Lichess.org HTTP API for chess bots
  * 
  */
 public class LichessAPI {
-    private HTTPHandler http;
     private final String token;
     private TestBot bot;
     private String gameId;
     private String playerId;
+    private Logger logger;
+    
+    private HashMap<String, String> headers;
     
     public LichessAPI(TestBot bot) {
+        this(bot, new Logger().useStdOut());
+    }
+    
+    public LichessAPI(TestBot bot, Logger logger) {
         this.bot = bot;
+        this.logger = logger;
         
         this.token = bot.getToken();
         
-        HashMap<String, String> headers = new HashMap<>();
+        headers = new HashMap<>();
         
+        // Add token to HTTP headers
         headers.put("Authorization", "Bearer " + token);
         
-        this.http = new HTTPHandler(headers);
     }
     
     /**
@@ -48,14 +52,19 @@ public class LichessAPI {
     public Profile getAccount() {
         String json;
         try {
-            json = (String) this.http.get("https://lichess.org/api/account")
+            json = Unirest.get("https://lichess.org/api/account")
+                    .header("Authorization", "Bearer " + token)
                     .asString().getBody();
             
             Profile profile = Profile.parseFromJson(json);
-        
+            
+            if (profile.id.isEmpty()) {
+                logger.logError("Returned profile does not have an ID, is your Lichess token valid?");
+            }
+            
             return profile;
         } catch (UnirestException ex) {
-            Logger.getLogger(LichessAPI.class.getName()).log(Level.SEVERE, null, ex);
+            logger.logError(LichessAPI.class.getName() + " - " + ex.toString());
         }
         
         return null;
@@ -77,11 +86,11 @@ public class LichessAPI {
                         if (!line.isEmpty()) {
                             Event event = Event.parseFromJson(line);
                 
-                            System.out.println("New event: " + event.type + " id: " + event.id);
+                            logger.logMessage("New event: " + event.type + " id: " + event.id);
                         
                             switch (event.type) {
                                 case Challenge:
-                                    System.out.println("Accepting challenge: " + event.id);
+                                    logger.logMessage("Accepting challenge: " + event.id);
                                     System.out.println(acceptChallenge(event.id));
                                     break;
                                 case GameStart:
@@ -103,8 +112,7 @@ public class LichessAPI {
     public void playGame() {
         this.playerId = this.getAccount().id;
         
-        System.out.println("Game starting...");
-        
+        logger.logMessage("Game starting: " + gameId);
         
         Unirest.get("https://lichess.org/api/bot/game/stream/" + gameId)
                 .header("Authorization", "Bearer " + token)
@@ -121,12 +129,16 @@ public class LichessAPI {
                         String line = gameEvents.next();
                         String move = getNextMove(line, gs, playerId);
 
-                        if (move.equals("nomove")) {
-                            System.out.println("Not my turn.");
-                        } else if (move != null) {
-                            System.out.println(makeMove(move));
+                        if (move == null) {
+                             gameRunning = false;
+                        } else if (move.equals("nomove")) {
+                            logger.logMessage("Cannot make a move yet.");
                         } else {
-                            gameRunning = false;
+                            int statusCode = makeMove(move);
+                            
+                            if (statusCode != 200) {
+                                logger.logError("Lichess returned Bad Request status code, illegal move? Move was: " + move);
+                            }
                         }
                     }
                 });
@@ -150,10 +162,10 @@ public class LichessAPI {
             String move = bot.nextMove(gamestate);
             
             if (move == null) {
-                System.out.println("Bot returned no moves.");
+                logger.logMessage("Bot returned no moves.");
                 
             } else {
-                System.out.println("Making move: " + move);
+                logger.logMessage("Bot made move: " + move);
                 return move;
             }
         } else {
@@ -166,39 +178,40 @@ public class LichessAPI {
     /**
      * Accept a Lichess challenge
      * @param id The ID of the challenge event
-     * @return The HTTP status text of the POST request response
+     * @return The HTTP status code of the POST request response
      */
-    public String acceptChallenge(String id) {
+    public int acceptChallenge(String id) {
         return Unirest.post("https://lichess.org/api/challenge/" + id + "/accept")
                 .header("Authorization", "Bearer " + token)
-                .asEmpty().getStatusText();
+                .asEmpty().getStatus();
     }
     
     /**
      * Decline a Lichess challenge
      * @param id The ID of the challenge event
-     * @return The HTTP status text of the POST request response
+     * @return The HTTP status code of the POST request response
      */
-    public String declineChallenge(String id) {
+    public int declineChallenge(String id) {
         return Unirest.post("https://lichess.org/api/challenge/" + id + "/decline")
                 .header("Authorization", "Bearer " + token)
-                .asEmpty().getStatusText();
+                .asEmpty().getStatus();
     }
     
     /**
      * Make a move in the current Lichess game
      * @param move The chess move in UCI format
-     * @return The HTTP status text of the POST request response
+     * @return The HTTP status code of the POST request response
      */
-    public String makeMove(String move) {
+    public int makeMove(String move) {
         return Unirest.post("https://lichess.org/api/bot/game/" + this.gameId + "/move/" + move)
                 .header("Authorization", "Bearer " + token)
-                .field("offeringDraw", "false").asEmpty().getStatusText();
+                .field("offeringDraw", "false").asEmpty().getStatus();
     }
 
     public void setPlayerId(String newPlayerId) {
         this.playerId = newPlayerId;
     }
+    
     public String getPlayerId() {
         return this.playerId;
     }
