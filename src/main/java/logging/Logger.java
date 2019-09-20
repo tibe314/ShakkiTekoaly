@@ -54,7 +54,7 @@ public class Logger {
     }
     
     public void logMessage(String message) {
-        String messageWithDate = LocalDateTime.now().toString() + textInYellow(" MESSAGE: ") + message;
+        String messageWithDate = LocalDateTime.now().toString() + textInGreen(" MESSAGE: ") + message;
         
         if (useStdOut) {
             System.out.println(messageWithDate);
@@ -107,7 +107,7 @@ public class Logger {
         return ANSI_RED + text + ANSI_RESET;
     }
     
-    public String textInYellow(String text) {
-        return ANSI_YELLOW + text + ANSI_RESET;
+    public String textInGreen(String text) {
+        return ANSI_GREEN + text + ANSI_RESET;
     }
 }
