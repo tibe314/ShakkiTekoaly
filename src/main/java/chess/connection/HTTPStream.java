@@ -40,7 +40,7 @@ public class HTTPStream implements Iterator<String>, Closeable {
         return this;
     }
 
-    public HTTPStream setHeaders(String urlString, Map<String, String> headerFields) {
+    public HTTPStream setHeaders(Map<String, String> headerFields) {
         try {
             headerFields.entrySet().forEach((entry) -> {
                 this.conn.setRequestProperty(entry.getKey(), entry.getValue());
@@ -78,5 +78,14 @@ public class HTTPStream implements Iterator<String>, Closeable {
     public void close() throws IOException {
         this.conn.disconnect();
     }
-
+    
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        
+        while (iterator.hasNext()) {
+            builder.append(iterator.next() + "\n");
+        }
+        
+        return builder.toString();
+    }
 }
