@@ -26,6 +26,8 @@ public class LichessAPI {
     private String playerId;
     private Logger logger;
     
+    private HashMap<String, String> headers;
+    
     public LichessAPI(TestBot bot) {
         this(bot, new Logger().useStdOut());
     }
@@ -36,7 +38,7 @@ public class LichessAPI {
         
         this.token = bot.getToken();
         
-        HashMap<String, String> headers = new HashMap<>();
+        headers = new HashMap<>();
         
         // Add token to HTTP headers
         headers.put("Authorization", "Bearer " + token);
