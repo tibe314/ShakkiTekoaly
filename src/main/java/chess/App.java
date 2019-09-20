@@ -13,7 +13,7 @@ import chess.model.Profile;
 
 public class App {
     public static void main(String[] args) {
-        TestBot bot = new TestBot("<INSERT TOKEN HERE>");
+        TestBot bot = new TestBot("INSERT TOKEN HERE");
         
         LichessAPI api = new LichessAPI(bot);
         
@@ -21,6 +21,6 @@ public class App {
         
         System.out.println("Profile ID: " + myProfile.id);
         
-        api.getEvents();
+        api.beginEventLoop();
     }
 }
