@@ -25,3 +25,7 @@ Friday 10-16
 
 ## Retrospectives
 - [Sprint 0](https://helsinkifi-my.sharepoint.com/:w:/g/personal/strajama_ad_helsinki_fi/EW-Iukf5ZxlAmc2T-9s5amUB5vUZCHvnEFUc9A9EfDx8iQ?e=pqqpnp)
+
+## Notes on Client Meetings
+
+- [Sprint 0](https://helsinkifi-my.sharepoint.com/:w:/g/personal/strajama_ad_helsinki_fi/EcEilaFq3vhAnXarcNKh-rIBLmVnhHnLrASwhms3v5kIrA?e=h7WgqV)
