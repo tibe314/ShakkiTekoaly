@@ -10,13 +10,14 @@ import com.github.bhlangonijr.chesslib.move.Move;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class TestBot {
+public class TestBot implements ChessBot {
     private String token;
     
     public TestBot(String token) {
         this.token = token;
     }
     
+    @Override
     public String nextMove(GameState gs) {
         Move myMove;
         try {
@@ -34,6 +35,7 @@ public class TestBot {
         return null;
     }
     
+    @Override
     public String getToken() {
         return this.token;
     }
