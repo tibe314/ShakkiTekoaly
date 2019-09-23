@@ -108,7 +108,7 @@ public class GameState {
      * Parses a move in UCI move into the chess engine's move data type and
      * updates the engine's board state
      */
-    private void parseLatestMove() {
+    public void parseLatestMove() {
         this.engine = new Engine();
         
         // We play all of the moves onto a new board to ensure a previously

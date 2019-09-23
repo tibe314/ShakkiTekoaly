@@ -34,7 +34,6 @@ public class Engine {
      */
     public Move getMove() throws MoveGeneratorException {
         MoveList moves = MoveGenerator.generateLegalMoves(b);
-        System.out.println(moves);
         
         if (moves.size() > 0) {
             return moves.get(random.nextInt(moves.size()));

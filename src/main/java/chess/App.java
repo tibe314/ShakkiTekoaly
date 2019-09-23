@@ -5,14 +5,11 @@ package chess;
 
 
 // import chess.connection.EventPump;
-import chess.engine.*;
 import chess.model.*;
 import chess.connection.*;
-import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.IOException;
 // import java.util.ArrayDeque;
 // import java.util.logging.Level;
 // import java.util.logging.Logger;
@@ -23,12 +20,13 @@ public class App {
         Long initialTime = System.currentTimeMillis();
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
         try {
-            while (System.currentTimeMillis()-initialTime < 10000 && !in.ready()){}
+            while (System.currentTimeMillis()-initialTime < 15000 && !in.ready()){}
             
             if (in.ready()){
                 String input = in.readLine();
                 if (input.equalsIgnoreCase("xboard")){
                     XBoardHandler xb = new XBoardHandler(bot);
+                    
                 }
                 
             } else {
