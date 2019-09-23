@@ -3,6 +3,7 @@ import java.util.Scanner;
 import chess.TestBot;
 import chess.model.GameState;
 
+
 public class XBoardHandler {
     private Scanner scanner;
     private TestBot bot;
@@ -38,17 +39,19 @@ public class XBoardHandler {
 
                 default:
                 handleMove(command);
-                nextMove();
+                System.out.println(nextMove());
                 break;
             }
         }
     }
 
     public void handleMove(String move){
-        this.gamestate.moves.add(command);
+        this.gamestate.moves.add(move);
     }
 
     public String nextMove(){
-        return gamestate.moves.add(bot.makeMove());
+        String move = bot.nextMove(gamestate);
+        gamestate.moves.add(move);
+        return move;
     }
 }

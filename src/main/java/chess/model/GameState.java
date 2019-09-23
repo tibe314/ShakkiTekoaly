@@ -29,7 +29,7 @@ public class GameState {
     public Engine engine = new Engine();
 
     public GameState() {
-
+        this.moves = new ArrayList();
     }
 
     /**
