@@ -12,7 +12,7 @@ import java.util.Map;
 /**
  * Easily mockable Abstraction around Java's HttpUrlConnection
  */
-public class HTTPStream implements Iterator<String>, Closeable {
+public class HTTPStream implements Iterator<String>, HTTPIO {
 
     private HttpURLConnection conn;
     private Iterator<String> iterator;
@@ -26,6 +26,7 @@ public class HTTPStream implements Iterator<String>, Closeable {
      * @param urlString A valid URL in String format
      * @return Open HTTPStream 
      */
+    @Override
     public HTTPStream get(String urlString) {
         try {
             URL url = new URL(urlString);
@@ -43,6 +44,7 @@ public class HTTPStream implements Iterator<String>, Closeable {
      * @param postData Data associated with the POST request, currently unused
      * @return An open HTTPStream 
      */
+    @Override
     public HTTPStream post(String urlString, String postData) {
         try {
             URL url = new URL(urlString);
@@ -59,6 +61,7 @@ public class HTTPStream implements Iterator<String>, Closeable {
      * @param headerFields A key-value store with the HTTP headers
      * @return The open HTTPStream with the headers
      */
+    @Override
     public HTTPStream setHeaders(Map<String, String> headerFields) {
         try {
             headerFields.entrySet().forEach((entry) -> {
@@ -74,6 +77,7 @@ public class HTTPStream implements Iterator<String>, Closeable {
      * Connects the stream and instantiates the internal data iterator
      * @return A ready HTTPStream that can be read from
      */
+    @Override
     public HTTPStream connect() {
         try {
             this.conn.connect();
@@ -92,6 +96,7 @@ public class HTTPStream implements Iterator<String>, Closeable {
      * <b>NOTE:</b> HTTPStream must be connected before status code is read
      * @return HTTP status code
      */
+    @Override
     public int getHTTPStatus() {
         try {
             return this.conn.getResponseCode();
@@ -109,7 +114,12 @@ public class HTTPStream implements Iterator<String>, Closeable {
         // This code still indicates an error
         return 418;
     }
-
+    
+    @Override
+    public Iterator<String> getIterator() {
+        return this;
+    }
+    
     @Override
     public boolean hasNext() {
         return this.iterator.hasNext();

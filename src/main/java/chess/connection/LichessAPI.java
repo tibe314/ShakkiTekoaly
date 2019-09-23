@@ -26,16 +26,18 @@ public class LichessAPI {
     private String gameId;
     private String playerId;
     private Logger logger;
-
+    private HTTPIOFactory httpFactory;
+    
     private HashMap<String, String> headers;
 
     public LichessAPI(TestBot bot) {
-        this(bot, new Logger().useStdOut());
+        this(bot, new Logger().useStdOut(), new HTTPStreamFactory());
     }
 
-    public LichessAPI(TestBot bot, Logger logger) {
+    public LichessAPI(TestBot bot, Logger logger, HTTPIOFactory httpFactory) {
         this.bot = bot;
         this.logger = logger;
+        this.httpFactory = httpFactory;
 
         this.token = bot.getToken();
 
@@ -43,7 +45,6 @@ public class LichessAPI {
 
         // Add token to HTTP headers
         headers.put("Authorization", "Bearer " + token);
-
     }
 
     /**
@@ -53,7 +54,7 @@ public class LichessAPI {
      */
     public Profile getAccount() {
         String json;
-        HTTPStream stream = new HTTPStream()
+        HTTPIO stream = httpFactory.createNew()
                 .get("https://lichess.org/api/account")
                 .setHeaders(headers)
                 .connect();
@@ -83,12 +84,12 @@ public class LichessAPI {
      * loop
      */
     public void beginEventLoop() {
-        HTTPStream eventStream = new HTTPStream()
+        HTTPIO eventStream = httpFactory.createNew()
                 .get("https://lichess.org/api/stream/event")
                 .setHeaders(headers)
                 .connect();
 
-        handleEventLoop(eventStream);
+        handleEventLoop(eventStream.getIterator());
 
         try {
             eventStream.close();
@@ -132,12 +133,12 @@ public class LichessAPI {
 
         logger.logMessage("Game starting: " + gameId);
 
-        HTTPStream gameStream = new HTTPStream()
+        HTTPIO gameStream = httpFactory.createNew()
                 .get("https://lichess.org/api/bot/game/stream/" + gameId)
                 .setHeaders(headers)
                 .connect();
 
-        playGame(gameStream);
+        playGame(gameStream.getIterator());
 
         try {
             gameStream.close();
@@ -210,7 +211,7 @@ public class LichessAPI {
      * @return The HTTP status code of the POST request response
      */
     public int acceptChallenge(String id) {
-        HTTPStream stream = new HTTPStream()
+        HTTPIO stream = httpFactory.createNew()
                 .post("https://lichess.org/api/challenge/" + id + "/accept", "")
                 .setHeaders(headers)
                 .connect();
@@ -225,7 +226,7 @@ public class LichessAPI {
      * @return The HTTP status code of the POST request response
      */
     public int declineChallenge(String id) {
-        HTTPStream stream = new HTTPStream()
+        HTTPIO stream = httpFactory.createNew()
                 .post("https://lichess.org/api/challenge/" + id + "/decline", "")
                 .setHeaders(headers)
                 .connect();
@@ -240,7 +241,7 @@ public class LichessAPI {
      * @return The HTTP status code of the POST request response
      */
     public int makeMove(String move) {
-        HTTPStream stream = new HTTPStream()
+        HTTPIO stream = httpFactory.createNew()
                 .post("https://lichess.org/api/bot/game/" + this.gameId + "/move/" + move, "")
                 .setHeaders(headers)
                 .connect();
