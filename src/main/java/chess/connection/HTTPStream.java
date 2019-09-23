@@ -9,6 +9,9 @@ import java.net.URL;
 import java.util.Iterator;
 import java.util.Map;
 
+/**
+ * Easily mockable Abstraction around Java's HttpUrlConnection
+ */
 public class HTTPStream implements Iterator<String>, Closeable {
 
     private HttpURLConnection conn;
@@ -17,29 +20,45 @@ public class HTTPStream implements Iterator<String>, Closeable {
     public HTTPStream() {
 
     }
-
+    
+    /**
+     * Open a connection as a GET request to the given URL
+     * @param urlString A valid URL in String format
+     * @return Open HTTPStream 
+     */
     public HTTPStream get(String urlString) {
         try {
             URL url = new URL(urlString);
             this.conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
-        } catch (Exception e) {
+        } catch (IOException e) {
             System.out.println(e);
         }
         return this;
     }
-
+    
+    /**
+     * Open a connection as a POST request to the given URL
+     * @param urlString A valid URL in String format
+     * @param postData Data associated with the POST request, currently unused
+     * @return An open HTTPStream 
+     */
     public HTTPStream post(String urlString, String postData) {
         try {
             URL url = new URL(urlString);
             this.conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("POST");
-        } catch (Exception e) {
+        } catch (IOException e) {
             System.out.println(e);
         }
         return this;
     }
-
+    
+    /**
+     * Sets the request's headers to the values defined in the given Map<String, String>
+     * @param headerFields A key-value store with the HTTP headers
+     * @return The open HTTPStream with the headers
+     */
     public HTTPStream setHeaders(Map<String, String> headerFields) {
         try {
             headerFields.entrySet().forEach((entry) -> {
@@ -50,7 +69,11 @@ public class HTTPStream implements Iterator<String>, Closeable {
         }
         return this;
     }
-
+    
+    /**
+     * Connects the stream and instantiates the internal data iterator
+     * @return A ready HTTPStream that can be read from
+     */
     public HTTPStream connect() {
         try {
             this.conn.connect();
@@ -58,19 +81,33 @@ public class HTTPStream implements Iterator<String>, Closeable {
                     new InputStreamReader(
                             this.conn.getInputStream()));
             this.iterator = reader.lines().iterator();
-        } catch (Exception e) {
+        } catch (IOException e) {
             System.out.println(e);
         }
         return this;
     }
     
+    /**
+     * Retrieves the HTTP status code of the open HTTPStream
+     * <b>NOTE:</b> HTTPStream must be connected before status code is read
+     * @return HTTP status code
+     */
     public int getHTTPStatus() {
         try {
             return this.conn.getResponseCode();
         } catch (IOException e) {
             System.out.println(e);
         }
-        return 999;
+        
+        // I'm a tea pot!
+        //
+        // This code should never need to be returned.
+        // But in case it ever is, for unknown reasons,
+        // we might a well use a code that is an April Fool's
+        // from 1998.
+        //
+        // This code still indicates an error
+        return 418;
     }
 
     @Override
@@ -82,17 +119,29 @@ public class HTTPStream implements Iterator<String>, Closeable {
     public String next() {
         return this.iterator.next();
     }
-
+    
+    /**
+     * Disconnects the HTTPStream
+     * <b>NOTE:</b> The HTTPStream must not be used after closing
+     * @throws IOException 
+     */
     @Override
     public void close() throws IOException {
         this.conn.disconnect();
     }
     
+    
+    /**
+     * Reads all lines from the internal data iterator and appends them
+     * together as a single String
+     * @return The whole HTTP response body
+     */
+    @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
         
         while (iterator.hasNext()) {
-            builder.append(iterator.next() + "\n");
+            builder.append(iterator.next()).append("\n");
         }
         
         return builder.toString();
