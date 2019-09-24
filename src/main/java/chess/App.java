@@ -7,9 +7,7 @@ package chess;
 // import chess.connection.EventPump;
 import chess.model.*;
 import chess.connection.*;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.util.Scanner;
 // import java.util.ArrayDeque;
 // import java.util.logging.Level;
 // import java.util.logging.Logger;
@@ -17,19 +15,23 @@ import java.io.InputStreamReader;
 public class App {
     public static void main(String[] args) {
         TestBot bot = new TestBot("INSERT TOKEN HERE");
-        Long initialTime = System.currentTimeMillis();
-        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-        try {
-            while (System.currentTimeMillis()-initialTime < 15000 && !in.ready()){}
-            
-            if (in.ready()){
-                String input = in.readLine();
-                if (input.equalsIgnoreCase("xboard")){
-                    XBoardHandler xb = new XBoardHandler(bot);
-                    
+     
+        Scanner scanner = new Scanner(System.in); 
+        while (true){
+            String input = scanner.nextLine();
+            if (input.equalsIgnoreCase("xboard")){
+                XBoardHandler xb = new XBoardHandler(bot);
+                while (true){
+                    if (scanner.nextLine().startsWith("protover")){
+                        System.out.append("feature sigint=0 sigterm=0 reuse=0 usermove=1 myname=\"tiraengine\" done=1\n");
+                        System.out.flush();
+                        break;
+                    }
                 }
+                xb.run();
                 
-            } else {
+            } else if (input.equalsIgnoreCase("lichess")){
+                scanner.close();
                 LichessAPI api = new LichessAPI(bot);
                 
                 Profile myProfile = api.getAccount();
@@ -38,8 +40,8 @@ public class App {
                 
                 api.beginEventLoop();
             }
-        } catch (IOException e){
-            System.out.println(e);
+            
         }
+        
     }
 }
