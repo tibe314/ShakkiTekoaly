@@ -7,12 +7,9 @@ package logging;
 
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Path;
+// import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.util.logging.Level;
-
-
-
 
 public class Logger {
     public static final String ANSI_RESET = "\u001B[0m";
