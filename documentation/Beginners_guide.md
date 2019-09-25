@@ -20,9 +20,12 @@ By no means, this guideline will not replace the API Reference. We hope that thi
 
 *curl -d '' https<span></span>://lichess.org/api/bot/account/upgrade -H "Authorization: Bearer INSERT YOUR TOKEN HERE"*
 
-6. Now you can try the Tiralabra chess bot. The first step is to replace "INSERT TOKEN HERE" in the App.java file with your personal API access token.
+6. Now you can try the Tiralabra chess bot. 
+You can replace "INSERT TOKEN HERE" in the App.java file with your personal API access token or you can pass token as a parameter..
 
-7. One possible way to use the bot: after login, select “PLAY WITH THE COMPUTER” at https<span></span>://lichess.org/. Then choose which pieces you want to play. Finally, at the command line, type ./gradlew build, then ./gradlew run.
+7. One possible way to use the bot: after login, select “PLAY WITH THE COMPUTER” at https<span></span>://lichess.org/. 
+Then choose which pieces you want to play. Finally, at the command line, type *./gradlew build*, 
+then if you inserted your token App.java *./gradlew run* or if you didn't *./gradlew run --args=INSERT YOUR TOKEN HERE* .
 
 8. Your chess bot will start playig with random moves, that is, very poorly. Your task is now to create a real A.I. bot!
 

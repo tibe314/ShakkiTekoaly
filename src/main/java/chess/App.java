@@ -12,7 +12,15 @@ import java.io.InputStreamReader;
 
 public class App {
     public static void main(String[] args) {
-        TestBot bot = new TestBot("INSERT TOKEN HERE");
+        
+        String token = "INSERT TOKEN HERE";
+        
+        if (args.length > 0) {
+            token = args[0];
+            System.out.println("You inserted token as a parameter");
+        }
+        
+        TestBot bot = new TestBot(token);
 
         Long initialTime = System.currentTimeMillis();
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
