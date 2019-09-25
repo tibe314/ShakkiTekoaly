@@ -4,6 +4,7 @@ import chess.TestBot;
 import chess.model.GameState;
 import java.io.BufferedReader;
 
+
 public class XBoardHandler {
     private Scanner scanner;
     private TestBot bot;
