@@ -24,7 +24,9 @@ public class XBoardHandler {
                     System.out.flush();
                     break;
                 }
-            } catch (Exception e) { }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
