@@ -3,22 +3,49 @@
  */
 package chess;
 
+
 // import chess.connection.EventPump;
 import chess.connection.LichessAPI;
 import chess.model.Profile;
-import logging.Logger;
+// import logging.Logger;
+// import chess.model.*;
+import chess.connection.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+// import java.util.ArrayDeque;
+// import java.util.logging.Level;
+// import java.util.logging.Logger;
 
 public class App {
     public static void main(String[] args) {
         TestBot bot = new TestBot("INSERT TOKEN HERE");
+
+        Long initialTime = System.currentTimeMillis();
+        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+
+        try {
+            while (System.currentTimeMillis() - initialTime < 15000 && !in.ready()) { }
+            
+            if (in.ready()) {
+                String input = in.readLine();
+                if (input.equalsIgnoreCase("xboard")) {
+                    XBoardHandler xb = new XBoardHandler(bot, in);
+                }
+                
+            } else {
+                LichessAPI api = new LichessAPI(bot);
+                
+                Profile myProfile = api.getAccount();
+                
+                System.out.println("Profile ID: " + myProfile.id);
+                
+                api.beginEventLoop();
+            }
+        } catch (IOException e) {
+            System.out.println(e);
+        }
         
-        LichessAPI api = new LichessAPI(bot);
-        Logger logger = new Logger().useStdOut();
-        
-        Profile myProfile = api.getAccount();
-        
-        logger.logMessage("Profile ID: " + myProfile.id);
-        
-        api.beginEventLoop();
     }
 }

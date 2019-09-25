@@ -27,7 +27,7 @@ public class GameState {
     public Engine engine = new Engine();
     
     public GameState() {
-        
+        this.moves = new ArrayList();
     }
 
     /**
@@ -106,7 +106,7 @@ public class GameState {
      * Parses a move in UCI move into the chess engine's move data type and
      * updates the engine's board state
      */
-    private void parseLatestMove() {
+    public void parseLatestMove() {
         this.engine = new Engine();
         // We play all of the moves onto a new board to ensure a previously
         // started game can be resumed correctly, inefficient but it works
@@ -115,7 +115,8 @@ public class GameState {
             this.moves.forEach(moveString -> {
                 String startingString = moveString.substring(0, 2).toUpperCase();
                 String endingString = moveString.substring(2, 4).toUpperCase();
-                String promoteString = moveString.length() > 4 ? moveString.substring(4).toUpperCase() : "".toUpperCase();
+                String promoteString = moveString.length() > 4 ? moveString
+                        .substring(4).toUpperCase() : "".toUpperCase();
                 this.engine.setMove(startingString, endingString, promoteString);
             });
         }
