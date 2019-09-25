@@ -26,3 +26,5 @@ By no means, this guideline will not replace the API Reference. We hope that thi
 
 8. Your chess bot will start playig with random moves, that is, very poorly. Your task is now to create a real A.I. bot!
 
+**Note:** By default, program keeps running as it waits for new challenges from Lichess, to close the program use CTRL+C
+
