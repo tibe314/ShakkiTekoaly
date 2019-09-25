@@ -5,6 +5,7 @@
  */
 package chess.connection;
 
+import chess.ChessBot;
 import chess.TestBot;
 import chess.model.Event;
 import chess.model.GameState;
@@ -22,7 +23,7 @@ import logging.Logger;
 public class LichessAPI {
 
     private final String token;
-    private TestBot bot;
+    private ChessBot bot;
     private String gameId;
     private String playerId;
     private Logger logger;
@@ -30,11 +31,11 @@ public class LichessAPI {
     
     private HashMap<String, String> headers;
 
-    public LichessAPI(TestBot bot) {
+    public LichessAPI(ChessBot bot) {
         this(bot, new Logger().useStdOut(), new HTTPStreamFactory());
     }
 
-    public LichessAPI(TestBot bot, Logger logger, HTTPIOFactory httpFactory) {
+    public LichessAPI(ChessBot bot, Logger logger, HTTPIOFactory httpFactory) {
         this.bot = bot;
         this.logger = logger;
         this.httpFactory = httpFactory;
