@@ -20,8 +20,6 @@ plugins {
     id 'jacoco'
 
     id 'checkstyle'
-
-    id 'war'
 }
 
 jacocoTestReport {
@@ -51,7 +49,6 @@ dependencies {
 
     compile group: 'org.json', name: 'json', version: '20190722'
     implementation 'com.github.bhlangonijr:chesslib:1.1.12'
-    compile 'com.konghq:unirest-java:2.3.17'
 }
 
 application {
