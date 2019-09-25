@@ -1,12 +1,11 @@
 package chess.connection;
-import java.util.Scanner;
+
 import chess.TestBot;
 import chess.model.GameState;
 import java.io.BufferedReader;
-
+import java.io.IOException;
 
 public class XBoardHandler {
-    private Scanner scanner;
     private TestBot bot;
     private GameState gamestate;
     private BufferedReader in;
@@ -21,13 +20,12 @@ public class XBoardHandler {
                 if (input.startsWith("protover")) {
                     System.out.println("feature done=0 sigint=0 sigterm=0 reuse=0 "
                             + "usermove=1 myname=\"tira-chess\" done=1\n");
-//set reuse=1 if bot is able to play multiple games in a session
+                    //set reuse=1 if bot is able to play multiple games in a session
                     System.out.flush();
                     break;
                 }
             } catch (Exception e) { }
         }
-        this.run();
     }
 
     public void run() {
@@ -37,10 +35,11 @@ public class XBoardHandler {
                 String command = this.in.readLine();
                 switch (command.split(" ")[0]) {
                     case "new":
-//tells the engine the match has started and it plays as black, may not require implementation at all.
+                        //tells the engine the match has started and it plays as black
                         break;
+                    
                     case "go": 
-                //tells the engine to start playing as white
+                        //tells the engine to start playing as white
                         System.out.println("move " + nextMove() + "\n");
                         System.out.flush(); 
                         break;
@@ -50,11 +49,14 @@ public class XBoardHandler {
                         System.out.println("move " + nextMove() + "\n");
                         System.out.flush();
                         break;
+                    
                     default:
                         continue;
                 }
                 
-            } catch (Exception e) { }
+            } catch (IOException e) { 
+                e.printStackTrace();
+            }
         }
     }
     

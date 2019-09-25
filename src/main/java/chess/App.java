@@ -3,20 +3,12 @@
  */
 package chess;
 
-
-// import chess.connection.EventPump;
 import chess.connection.LichessAPI;
 import chess.model.Profile;
-// import logging.Logger;
-// import chess.model.*;
 import chess.connection.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-
-// import java.util.ArrayDeque;
-// import java.util.logging.Level;
-// import java.util.logging.Logger;
 
 public class App {
     public static void main(String[] args) {
@@ -32,6 +24,7 @@ public class App {
                 String input = in.readLine();
                 if (input.equalsIgnoreCase("xboard")) {
                     XBoardHandler xb = new XBoardHandler(bot, in);
+                    xb.run();
                 }
                 
             } else {
@@ -44,7 +37,7 @@ public class App {
                 api.beginEventLoop();
             }
         } catch (IOException e) {
-            System.out.println(e);
+            e.printStackTrace();
         }
         
     }
