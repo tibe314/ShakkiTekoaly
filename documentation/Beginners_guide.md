@@ -21,7 +21,11 @@ By no means, this guideline will not replace the API Reference. We hope that thi
 *curl -d '' https<span></span>://lichess.org/api/bot/account/upgrade -H "Authorization: Bearer INSERT YOUR TOKEN HERE"*
 
 6. Now you can try the Tiralabra chess bot. 
-You can replace "INSERT TOKEN HERE" in the App.java file with your personal API access token or you can pass token as a parameter..
+    a) You can replace "PLEASE DON'T INSERT TOKEN HERE" in the App.java file with your personal API access token and risk that you accidently push it to GitHub or
+    b) you can pass token as a parameter or
+    c) you can create "token.txt" file to resources-directory (it's in src/main). It won't go to GitHub because it's in *.gitignore*.
+
+**Note** Token given as a parameter overrides any token in token.txt file. 
 
 7. One possible way to use the bot: after login, select “PLAY WITH THE COMPUTER” at https<span></span>://lichess.org/. 
 Then choose which pieces you want to play. Finally, at the command line, type *./gradlew build*, 
