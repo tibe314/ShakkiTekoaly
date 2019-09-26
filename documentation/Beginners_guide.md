@@ -34,11 +34,11 @@ then if you inserted your token App.java *./gradlew run* or if you didn't *./gra
 
 ## XBoard Setup
 
-XBoard is a graphical user interface chessboard for chess engines. Xboard can be connected to the tira chess engine.
+XBoard is a graphical user interface chessboard for chess engines. Xboard can be connected to your tira chess engine.
 
 1. Download XBoard from  https://www.gnu.org/software/xboard/#download
 
-One can download the tar.gz file of the latest stable version and uncompress it, for example, in the same directory where the chess folder is.
+One can download the tar.gz file of the latest stable version and uncompress it, for example, under the same directory where the chess directory is.
 
 $ tar xvzf xboard-4.9.0.tar.gz
 
@@ -48,22 +48,26 @@ $ xboard
 
 3. Under Engine tab, select Edit Engine List..
 
-4. Add the path of the chess engine's jar file in the list
+4. Make sure that you have a jar file for your engine
+
+$ ./gradlew build
+
+5. Add the path of the chess engine's jar file in the list
 
 "tira-chess" -fcp "java -jar /home/local/..your path../chess/build/libs/chess-all.jar"
 
 You can replace "tira-chess" with any unique name.
-The click 'commit changes' and 'OK'.
+Then click 'commit changes' and 'OK'.
 
-5. Under Engine tab, select Load New 1st Engine..
+6. Under Engine tab, select Load New 1st Engine..
 
-Just select your engine and click 'OK'.
+Just select your engine from the list and click 'OK'.
 
-6. Make your first move (as white) and your engine should respond by its move.
+7. Make your first move (as white) and your engine should respond by its move.
 
-You can also select 'Machine White' under the Mode tab. In this case, your engine will play white and make its move first.
+You can also select 'Machine White' under the Mode tab. In this case, your engine will play white pieces and make its move first.
 
-7. When developing your AI engine, you may want to modify the way how XBoard communicates with your chess engine. Web page https://www.gnu.org/software/xboard/engine-intf.html gives the Chess Engine Communication Protocol.
+**Note:** When developing your AI engine, you may want to modify the way how XBoard communicates with your chess engine. Web page https://www.gnu.org/software/xboard/engine-intf.html gives the Chess Engine Communication Protocol.
 
 
 
