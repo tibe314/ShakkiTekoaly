@@ -36,9 +36,9 @@ then if you inserted your token App.java *./gradlew run* or if you didn't *./gra
 
 XBoard is a graphical user interface chessboard for chess engines. Xboard can be connected to your tira chess engine.
 
-1. Download XBoard from  https://www.gnu.org/software/xboard/#download
+1. Download the tar.gz file of the latest stable version of [XBoard](https://www.gnu.org/software/xboard/#download)
 
-One can download the tar.gz file of the latest stable version and uncompress it, for example, under the same directory where the chess directory is.
+Uncompress it, for example, under the same directory where the chess directory is.
 
 $ tar xvzf xboard-4.9.0.tar.gz
 
@@ -67,7 +67,7 @@ Just select your engine from the list and click 'OK'.
 
 You can also select 'Machine White' under the Mode tab. In this case, your engine will play white pieces and make its move first.
 
-**Note:** When developing your AI engine, you may want to modify the way how XBoard communicates with your chess engine. Web page https://www.gnu.org/software/xboard/engine-intf.html gives the Chess Engine Communication Protocol.
+**Note:** When developing your AI engine, you may want to modify the way how XBoard communicates with your chess engine. The [Chess Engine Communication Protocol](https://www.gnu.org/software/xboard/engine-intf.html) has the details.
 
 
 
