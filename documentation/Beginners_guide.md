@@ -46,11 +46,11 @@ $ tar xvzf xboard-4.9.0.tar.gz
 
 $ xboard
 
-3. Under Engine tab, select Edit Engine List..
-
-4. Make sure that you have a jar file for your engine
+3. Make sure that you have a jar file for your engine
 
 $ ./gradlew build
+
+4. Under Engine tab, select Edit Engine List..
 
 5. Add the path of the chess engine's jar file in the list
 
