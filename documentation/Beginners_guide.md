@@ -70,7 +70,7 @@ Then click 'commit changes' and 'OK'.
 
 Just select your engine from the list and click 'OK'.
 
-7. Make your first move (as white) and your engine should respond by its move.
+7. Make your first move (as white) and your engine should respond with its move.
 
 You can also select 'Machine White' under the Mode tab. In this case, your engine will play white pieces and make its move first.
 

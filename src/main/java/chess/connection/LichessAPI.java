@@ -6,7 +6,7 @@
 package chess.connection;
 
 import chess.ChessBot;
-import chess.TestBot;
+//import chess.TestBot;
 import chess.model.Event;
 import chess.model.GameState;
 import chess.model.Profile;

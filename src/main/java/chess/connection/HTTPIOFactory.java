@@ -9,5 +9,5 @@ package chess.connection;
  * Abstract factory for generating HTTPIO objects
  */
 public interface HTTPIOFactory {
-    public HTTPIO createNew();
+    HTTPIO createNew();
 }
