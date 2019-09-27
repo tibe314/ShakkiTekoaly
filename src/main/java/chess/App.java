@@ -10,17 +10,22 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Map;
 import java.util.Scanner;
 
 public class App {
 
     public static void main(String[] args) {
+        Map<String, String> env = System.getenv();
         
-        TestBot bot = new TestBot("<INSERT TOKEN HERE>");
+        String token = "PLEASE DON'T INSERT TOKEN HERE";
+
 
         if (args.length > 0) {
             token = args[0];
             System.out.println("You inserted token as a parameter.");
+        } else if (env.containsKey("LICHESS_TOKEN")) {
+            token = env.get("LICHESS_TOKEN");
         } else {
             try (Scanner reader = new Scanner(new File("src/main/resources/token.txt"))) {
                 if (reader.hasNextLine()) {
