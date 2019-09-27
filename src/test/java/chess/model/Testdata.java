@@ -5,7 +5,7 @@ public class Testdata {
     public static String gameStateFullJson = "{\n"
             + "\n"
             + "    \"type\": \"gameFull\",\n"
-            + "    \"id\": \"5IrD6Gzz\",\n"
+            + "    \"id\": \"NCCbuaQM\",\n"
             + "    \"rated\": true,\n"
             + "    \"variant\": \n"
             + "\n"
@@ -76,7 +76,7 @@ public class Testdata {
             + "\n"
             + "}";
 
-    public static String gameStateJsonShort = "{\"id\":\"eNKgUPQ6\","
+    public static String gameStateJsonShort = "{\"id\":\"NCCbuaQM\","
             + "\"variant\":{\"key\":\"standard\",\"name\":\"Standard\","
             + "\"short\":\"Std\"},\"clock\":null,\"speed\":\"correspondence\","
             + "\"perf\":{\"name\":\"Correspondence\"},\"rated\":false,"
@@ -90,8 +90,8 @@ public class Testdata {
 
     public static String profileJson = "{\n"
             + "\n"
-            + "    \"id\": \"georges\",\n"
-            + "    \"username\": \"Georges\",\n"
+            + "    \"id\": \"leela\",\n"
+            + "    \"username\": \"leela\",\n"
             + "    \"title\": \"NM\",\n"
             + "    \"online\": true,\n"
             + "    \"playing\": true,\n"
@@ -159,12 +159,15 @@ public class Testdata {
             + "    }\n"
             + "\n"
             + "}";
+    
+    public static String gameStartJSON = "{\"type\":\"gameStart\","
+            + "\"game\":{\"id\":\"NCCbuaQM\"}}";
 
     /*
-    Player id: testUser1 Lichess AI level 8
+    Player id: leela Lichess AI level 8
      */
     public static String[] testGameJSON = {
-        "{\"id\":\"NCCbuaQM\",\"variant\":{\"key\":\"standard\",\"name\":\"Standard\",\"short\":\"Std\"},\"clock\":null,\"speed\":\"correspondence\",\"perf\":{\"name\":\"Correspondence\"},\"rated\":false,\"createdAt\":1569232053391,\"white\":{\"aiLevel\":8},\"black\":{\"id\":\"testiUser1\",\"name\":\"ohtukayttaja1\",\"title\":\"BOT\",\"rating\":1500,\"provisional\":true},\"initialFen\":\"startpos\",\"type\":\"gameFull\",\"state\":{\"type\":\"gameState\",\"moves\":\"e2e4\",\"wtime\":2147483647,\"btime\":2147483647,\"winc\":0,\"binc\":0,\"bdraw\":false,\"wdraw\":false}}\n",
+        "{\"id\":\"NCCbuaQM\",\"variant\":{\"key\":\"standard\",\"name\":\"Standard\",\"short\":\"Std\"},\"clock\":null,\"speed\":\"correspondence\",\"perf\":{\"name\":\"Correspondence\"},\"rated\":false,\"createdAt\":1569232053391,\"white\":{\"aiLevel\":8},\"black\":{\"id\":\"leela\",\"name\":\"leela\",\"title\":\"BOT\",\"rating\":1500,\"provisional\":true},\"initialFen\":\"startpos\",\"type\":\"gameFull\",\"state\":{\"type\":\"gameState\",\"moves\":\"e2e4\",\"wtime\":2147483647,\"btime\":2147483647,\"winc\":0,\"binc\":0,\"bdraw\":false,\"wdraw\":false}}\n",
         "{\"type\":\"gameState\",\"moves\":\"e2e4 d7d5\",\"wtime\":2147483647,\"btime\":2147483647,\"winc\":0,\"binc\":0,\"bdraw\":false,\"wdraw\":false}\n",
         "{\"type\":\"gameState\",\"moves\":\"e2e4 d7d5 e4d5\",\"wtime\":2147483647,\"btime\":2147483647,\"winc\":0,\"binc\":0,\"bdraw\":false,\"wdraw\":false}\n",
         "{\"type\":\"gameState\",\"moves\":\"e2e4 d7d5 e4d5 c7c5\",\"wtime\":2147483647,\"btime\":2147483647,\"winc\":0,\"binc\":0,\"bdraw\":false,\"wdraw\":false}\n",
