@@ -21,6 +21,10 @@ public class MockHTTPIOFactory implements HTTPIOFactory {
     
     @Override
     public HTTPIO createNew() {
+        if (index == createdObjects.size()) {
+            createdObjects.add(new MockHTTPIO());
+        }
+        
         return createdObjects.get(index++);
     }
     
