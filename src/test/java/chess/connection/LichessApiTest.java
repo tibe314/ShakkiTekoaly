@@ -176,6 +176,7 @@ public class LichessApiTest {
         this.httpFactory.addMockHTTPIOToQueue(io);
 
         list = new ArrayList<>();
+
         list.addAll(Arrays.asList(Testdata.testGameJSON));
         iterator = list.iterator();
         io = new MockHTTPIO();
