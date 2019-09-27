@@ -20,6 +20,7 @@ public class App {
         
         String token = "PLEASE DON'T INSERT TOKEN HERE";
 
+
         if (args.length > 0) {
             token = args[0];
             System.out.println("You inserted token as a parameter.");
