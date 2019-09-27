@@ -13,17 +13,17 @@ import java.util.Map;
  * Abstract representation of a HTTP input/output object
  */
 public interface HTTPIO {
-    public HTTPIO get(String url);
+    HTTPIO get(String url);
     
-    public HTTPIO post(String url, String postData);
+    HTTPIO post(String url, String postData);
     
-    public HTTPIO setHeaders(Map<String, String> headers);
+    HTTPIO setHeaders(Map<String, String> headers);
     
-    public HTTPIO connect();
+    HTTPIO connect();
     
-    public int getHTTPStatus();
+    int getHTTPStatus();
     
-    public void close() throws IOException;
+    void close() throws IOException;
     
-    public Iterator<String> getIterator();
+    Iterator<String> getIterator();
 }

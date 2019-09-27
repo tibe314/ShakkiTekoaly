@@ -10,21 +10,19 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.Scanner;
 
 public class App {
 
     public static void main(String[] args) {
-
-        String token = "PLEASE DON'T INSERT TOKEN HERE";
+        String token = "O54PgYvpmdOjtUCp";
+//        TestBot bot = new TestBot("<INSERT TOKEN HERE>");
 
         if (args.length > 0) {
             token = args[0];
             System.out.println("You inserted token as a parameter.");
         } else {
-            try (Scanner reader = new Scanner(new File("src/main/resources/token.txt"))){
+            try (Scanner reader = new Scanner(new File("src/main/resources/token.txt"))) {
                 if (reader.hasNextLine()) {
                     token = reader.nextLine();
                     System.out.println("Token read from the file.");
