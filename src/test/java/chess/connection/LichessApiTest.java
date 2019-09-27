@@ -154,4 +154,29 @@ public class LichessApiTest {
         this.api.playGame(iterator);
         assertFalse("Error reading message from std", System.in.read() == 0);
     }
+
+    @Test
+    public void lichessAPIProceedsFromBeginEventLoopToPlayGame() {
+        this.httpFactory = new MockHTTPIOFactory();
+
+        ArrayList<String> list = new ArrayList<>();
+        list.addAll(Arrays.asList(Testdata.gameStartJSON));
+        Iterator<String> iterator = list.iterator();
+        MockHTTPIO io = new MockHTTPIO();
+        io.setOutput(iterator);
+
+        this.httpFactory.addMockHTTPIOToQueue(io);
+
+        list = new ArrayList<>();
+        list.addAll(Arrays.asList(Testdata.testGameJSON));
+        iterator = list.iterator();
+        io = new MockHTTPIO();
+        io.setOutput(iterator);
+
+        this.httpFactory.addMockHTTPIOToQueue(io);
+
+        this.api = new LichessAPI(new MockBot(Arrays.asList("d7d5", "c7c5", "b7b5", "d8d7", "e8d7")), this.logger, this.httpFactory);
+        this.api.beginEventLoop();
+
+    }
 }
