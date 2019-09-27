@@ -7,46 +7,61 @@ import chess.connection.LichessAPI;
 import chess.model.Profile;
 import chess.connection.*;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Scanner;
 
 public class App {
+
     public static void main(String[] args) {
-        
-        String token = "INSERT TOKEN HERE";
-        
+
+        String token = "PLEASE DON'T INSERT TOKEN HERE";
+
         if (args.length > 0) {
             token = args[0];
-            System.out.println("You inserted token as a parameter");
+            System.out.println("You inserted token as a parameter.");
+        } else {
+            try (Scanner reader = new Scanner(new File("src/main/resources/token.txt"))){
+                if (reader.hasNextLine()) {
+                    token = reader.nextLine();
+                    System.out.println("Token read from the file.");
+                }
+            } catch (Exception e) {
+                System.out.println("No token.txt found.");
+            }
         }
-        
+
         TestBot bot = new TestBot(token);
 
         Long initialTime = System.currentTimeMillis();
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 
         try {
-            while (System.currentTimeMillis() - initialTime < 15000 && !in.ready()) { }
-            
+            while (System.currentTimeMillis() - initialTime < 15000 && !in.ready()) {
+            }
+
             if (in.ready()) {
                 String input = in.readLine();
                 if (input.equalsIgnoreCase("xboard")) {
                     XBoardHandler xb = new XBoardHandler(bot, in);
                     xb.run();
                 }
-                
+
             } else {
                 LichessAPI api = new LichessAPI(bot);
-                
+
                 Profile myProfile = api.getAccount();
-                
+
                 System.out.println("Profile ID: " + myProfile.id);
-                
+
                 api.beginEventLoop();
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        
+
     }
 }
