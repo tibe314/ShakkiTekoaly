@@ -51,13 +51,16 @@ public class Logger {
     }
     
     public void logMessage(String message) {
-        String messageWithDate = LocalDateTime.now().toString() + textInGreen(" MESSAGE: ") + message;
+        String messageWithDate;
         
         if (useStdOut) {
+            messageWithDate = LocalDateTime.now().toString() + textInGreen(" MESSAGE: ") + message;
             System.out.println(messageWithDate);
         }
         
         if (useLogFile) {
+            messageWithDate = LocalDateTime.now().toString() + " MESSAGE: " + message;
+            
             FileWriter out = null;
             try {
                 out = new FileWriter(filePath, true);
@@ -76,13 +79,16 @@ public class Logger {
     }
     
     public void logError(String message) {
-        String messageWithDate = LocalDateTime.now().toString() + textInRed(" ERROR: ") + message;
+        String messageWithDate;
         
         if (useStdOut) {
+            messageWithDate = LocalDateTime.now().toString() + textInRed(" ERROR: ") + message;
             System.out.println(messageWithDate);
         }
         
         if (useLogFile) {
+            messageWithDate = LocalDateTime.now().toString() + " ERROR: " + message;
+            
             FileWriter out = null;
             try {
                 out = new FileWriter(filePath, true);
