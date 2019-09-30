@@ -15,7 +15,7 @@ import java.util.Scanner;
 
 public class App {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         Map<String, String> env = System.getenv();
         
         String token = "PLEASE DON'T INSERT TOKEN HERE";
@@ -43,7 +43,8 @@ public class App {
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 
         try {
-            while (System.currentTimeMillis() - initialTime < 15000 && !in.ready()) {
+            while (System.currentTimeMillis() - initialTime < 2500 && !in.ready()) {
+                Thread.sleep(25);
             }
 
             if (in.ready()) {
