@@ -11,6 +11,9 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.logging.Level;
 
+/**
+ * A logger for errors and messages
+ */
 public class Logger {
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_BLACK = "\u001B[30m";
@@ -26,30 +29,50 @@ public class Logger {
     private boolean useLogFile;
     private String filePath;
     
+    /**
+     * Default constructor, will not log until logging features are manually enabled
+     */
     public Logger() {
         useStdOut = false;
         useLogFile = false;
         filePath = "./log.txt";
     }
     
+    /**
+     * Turn on logging to standard output
+     * @return Self
+     */
     public Logger useStdOut() {
         this.useStdOut = true;
         
         return this;
     }
     
+    /**
+     * Turn on logging to a text file
+     * @return 
+     */
     public Logger useLogFile() {
         this.useLogFile = true;
         
         return this;
     }
     
+    /**
+     * Set an alternate path for the log file
+     * @param path Path to a file
+     * @return Self
+     */
     public Logger alternatePath(String path) {
         this.filePath = path;
         
         return this;
     }
     
+    /**
+     * Logs a message, used for general status notifications
+     * @param message Message to be logged
+     */
     public void logMessage(String message) {
         String messageWithDate;
         
@@ -78,6 +101,10 @@ public class Logger {
         }
     }
     
+    /**
+     * Logs an error, used for when encountering an exceptional or a fatal situation
+     * @param message Error message to be logged
+     */
     public void logError(String message) {
         String messageWithDate;
         
@@ -106,10 +133,20 @@ public class Logger {
         }
     }
     
+    /**
+     * Surrounds given text with ANSI colour codes indicating red
+     * @param text
+     * @return 
+     */
     public String textInRed(String text) {
         return ANSI_RED + text + ANSI_RESET;
     }
     
+    /**
+     * Surrounds text with ANSI colour codes indicating green
+     * @param text
+     * @return 
+     */
     public String textInGreen(String text) {
         return ANSI_GREEN + text + ANSI_RESET;
     }
