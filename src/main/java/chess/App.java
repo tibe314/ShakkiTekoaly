@@ -19,8 +19,7 @@ public class App {
         Map<String, String> env = System.getenv();
         
         String token = "PLEASE DON'T INSERT TOKEN HERE";
-
-
+        
         if (args.length > 0) {
             token = args[0];
         } else if (env.containsKey("LICHESS_TOKEN")) {
@@ -36,7 +35,7 @@ public class App {
         }
 
         TestBot bot = new TestBot(token);
-
+        
         Long initialTime = System.currentTimeMillis();
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 
