@@ -28,7 +28,7 @@ public class LichessAPI {
     private String playerId;
     private Logger logger;
     private HTTPIOFactory httpFactory;
-    
+
     private HashMap<String, String> headers;
 
     public LichessAPI(ChessBot bot) {
@@ -155,20 +155,23 @@ public class LichessAPI {
 
         while (gameRunning && gameStream.hasNext()) {
             String line = gameStream.next();
-            String move = getNextMove(line, gs, playerId);
+            if (!line.isEmpty()) {
+                String move = getNextMove(line, gs, playerId);
 
-            if (move == null) {
-                gameRunning = false;
-            } else if (move.equals("nomove")) {
-                logger.logMessage("Cannot make a move yet.");
-            } else {
-                int statusCode = makeMove(move);
+                if (move == null) {
+                    gameRunning = false;
+                } else if (move.equals("nomove")) {
+                    logger.logMessage("Cannot make a move yet.");
+                } else {
+                    int statusCode = makeMove(move);
 
-                if (statusCode != 200) {
-                    logger.logError("Lichess returned Bad Request status code, illegal move? Move was: " + move);
+                    if (statusCode != 200) {
+                        logger.logError("Lichess returned Bad Request status code, illegal move? Move was: " + move);
+                    }
                 }
             }
         }
+
     }
 
     /**
