@@ -1,5 +1,12 @@
 # Beginner's guide for chess bot setup
 
+This template provides two ways for your bots to interact with other bots or players. You can either play online on [Lichess](https://lichess.org)
+or you can play locally using the program [XBoard](https://www.gnu.org/software/xboard/).
+
+Below you can find the instructions to configuring your project to work with either of these options.
+
+## Playing on Lichess
+
 The following minimum actions are necessary to run the Tiralabra chess bot app with the Lichess.org application program interface (API). See [Lichess API](https://lichess.org/api) for the full API Reference. 
 
 By no means, this guideline will not replace the API Reference. We hope that this guideline will save your valuable time when getting started.
@@ -22,13 +29,15 @@ By no means, this guideline will not replace the API Reference. We hope that thi
 
 6. Now you can try the Tiralabra chess bot. 
 
-    a) You can replace "PLEASE DON'T INSERT TOKEN HERE" in the App.java file with your personal API access token and risk that you accidently push it to GitHub or
+    a) (Not recommended) You can replace "PLEASE DON'T INSERT TOKEN HERE" in the App.java file with your personal API access token and risk that you accidently push it to GitHub or
     
-    b) you can pass token as a parameter or
+    b) you can pass token as a commandline parameter or
     
-    c) you can create "token.txt" file to resources-directory (it's in src/main). It won't go to GitHub because it's in *.gitignore*.
+    c) you can supply the token via the LICHESS_TOKEN environment variable or
+    
+    d) you can create "token.txt" file to resources-directory (it's in src/main). It won't go to GitHub because it's in *.gitignore*.
 
-**Note** Token given as a parameter overrides any token in token.txt file. 
+**Note** Token given as a parameter or through an environment variable overrides any token in token.txt file. 
 
 7. One possible way to use the bot: after login, select “PLAY WITH THE COMPUTER” at https<span></span>://lichess.org/. 
 Then choose which pieces you want to play. Finally, at the command line, type *./gradlew build*, 
