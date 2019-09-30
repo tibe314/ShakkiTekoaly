@@ -57,7 +57,7 @@ public class HTTPStream implements Iterator<String>, HTTPIO {
     }
     
     /**
-     * Sets the request's headers to the values defined in the given Map<String, String>
+     * Sets the request's headers to the values defined in the given Map
      * @param headerFields A key-value store with the HTTP headers
      * @return The open HTTPStream with the headers
      */
