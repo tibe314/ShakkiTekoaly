@@ -5,6 +5,7 @@ import chess.model.GameState;
 import java.io.BufferedReader;
 import java.io.IOException;
 
+import logging.Logger;
 /**
  * Class for handling game input coming from XBoard
  */
@@ -12,6 +13,8 @@ public class XBoardHandler {
     private ChessBot bot;
     private GameState gamestate;
     private BufferedReader in;
+
+    private Logger logger;
     
     /**
      * Initializes XBoardHandler with a 
@@ -22,6 +25,9 @@ public class XBoardHandler {
         this.bot = bot;
         this.in = in;
         String input;
+        this.logger = new Logger().useLogFile();
+
+        
         while (true) {
             try {
                 input = this.in.readLine();
@@ -46,12 +52,13 @@ public class XBoardHandler {
         while (true) {            
             try {
                 String command = this.in.readLine();
+                logger.logMessage(command);
                 switch (command.split(" ")[0]) {
                     case "new":
                         //tells the engine the match has started and it plays as black
                         break;
                     
-                    case "go": 
+                    case "white": 
                         //tells the engine to start playing as white
                         System.out.println("move " + nextMove() + "\n");
                         System.out.flush(); 
@@ -80,6 +87,7 @@ public class XBoardHandler {
     public void handleMove(String move) {
         this.gamestate.moves.add(move);
         gamestate.parseLatestMove();
+        this.logger.logMessage(gamestate.moves.toString());
     }
     
     /**

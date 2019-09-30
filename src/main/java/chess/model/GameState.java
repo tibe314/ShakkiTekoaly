@@ -110,7 +110,6 @@ public class GameState {
         this.engine = new Engine();
         // We play all of the moves onto a new board to ensure a previously
         // started game can be resumed correctly, inefficient but it works
-        this.engine = new Engine();
         if (!this.moves.isEmpty()) {
             this.moves.forEach(moveString -> {
                 String startingString = moveString.substring(0, 2).toUpperCase();
