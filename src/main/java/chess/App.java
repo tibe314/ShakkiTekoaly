@@ -23,17 +23,15 @@ public class App {
 
         if (args.length > 0) {
             token = args[0];
-            System.out.println("You inserted token as a parameter.");
         } else if (env.containsKey("LICHESS_TOKEN")) {
             token = env.get("LICHESS_TOKEN");
         } else {
             try (Scanner reader = new Scanner(new File("src/main/resources/token.txt"))) {
                 if (reader.hasNextLine()) {
                     token = reader.nextLine();
-                    System.out.println("Token read from the file.");
                 }
             } catch (Exception e) {
-                System.out.println("No token.txt found.");
+                // System.out.println("No token.txt found.");
             }
         }
 
