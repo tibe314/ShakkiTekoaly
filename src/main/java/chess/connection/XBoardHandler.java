@@ -1,16 +1,24 @@
 package chess.connection;
 
-import chess.TestBot;
+import chess.ChessBot;
 import chess.model.GameState;
 import java.io.BufferedReader;
 import java.io.IOException;
 
+/**
+ * Class for handling game input coming from XBoard
+ */
 public class XBoardHandler {
-    private TestBot bot;
+    private ChessBot bot;
     private GameState gamestate;
     private BufferedReader in;
-
-    public XBoardHandler(TestBot bot, BufferedReader in) {
+    
+    /**
+     * Initializes XBoardHandler with a 
+     * @param bot A chess bot 
+     * @param in Reader for standard input
+     */
+    public XBoardHandler(ChessBot bot, BufferedReader in) {
         this.bot = bot;
         this.in = in;
         String input;
@@ -29,7 +37,10 @@ public class XBoardHandler {
             }
         }
     }
-
+    
+    /**
+     * Executes the game loop for XBoard
+     */
     public void run() {
         this.gamestate = new GameState();
         while (true) {            
@@ -62,12 +73,19 @@ public class XBoardHandler {
         }
     }
     
-
+    /**
+     * Processes a single move from XBoard and updates GameState
+     * @param move XBoard-supplied move
+     */
     public void handleMove(String move) {
         this.gamestate.moves.add(move);
         gamestate.parseLatestMove();
     }
-
+    
+    /**
+     * Asks the chess bot for a move and updates the GameState
+     * @return 
+     */
     public String nextMove() {
         String move = bot.nextMove(gamestate);
         gamestate.moves.add(move);
