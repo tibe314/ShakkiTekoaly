@@ -27,6 +27,7 @@ public class XBoardHandler {
         String input;
         this.logger = new Logger().useLogFile();
 
+        this.gamestate = new GameState();
         
         while (true) {
             try {
@@ -48,8 +49,8 @@ public class XBoardHandler {
      * Executes the game loop for XBoard
      */
     public void run() {
-        this.gamestate = new GameState();
-        while (true) {            
+        Boolean run = true;
+        while (run) {            
             try {
                 String command = this.in.readLine();
                 logger.logMessage(command);
@@ -70,6 +71,10 @@ public class XBoardHandler {
                         System.out.flush();
                         break;
                     
+                    case "endloop":
+                        run = false;
+                        break;
+                        
                     default:
                         continue;
                 }
@@ -99,5 +104,9 @@ public class XBoardHandler {
         gamestate.moves.add(move);
         gamestate.parseLatestMove();
         return move;
+    }
+
+    public GameState getGameState(){
+        return this.gamestate;
     }
 }
