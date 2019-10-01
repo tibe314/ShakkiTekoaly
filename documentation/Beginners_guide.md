@@ -3,7 +3,7 @@
 This template provides two ways for your bots to interact with other bots or players. You can either play online on [Lichess](https://lichess.org)
 or you can play locally using the program [XBoard](https://www.gnu.org/software/xboard/).
 
-Below you can find the instructions to configuring your project to work with either of these options.
+Below you can find the instructions to configure your project to work with either of these options.
 
 ## Playing on Lichess
 
@@ -27,25 +27,25 @@ By no means, this guideline will not replace the API Reference. We hope that thi
 
 *curl -d '' https<span></span>://lichess.org/api/bot/account/upgrade -H "Authorization: Bearer INSERT YOUR TOKEN HERE"*
 
-6. Now you can try the Tiralabra chess bot. 
+5. Select your way to pass your token to the Tiralabra chess bot. 
 
-    a) (Not recommended) You can replace "PLEASE DON'T INSERT TOKEN HERE" in the App.java file with your personal API access token and risk that you accidently push it to GitHub or
+    a) you can pass token as a commandline parameter or
     
-    b) you can pass token as a commandline parameter or
+    b) you can supply the token via the LICHESS_TOKEN environment variable or
     
-    c) you can supply the token via the LICHESS_TOKEN environment variable or
-    
-    d) you can create "token.txt" file to resources-directory (it's in src/main). It won't go to GitHub because it's in *.gitignore*.
+    c) you can create a "token.txt" file to resources-directory (it's in src/main). It won't go to GitHub because it is listed  in *.gitignore*.
 
-**Note** Token given as a parameter or through an environment variable overrides any token in token.txt file. 
+    d) (Not recommended) You can replace "PLEASE DON'T INSERT TOKEN HERE" in the App.java file with your personal API access token and risk that you accidently push it to GitHub
 
-7. One possible way to use the bot: after login, select “PLAY WITH THE COMPUTER” at https<span></span>://lichess.org/. 
+**Note** Token given as a parameter or through an environment variable overrides any token in the token.txt file. 
+
+6. Now you can try the Tiralabra chess bot. One possible way to start the bot: after login, select “PLAY WITH THE COMPUTER” at https<span></span>://lichess.org/. 
 Then choose which pieces you want to play. Finally, at the command line, type *./gradlew build*, 
-then if you inserted your token App.java *./gradlew run* or if you didn't *./gradlew run --args=INSERT YOUR TOKEN HERE* .
+then if you inserted your token App.java *./gradlew run* or, if you didn't, *./gradlew run --args=INSERT YOUR TOKEN HERE* .
 
-8. Your chess bot will start playig with random moves, that is, very poorly. Your task is now to create a real A.I. bot!
+7. Your chess bot will start playig with random moves, that is, very poorly. Your task is now to create a real A.I. bot!
 
-**Note:** By default, program keeps running as it waits for new challenges from Lichess, to close the program use CTRL+C
+**Note:** By default, program keeps running as it waits for new challenges from Lichess. To close the program use CTRL+C.
 
 
 ## XBoard Setup
@@ -82,6 +82,8 @@ Just select your engine from the list and click 'OK'.
 7. Make your first move (as white) and your engine should respond with its move.
 
 You can also select 'Machine White' under the Mode tab. In this case, your engine will play white pieces and make its move first.
+
+With the "Two Machines" mode, you can also get two bots playing against each other.
 
 **Note:** When developing your AI engine, you may want to modify the way how XBoard communicates with your chess engine. The [Chess Engine Communication Protocol](https://www.gnu.org/software/xboard/engine-intf.html) has the details.
 
