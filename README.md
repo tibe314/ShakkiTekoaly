@@ -18,7 +18,7 @@ Friday 10-16
 
 ## Project progress
 - [Working hours](https://helsinkifi-my.sharepoint.com/:x:/g/personal/strajama_ad_helsinki_fi/ERPYySnLnbtLtp5ouqWf6CkB0oFQLGVaGjUu03Ro86MbFw?e=mDgJZn)
-- Workflow will be added later
+- [Workflow](https://helsinkifi-my.sharepoint.com/:w:/g/personal/strajama_ad_helsinki_fi/EawIdQCt7z1IriBRpwv4yDsBqB3rMStTncH2uAGvklX1UQ?e=LEFoTb)
 - [Sprint 0 board](https://github.com/TiraLabra/chess/projects/1)
 - [Sprint 1 board](https://github.com/TiraLabra/chess/projects/2) 
 - [Product backlog](https://helsinkifi-my.sharepoint.com/:x:/g/personal/strajama_ad_helsinki_fi/EeqfgrknuGlIoK0kOG8hLdIBLK_6oRckeZA5xo4XktYMtQ?e=XqQYM0)
