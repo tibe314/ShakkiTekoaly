@@ -11,3 +11,6 @@ log.txt
 
 # Ignore token
 token.txt
+
+# Ignore classpath
+.classpath

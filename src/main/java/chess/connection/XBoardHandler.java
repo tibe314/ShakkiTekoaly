@@ -27,7 +27,6 @@ public class XBoardHandler {
         String input;
         this.logger = new Logger().useLogFile();
 
-        this.gamestate = new GameState();
         
         while (true) {
             try {
@@ -56,7 +55,7 @@ public class XBoardHandler {
                 logger.logMessage(command);
                 switch (command.split(" ")[0]) {
                     case "new":
-                        //tells the engine the match has started and it plays as black
+                        this.gamestate = new GameState();
                         break;
                     
                     case "white": 
@@ -106,7 +105,7 @@ public class XBoardHandler {
         return move;
     }
 
-    public GameState getGameState(){
+    public GameState getGameState() {
         return this.gamestate;
     }
 }

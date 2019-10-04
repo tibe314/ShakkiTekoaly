@@ -108,12 +108,13 @@ public class XBoardHandlerTest {
     }
     @Test
     public void xBoardHandlerIsAbleToHandleIncomingMoves() {
-        String data = "protover \n";
+        String data = "protover \n" + "new \n" + "endloop \n";
         System.setIn(new ByteArrayInputStream(data.getBytes()));
-
+      
         this.in = new BufferedReader(new InputStreamReader(System.in));
 
         XBoardHandler xb = new XBoardHandler(bot, in);
+        xb.run();
         xb.handleMove("e2e4");
    
 
@@ -123,13 +124,14 @@ public class XBoardHandlerTest {
 
     @Test
     public void xBoardHandlerIsAbleToMakeNewMoves() {
-        String data = "protover \n";
+        String data = "protover \n" + "new \n" + "endloop \n";
         System.setIn(new ByteArrayInputStream(data.getBytes()));
 
 
         this.in = new BufferedReader(new InputStreamReader(System.in));
 
         XBoardHandler xb = new XBoardHandler(bot, in);
+        xb.run();
         xb.nextMove();
 
         GameState gs = xb.getGameState();
