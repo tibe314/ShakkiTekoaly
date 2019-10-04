@@ -22,6 +22,13 @@ public class GameState {
     public String playingBlack;
     public String playingWhite;
     
+    public Side playing;
+    public Side turn = Side.WHITE;
+    
+    // Stores the remaining time in milliseconds
+    public long whiteTime;
+    public long blackTime;
+    
     public ArrayList<String> moves;
     
     public Engine engine = new Engine();
@@ -29,7 +36,27 @@ public class GameState {
     public GameState() {
         this.moves = new ArrayList();
     }
-
+    
+    public int getMoveCount() {
+        return moves.size();
+    }
+    
+    public int getTurnCount() {
+        return 1 + moves.size() / 2;
+    }
+    
+    public long getRemainingTime() {
+        if (playing == Side.WHITE) {
+            return this.whiteTime;
+        } else {
+            return this.blackTime;
+        }
+    }
+    
+    public boolean myTurn() {
+        return this.turn == this.playing;
+    }
+    
     /**
      * Parses a full game state from a gameFull JSON object
      * <b>Note:</b> Use only to gain the initial game state, game state should
@@ -55,6 +82,9 @@ public class GameState {
                     .getJSONObject("state").getString("moves").split(" ");
             
             gameState.moves = new ArrayList<>(Arrays.asList(moves));
+            
+            gameState.whiteTime = jsonGameState.getJSONObject("state").getInt("wtime");
+            gameState.blackTime = jsonGameState.getJSONObject("state").getInt("btime");
         }
         
         return gameState;
@@ -91,10 +121,15 @@ public class GameState {
                 System.out.println(i);
             }
             
+            this.whiteTime = jsonGameState.getJSONObject("state").getInt("wtime");
+            this.blackTime = jsonGameState.getJSONObject("state").getInt("btime");
         } else if (jsonGameState.getString("type").equals("gameState")) {
             String[] moves = jsonGameState.getString("moves").split(" ");
             
             this.moves = new ArrayList<>(Arrays.asList(moves));
+            
+            this.whiteTime = jsonGameState.getInt("wtime");
+            this.blackTime = jsonGameState.getInt("btime");
         } else {
             // This would only have chat stuff, we probably don't need it.
         }
