@@ -36,6 +36,13 @@ repositories {
     maven { url 'https://jitpack.io' }
 }
 
+test {
+    testLogging {
+        events "failed"
+        exceptionFormat "full"
+    }
+}
+
 run {
    standardInput = System.in 
 }

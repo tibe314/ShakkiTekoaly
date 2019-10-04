@@ -24,7 +24,7 @@ public class XBoardHandler {
     public XBoardHandler(ChessBot bot, BufferedReader in) {
         this.bot = bot;
         this.in = in;
-        String input;
+        String input = "";
         this.logger = new Logger().useLogFile();
 
         
