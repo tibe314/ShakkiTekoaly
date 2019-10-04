@@ -13,20 +13,21 @@ Wednesday 14.30-18
 Friday 10-16
 
 ## Documentation
-- [Definition of Done](https://helsinkifi-my.sharepoint.com/:w:/g/personal/strajama_ad_helsinki_fi/EQPacc0Mp4hPirx8vVx9E2cBfRAHCI4sSgrW84yxIUl_rw)
+- [Definition of Done](https://helsinkifi-my.sharepoint.com/:w:/g/personal/jermusto_ad_helsinki_fi/Ea7I4Fxar9dEjPrevnzOXaMBuWZ7h_ZDH5jQdJm7uQ_Sjw)
 - [Beginner's guide for chess bot setup](https://github.com/TiraLabra/chess/blob/master/documentation/Beginners_guide.md)
 
 ## Project progress
-- [Working hours](https://helsinkifi-my.sharepoint.com/:x:/g/personal/strajama_ad_helsinki_fi/ERPYySnLnbtLtp5ouqWf6CkB0oFQLGVaGjUu03Ro86MbFw?e=mDgJZn)
-- [Workflow](https://helsinkifi-my.sharepoint.com/:w:/g/personal/strajama_ad_helsinki_fi/EawIdQCt7z1IriBRpwv4yDsBqB3rMStTncH2uAGvklX1UQ?e=LEFoTb)
+- [Working hours](https://helsinkifi-my.sharepoint.com/:x:/g/personal/jermusto_ad_helsinki_fi/EWKQox0uvixEupOQ90-N2u0BDQv4EVi05rhoQAP-vzImlg?e=zcIxHE)
+- [Workflow](https://helsinkifi-my.sharepoint.com/:w:/g/personal/jermusto_ad_helsinki_fi/Ea9AnzQhw79PrinE3BbHqvIBcvvZ3k_Q0KPHYS4sj6KzsQ?e=PQUDBy)
 - [Sprint 0 board](https://github.com/TiraLabra/chess/projects/1)
 - [Sprint 1 board](https://github.com/TiraLabra/chess/projects/2) 
-- [Product backlog](https://helsinkifi-my.sharepoint.com/:x:/g/personal/strajama_ad_helsinki_fi/EeqfgrknuGlIoK0kOG8hLdIBLK_6oRckeZA5xo4XktYMtQ?e=XqQYM0)
+- [Sprint 2 board](https://github.com/TiraLabra/chess/projects/3)
+- [Product backlog](https://helsinkifi-my.sharepoint.com/:x:/g/personal/jermusto_ad_helsinki_fi/EbSHuSez9tVNi0CxTRtVU_sBo6SEdoqiayo5-I-wRxh_XA?e=TAZVRq)
 
 ## Retrospectives
-- [Sprint 0](https://helsinkifi-my.sharepoint.com/:w:/g/personal/strajama_ad_helsinki_fi/EW-Iukf5ZxlAmc2T-9s5amUB5vUZCHvnEFUc9A9EfDx8iQ?e=pqqpnp)
+- [Sprint 0](https://helsinkifi-my.sharepoint.com/:x:/g/personal/jermusto_ad_helsinki_fi/EWKQox0uvixEupOQ90-N2u0BDQv4EVi05rhoQAP-vzImlg?e=jCG7vZ)
 
 ## Notes on Client Meetings
 
-- [Sprint 0](https://helsinkifi-my.sharepoint.com/:w:/g/personal/strajama_ad_helsinki_fi/EcEilaFq3vhAnXarcNKh-rIBLmVnhHnLrASwhms3v5kIrA?e=h7WgqV)
-- [Sprint 1](https://helsinkifi-my.sharepoint.com/:w:/g/personal/ktojala_ad_helsinki_fi/EccrdQhsuUZBuI7TDq-SvlEB49Zaepl05AwwS2rAZpPDjg?e=cVJfIg)
+- [Sprint 0](https://helsinkifi-my.sharepoint.com/:w:/g/personal/jermusto_ad_helsinki_fi/EfJxIu_TyNRAmp_pyUaEcBQBCu1vNHMAGViYYpNLfkISGQ?e=l4siCN)
+- [Sprint 1](https://helsinkifi-my.sharepoint.com/:w:/g/personal/jermusto_ad_helsinki_fi/EfJxIu_TyNRAmp_pyUaEcBQBCu1vNHMAGViYYpNLfkISGQ?e=l4siCN)
