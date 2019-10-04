@@ -101,6 +101,8 @@ public class LichessAPI {
 
     public void handleEventLoop(Iterator<String> eventStream) {
         while (eventStream.hasNext()) {
+            logger.logMessage("Waiting for Lichess events...");
+            
             String line = eventStream.next();
 
             if (!line.isEmpty()) {
@@ -160,6 +162,7 @@ public class LichessAPI {
 
                 if (move == null) {
                     gameRunning = false;
+                    logger.logMessage("Bot returned null move - Game ends.");
                 } else if (move.equals("nomove")) {
                     logger.logMessage("Cannot make a move yet.");
                 } else {
