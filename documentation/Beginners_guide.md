@@ -85,6 +85,8 @@ You can also select 'Machine White' under the Mode tab. In this case, your engin
 
 With the "Two Machines" mode, you can also get two bots playing against each other.
 
+**Note:** How to start a new XBoard game after one has ended? First under Edit, select New Game. Then just select the Mode.
+
 **Note:** When developing your AI engine, you may want to modify the way how XBoard communicates with your chess engine. The [Chess Engine Communication Protocol](https://www.gnu.org/software/xboard/engine-intf.html) has the details.
 
 

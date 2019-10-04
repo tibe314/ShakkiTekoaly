@@ -101,7 +101,7 @@ public class LichessAPI {
 
     public void handleEventLoop(Iterator<String> eventStream) {
         while (eventStream.hasNext()) {
-            logger.logMessage("Waiting for Lichess events...");
+            logger.logMessage("Waiting for Lichess events... (press Ctrl-C if you want to quit playing)");
             
             String line = eventStream.next();
 
