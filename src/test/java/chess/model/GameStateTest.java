@@ -107,4 +107,11 @@ public class GameStateTest {
         
         assert (true);
     }
+    
+    @Test
+    public void gameStateReadsTimeCorrectly() {
+        GameState gameState = GameState.parseFromJson(gameStateFullJson);
+        
+        assert(gameState.whiteTime == 7598040);
+    }
 }
