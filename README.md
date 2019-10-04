@@ -29,3 +29,4 @@ Friday 10-16
 ## Notes on Client Meetings
 
 - [Sprint 0](https://helsinkifi-my.sharepoint.com/:w:/g/personal/strajama_ad_helsinki_fi/EcEilaFq3vhAnXarcNKh-rIBLmVnhHnLrASwhms3v5kIrA?e=h7WgqV)
+- [Sprint 1](https://helsinkifi-my.sharepoint.com/:w:/g/personal/ktojala_ad_helsinki_fi/EccrdQhsuUZBuI7TDq-SvlEB49Zaepl05AwwS2rAZpPDjg?e=cVJfIg)
