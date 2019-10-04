@@ -10,6 +10,7 @@ import chess.ChessBot;
 import chess.model.Event;
 import chess.model.GameState;
 import chess.model.Profile;
+import chess.model.Side;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -164,7 +165,7 @@ public class LichessAPI {
                     gameRunning = false;
                     logger.logMessage("Bot returned null move - Game ends.");
                 } else if (move.equals("nomove")) {
-                    logger.logMessage("Cannot make a move yet.");
+                    
                 } else {
                     int statusCode = makeMove(move);
 
@@ -190,10 +191,23 @@ public class LichessAPI {
     public String getNextMove(String jsonLine, GameState gamestate, String playerId) {
         if (!jsonLine.isEmpty()) {
             gamestate.updateFromJson(jsonLine);
+            
+            if (gamestate.playing == null) {
+                if (gamestate.playingWhite.equals(playerId)) {
+                    gamestate.playing = Side.WHITE;
+                } else {
+                    gamestate.playing = Side.BLACK;
+                }
+            }
         }
-
-        if ((gamestate.moves.size() % 2 == 0 && gamestate.playingWhite.equals(playerId))
-                || (gamestate.moves.size() % 2 != 0 && gamestate.playingBlack.equals(playerId))) {
+        
+        if (gamestate.moves.size() % 2 == 0) {
+            gamestate.turn = Side.WHITE;
+        } else {
+            gamestate.turn = Side.BLACK;
+        }
+        
+        if (gamestate.turn == gamestate.playing) {
             // Call the bot
             String move = bot.nextMove(gamestate);
 
@@ -207,7 +221,7 @@ public class LichessAPI {
         } else {
             return "nomove";
         }
-
+        
         return null;
     }
 
