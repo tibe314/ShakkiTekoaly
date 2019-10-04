@@ -26,7 +26,7 @@ public class XBoardHandler {
         this.in = in;
         String input = "";
         this.logger = new Logger().useLogFile();
-
+        this.gamestate = new GameState();
         
         while (true) {
             try {
