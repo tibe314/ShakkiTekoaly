@@ -42,9 +42,8 @@ public class XBoardHandlerTest {
     @Test
     public void xBoardHandlerDoesntCrashOnStartupAsWhite() {
         String data = "protover\n" + "new\n" + "white \n" + "endloop \n";
-        System.setIn(new ByteArrayInputStream(data.getBytes()));
-
-        this.in = new BufferedReader(new InputStreamReader(System.in));
+        
+        this.in = new BufferedReader(new InputStreamReader(new ByteArrayInputStream(data.getBytes())));
 
         XBoardHandler xb = new XBoardHandler(bot, in);
         xb.run();
@@ -55,9 +54,8 @@ public class XBoardHandlerTest {
     @Test
     public void xBoardHandlerDoesntCrashOnStartupAsWhiteWithBlankInputIncluded() {
         String data = "protover\n" + "new\n" + "white \n" + "\n" + "endloop \n";
-        System.setIn(new ByteArrayInputStream(data.getBytes()));
-
-        this.in = new BufferedReader(new InputStreamReader(System.in));
+        
+        this.in = new BufferedReader(new InputStreamReader(new ByteArrayInputStream(data.getBytes())));
 
         XBoardHandler xb = new XBoardHandler(bot, in);
         xb.run();
@@ -69,9 +67,8 @@ public class XBoardHandlerTest {
     @Test
     public void xBoardHandlerDoesntCrashOnStartupAsWhiteWithBlankInputBeforeProtover() {
         String data = "\n" + "protover\n" + "new\n" + "white \n" + "\n" + "endloop \n";
-        System.setIn(new ByteArrayInputStream(data.getBytes()));
-
-        this.in = new BufferedReader(new InputStreamReader(System.in));
+        
+        this.in = new BufferedReader(new InputStreamReader(new ByteArrayInputStream(data.getBytes())));
 
         XBoardHandler xb = new XBoardHandler(bot, in);
         xb.run();
@@ -82,9 +79,8 @@ public class XBoardHandlerTest {
     @Test
     public void xBoardHandlerDoesntCrashOnStartupAsBlack() {
         String data = "protover\n" + "new\n" + "endloop \n";
-        System.setIn(new ByteArrayInputStream(data.getBytes()));
-
-        this.in = new BufferedReader(new InputStreamReader(System.in));
+        
+        this.in = new BufferedReader(new InputStreamReader(new ByteArrayInputStream(data.getBytes())));
 
         XBoardHandler xb = new XBoardHandler(bot, in);
         xb.run();
@@ -96,9 +92,8 @@ public class XBoardHandlerTest {
     @Test
     public void xBoardHandlerDoesntCrashOnStartupAsBlackWithOpeningMove() {
         String data = "protover\n" + "new\n" + "white \n" + "usermove e2e4\n" + "endloop \n";
-        System.setIn(new ByteArrayInputStream(data.getBytes()));
-
-        this.in = new BufferedReader(new InputStreamReader(System.in));
+        
+        this.in = new BufferedReader(new InputStreamReader(new ByteArrayInputStream(data.getBytes())));
 
         XBoardHandler xb = new XBoardHandler(bot, in);
         xb.run();
@@ -109,9 +104,8 @@ public class XBoardHandlerTest {
     @Test
     public void xBoardHandlerIsAbleToHandleIncomingMoves() {
         String data = "protover \n" + "new \n" + "endloop \n";
-        System.setIn(new ByteArrayInputStream(data.getBytes()));
-      
-        this.in = new BufferedReader(new InputStreamReader(System.in));
+        
+        this.in = new BufferedReader(new InputStreamReader(new ByteArrayInputStream(data.getBytes())));
 
         XBoardHandler xb = new XBoardHandler(bot, in);
         xb.run();
@@ -125,10 +119,8 @@ public class XBoardHandlerTest {
     @Test
     public void xBoardHandlerIsAbleToMakeNewMoves() {
         String data = "protover \n" + "new \n" + "endloop \n";
-        System.setIn(new ByteArrayInputStream(data.getBytes()));
-
-
-        this.in = new BufferedReader(new InputStreamReader(System.in));
+        
+        this.in = new BufferedReader(new InputStreamReader(new ByteArrayInputStream(data.getBytes())));
 
         XBoardHandler xb = new XBoardHandler(bot, in);
         xb.run();
