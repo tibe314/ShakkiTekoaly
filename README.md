@@ -25,9 +25,9 @@ Friday 10-16
 - [Product backlog](https://helsinkifi-my.sharepoint.com/:x:/g/personal/jermusto_ad_helsinki_fi/EbSHuSez9tVNi0CxTRtVU_sBo6SEdoqiayo5-I-wRxh_XA?e=TAZVRq)
 
 ## Retrospectives
-- [Sprint 0](https://helsinkifi-my.sharepoint.com/:x:/g/personal/jermusto_ad_helsinki_fi/EWKQox0uvixEupOQ90-N2u0BDQv4EVi05rhoQAP-vzImlg?e=jCG7vZ)
+- [Sprint 0](https://helsinkifi-my.sharepoint.com/:w:/g/personal/jermusto_ad_helsinki_fi/EX7DEhSqQa1Cr1Frk_s9DIoByCM3laqIdS27pmF0lMYovg?e=ZuwpOr)
 
 ## Notes on Client Meetings
 
-- [Sprint 0](https://helsinkifi-my.sharepoint.com/:w:/g/personal/jermusto_ad_helsinki_fi/EfJxIu_TyNRAmp_pyUaEcBQBCu1vNHMAGViYYpNLfkISGQ?e=l4siCN)
+- [Sprint 0](https://helsinkifi-my.sharepoint.com/:w:/g/personal/jermusto_ad_helsinki_fi/EU6FbXQiGKBNuPhorreCqvoBszaWPCm9tC-sVFk3GOWwbQ?e=7R1OJo)
 - [Sprint 1](https://helsinkifi-my.sharepoint.com/:w:/g/personal/jermusto_ad_helsinki_fi/EfJxIu_TyNRAmp_pyUaEcBQBCu1vNHMAGViYYpNLfkISGQ?e=l4siCN)
