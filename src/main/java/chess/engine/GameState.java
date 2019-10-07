@@ -137,7 +137,28 @@ public class GameState {
         
         parseLatestMove();
     }
-    
+    /**
+     * Sets time for Player, used by XBoardHandler
+     * @param time
+     */
+    public void setTimePlayer(long time) {
+        if (playing == Side.WHITE) {
+            this.whiteTime = time;
+        } else {
+            this.blackTime = time;
+        }
+    }
+    /**
+     * Sets time for Opponent, used by XBoardHandler
+     * @param time
+     */
+    public void setTimeOpponent(long time) {
+        if (playing == Side.BLACK) {
+            this.whiteTime = time;
+        } else {
+            this.blackTime = time;
+        }
+    }
     /**
      * Parses a move in UCI move into the chess engine's move data type and
      * updates the engine's board state
