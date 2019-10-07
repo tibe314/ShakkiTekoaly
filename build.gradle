@@ -68,3 +68,8 @@ checkstyle {
 }
 
 check.dependsOn jacocoTestReport
+
+task performanceTest(type:JavaExec) {
+   classpath = sourceSets.main.runtimeClasspath
+   main = 'datastructureproject.PerformanceTest'
+}
