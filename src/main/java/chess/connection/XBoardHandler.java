@@ -70,6 +70,14 @@ public class XBoardHandler {
                         System.out.flush();
                         break;
                     
+                    case "time":
+                        gamestate.setTimePlayer(10 * Long.parseLong(command.split(" ")[1]));
+                        break;
+
+                    case "otim":
+                        gamestate.setTimeOpponent(10 * Long.parseLong(command.split(" ")[1]));
+                        break;
+
                     case "endloop":
                         run = false;
                         break;
