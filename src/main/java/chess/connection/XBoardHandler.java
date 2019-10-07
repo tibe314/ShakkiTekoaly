@@ -4,7 +4,7 @@ import chess.bot.ChessBot;
 import chess.engine.GameState;
 import java.io.BufferedReader;
 import java.io.IOException;
-
+import chess.model.Side;
 import logging.Logger;
 /**
  * Class for handling game input coming from XBoard
@@ -56,10 +56,12 @@ public class XBoardHandler {
                 switch (command.split(" ")[0]) {
                     case "new":
                         this.gamestate = new GameState();
+                        gamestate.playing = Side.BLACK;
                         break;
                     
                     case "white": 
                         //tells the engine to start playing as white
+                        gamestate.playing = Side.WHITE;
                         System.out.println("move " + nextMove() + "\n");
                         System.out.flush(); 
                         break;

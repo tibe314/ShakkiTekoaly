@@ -2,11 +2,15 @@ package chess.connection;
 
 import chess.bot.TestBot;
 import chess.engine.GameState;
+
+import static org.junit.Assert.assertEquals;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.Assert.*;
 import java.io.ByteArrayInputStream;
 
 public class XBoardHandlerTest {
@@ -101,6 +105,30 @@ public class XBoardHandlerTest {
         assert(gs.moves.contains("e2e4"));
     }
 
+    @Test
+    public void xBoardHandlerIsAbleToHandleTimeForPlayer() {
+        String data = "protover \n" + "new \n" + "time 30000\n" + "endloop \n";
+        
+        this.in = new BufferedReader(new InputStreamReader(new ByteArrayInputStream(data.getBytes())));
+
+        XBoardHandler xb = new XBoardHandler(bot, in);
+        xb.run();
+        
+        assertEquals((long) 300000, xb.getGameState().getRemainingTime());
+    }
+
+    @Test
+    public void xBoardHandlerIsAbleToHandleTimeForOpponent() {
+        String data = "protover \n" + "new \n" + "otim 20000\n" + "endloop \n";
+        
+        this.in = new BufferedReader(new InputStreamReader(new ByteArrayInputStream(data.getBytes())));
+
+        XBoardHandler xb = new XBoardHandler(bot, in);
+        xb.run();
+
+
+        assertEquals((long) 200000, xb.getGameState().getRemainingTimeOpponent());
+    }
     @Test
     public void xBoardHandlerIsAbleToMakeNewMoves() {
         String data = "protover \n" + "new \n" + "endloop \n";
