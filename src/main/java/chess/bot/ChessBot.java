@@ -1,6 +1,6 @@
-package chess;
+package chess.bot;
 
-import chess.model.GameState;
+import chess.engine.GameState;
 
 public interface ChessBot {
     String nextMove(GameState gamestate);

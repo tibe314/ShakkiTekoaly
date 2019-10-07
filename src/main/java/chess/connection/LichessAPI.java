@@ -5,10 +5,10 @@
  */
 package chess.connection;
 
-import chess.ChessBot;
+import chess.bot.ChessBot;
 //import chess.TestBot;
 import chess.model.Event;
-import chess.model.GameState;
+import chess.engine.GameState;
 import chess.model.Profile;
 import chess.model.Side;
 import java.io.IOException;

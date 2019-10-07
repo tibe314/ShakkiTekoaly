@@ -1,7 +1,7 @@
 package chess.connection;
 
-import chess.ChessBot;
-import chess.model.GameState;
+import chess.bot.ChessBot;
+import chess.engine.GameState;
 import java.io.BufferedReader;
 import java.io.IOException;
 

@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package chess;
+package chess.bot;
 
-import chess.model.GameState;
+import chess.engine.GameState;
 import com.github.bhlangonijr.chesslib.move.Move;
 import java.util.logging.Level;
 import java.util.logging.Logger;

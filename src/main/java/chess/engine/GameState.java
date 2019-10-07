@@ -3,11 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package chess.model;
+package chess.engine;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import chess.engine.Engine;
+import chess.model.Side;
 
 import org.json.JSONObject;
 

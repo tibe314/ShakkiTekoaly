@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package chess.model;
+import chess.engine.GameState;
 import java.util.ArrayList;
 import java.util.Arrays;
 import org.junit.After;

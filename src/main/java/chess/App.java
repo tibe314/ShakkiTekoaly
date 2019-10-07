@@ -3,6 +3,7 @@
  */
 package chess;
 
+import chess.bot.TestBot;
 import chess.connection.LichessAPI;
 import chess.model.Profile;
 import chess.connection.*;

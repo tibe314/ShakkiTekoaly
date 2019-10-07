@@ -5,8 +5,8 @@
  */
 package chess.connection;
 
-import chess.TestBot;
-import chess.model.GameState;
+import chess.bot.TestBot;
+import chess.engine.GameState;
 import chess.model.Profile;
 import chess.model.Testdata;
 import static chess.model.Testdata.profileJson;
