@@ -6,6 +6,7 @@
 package chess.engine;
 
 import chess.model.Testdata;
+import chess.model.Side;
 import java.util.ArrayList;
 import java.util.Arrays;
 import org.junit.After;
@@ -109,10 +110,26 @@ public class GameStateTest {
     }
     
     @Test
-    public void gameStateReadsTimeCorrectly() {
+    public void gameStateReadsWhiteTimeCorrectly() {
         GameState gameState = GameState.parseFromJson(gameStateFullJson);
         
         assert(gameState.whiteTime == 7598040);
+    }
+    
+    @Test
+    public void gameStateReadsBlackTimeCorrectly() {
+        GameState gameState = GameState.parseFromJson(gameStateFullJson);
+        
+        assert(gameState.blackTime == 8395220);
+    }
+
+    
+    @Test
+    public void gameStateReadsOpponentTimeCorrectly() {
+        GameState gameState = GameState.parseFromJson(gameStateFullJson);
+        gameState.playing = Side.WHITE;
+        
+        assert(gameState.getRemainingTimeOpponent() == 8395220);
     }
     
     @Test
@@ -121,5 +138,12 @@ public class GameStateTest {
 
         assert(gameState.getMoveCount() == 12);
     }
-    
+
+    @Test
+    public void gameStateGivesCorrectTurnCount() {
+        GameState gameState = GameState.parseFromJson(gameStateFullJson);
+
+        assert(gameState.getTurnCount() == 7);
+    }
+
 }
