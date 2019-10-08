@@ -40,6 +40,7 @@ public class XBoardHandlerTest {
         assert(true);
         
     }
+   
     @Test
     public void xBoardHandlerDoesntCrashOnStartupAsWhiteWithBlankInputIncluded() {
         String data = "protover\n" + "new\n" + "white \n" + "\n" + "endloop \n";

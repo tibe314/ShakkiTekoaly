@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package chess.model;
-import chess.engine.GameState;
+package chess.engine;
+
+import chess.model.Testdata;
 import java.util.ArrayList;
 import java.util.Arrays;
 import org.junit.After;
@@ -81,8 +82,7 @@ public class GameStateTest {
     @Test
     public void gameStateMovesReadCorrectly() {
         GameState gameState = GameState.parseFromJson(gameStateFullJson);
-        String s = "e2e4 c7c5 f2f4 d7d6 g1f3 ";
-        s = s.concat("b8c6 f1c4 g8f6 d2d3 g7g6 e1g1 f8g7");
+        String s = "e2e4 c7c5 f2f4 d7d6 g1f3 b8c6 f1c4 g8f6 d2d3 g7g6 e1g1 f8g7";
         ArrayList<String> moves = new ArrayList<>(Arrays.asList(s.split(" ")));
         
         assertEquals(gameState.moves, moves);
@@ -93,8 +93,7 @@ public class GameStateTest {
         GameState gameState = GameState.parseFromJson(gameStateFullJson);
         
         gameState.updateFromJson(gameStateJson);
-        String s = "e2e4 c7c5 f2f4 d7d6 g1f3 b8c6 f1c4 ";
-        s = s.concat("g8f6 d2d3 g7g6 e1g1 f8g7 b1c3");
+        String s = "e2e4 c7c5 f2f4 d7d6 g1f3 b8c6 f1c4 g8f6 d2d3 g7g6 e1g1 f8g7 b1c3";
         ArrayList<String> moves = new ArrayList<>(Arrays.asList(s.split(" ")));
         
         assertEquals(gameState.moves, moves);
@@ -115,4 +114,12 @@ public class GameStateTest {
         
         assert(gameState.whiteTime == 7598040);
     }
+    
+    @Test
+    public void gameStateGivesCorrectMoveCount() {
+        GameState gameState = GameState.parseFromJson(gameStateFullJson);
+
+        assert(gameState.getMoveCount() == 12);
+    }
+    
 }
