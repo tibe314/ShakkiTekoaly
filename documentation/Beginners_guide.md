@@ -31,17 +31,11 @@ By no means, this guideline will not replace the API Reference. We hope that thi
 
     a) you can pass token as a commandline parameter or
     
-    b) you can supply the token via the LICHESS_TOKEN environment variable or
-    
-    c) you can create a "token.txt" file to resources-directory (it's in src/main). It won't go to GitHub because it is listed  in *.gitignore*.
-
-    d) (Not recommended) You can replace "PLEASE DON'T INSERT TOKEN HERE" in the App.java file with your personal API access token and risk that you accidently push it to GitHub
-
-**Note** Token given as a parameter or through an environment variable overrides any token in the token.txt file. 
+    b) you can supply the token via the LICHESS_TOKEN environment variable
 
 6. Now you can try the Tiralabra chess bot. One possible way to start the bot: after login, select “PLAY WITH THE COMPUTER” at https<span></span>://lichess.org/. 
 Then choose which pieces you want to play. Finally, at the command line, type *./gradlew build*, 
-then if you inserted your token App.java *./gradlew run* or, if you didn't, *./gradlew run --args=INSERT YOUR TOKEN HERE* .
+then if you inserted your token as environment variable App.java *./gradlew run --args="--lichess"* or, if you didn't, *./gradlew run --args="--lichess --token=put_token_here"* .
 
 7. Your chess bot will start playig with random moves, that is, very poorly. Your task is now to create a real A.I. bot!
 
