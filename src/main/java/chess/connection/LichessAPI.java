@@ -48,7 +48,7 @@ public class LichessAPI {
         // Add token to HTTP headers
         headers.put("Authorization", "Bearer " + token);
     }
-
+            
     /**
      * Get Lichess account information
      *
@@ -60,7 +60,14 @@ public class LichessAPI {
                 .get("https://lichess.org/api/account")
                 .setHeaders(headers)
                 .connect();
-
+        
+        if (stream.getHTTPStatus() != 200) {
+            logger.logError("Lichess returned Error code " + stream.getHTTPStatus() 
+                    + ": your Lichess token might be invalid.");
+            
+            return null;
+        }
+        
         json = stream.toString();
 
         try {
