@@ -8,7 +8,7 @@ package chess.engine;
 import java.util.ArrayList;
 import java.util.Arrays;
 import chess.model.Side;
-
+import chess.bot.TestBot;
 import org.json.JSONObject;
 
 /**
@@ -31,7 +31,7 @@ public class GameState {
     
     public ArrayList<String> moves;
     
-    public Engine engine = new Engine();
+    public TestBot engine = new TestBot("");
     
     public GameState() {
         this.moves = new ArrayList();
@@ -170,7 +170,7 @@ public class GameState {
      * updates the engine's board state
      */
     public void parseLatestMove() {
-        this.engine = new Engine();
+        this.engine = new TestBot("");
         // We play all of the moves onto a new board to ensure a previously
         // started game can be resumed correctly, inefficient but it works
         if (!this.moves.isEmpty()) {
