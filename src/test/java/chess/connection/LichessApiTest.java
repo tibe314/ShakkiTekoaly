@@ -16,6 +16,8 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.function.Predicate;
+import java.util.stream.Stream;
 import logging.Logger;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -45,7 +47,7 @@ public class LichessApiTest {
     @Before
     public void setUp() {
         this.bot = new TestBot("");
-        this.logger = new Logger().useLogFile();
+        this.logger = new Logger().useMemory();
         this.httpFactory = new MockHTTPIOFactory();
         this.api = new LichessAPI(bot, logger, httpFactory);
     }
@@ -186,5 +188,30 @@ public class LichessApiTest {
         this.api = new LichessAPI(new MockBot(Arrays.asList("d7d5", "c7c5", "b7b5", "d8d7", "e8d7")), this.logger, this.httpFactory);
         this.api.beginEventLoop();
 
+    }
+    
+    @Test
+    public void lichessAPILogsAnErrorOnHTTPErrorCode() {
+        MockHTTPIO mockStream = new MockHTTPIO();
+        
+        mockStream.setStatusCode(401);
+        
+        this.httpFactory.addMockHTTPIOToQueue(mockStream);
+        
+        this.api.getAccount();
+        
+        assert(this.logger.inMemoryLog.size() > 0);
+    }
+    
+    public boolean anyMatch(Iterator<String> iterator, Predicate<String> pred) {
+        while (iterator.hasNext()) {
+            String value = iterator.next();
+            
+            if (pred.test(value)) {
+                return true;
+            }
+        }
+        
+        return false;
     }
 }

@@ -17,6 +17,11 @@ public class MockHTTPIO implements HTTPIO {
     
     public Map<String, String> headers;
     public Iterator<String> output;
+    public int statusCode = 200;
+    
+    public void setStatusCode(int statusCode) {
+        this.statusCode = statusCode;
+    }
     
     public void setOutput(Iterator<String> output) {
         this.output = output;
@@ -54,7 +59,7 @@ public class MockHTTPIO implements HTTPIO {
 
     @Override
     public int getHTTPStatus() {
-        return 200;
+        return this.statusCode;
     }
 
     @Override
