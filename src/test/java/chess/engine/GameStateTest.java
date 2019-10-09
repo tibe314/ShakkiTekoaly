@@ -67,17 +67,11 @@ public class GameStateTest {
     }
     
     @Test
-    public void gameStateWhitePlayerReadCorrectly() {
+    public void gameStatePlayersReadCorrectly() {
         GameState gameState = GameState.parseFromJson(gameStateFullJson);
         
         assertEquals(gameState.playingWhite, "lovlas");
-    }
-    
-    @Test
-    public void gameStateBlackPlayerReadCorrectly() {
-        GameState gameState = GameState.parseFromJson(gameStateFullJson);
-        
-        assertEquals(gameState.playingBlack, "leela");
+        assertEquals(gameState.playingBlack, "leela");       
     }
     
     @Test

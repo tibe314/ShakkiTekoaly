@@ -80,13 +80,10 @@ public class GameState {
         if (jsonGameState.getString("type").equals("gameFull")) {
             gameState.id = jsonGameState.getString("id");
             
-            gameState.playingWhite = jsonGameState
-                    .getJSONObject("white").optString("id");
-            gameState.playingBlack = jsonGameState
-                    .getJSONObject("black").optString("id");
+            gameState.playingWhite = jsonGameState.getJSONObject("white").optString("id");
+            gameState.playingBlack = jsonGameState.getJSONObject("black").optString("id");
             
-            String[] moves = jsonGameState
-                    .getJSONObject("state").getString("moves").split(" ");
+            String[] moves = jsonGameState.getJSONObject("state").getString("moves").split(" ");
             
             gameState.moves = new ArrayList<>(Arrays.asList(moves));
             
@@ -108,19 +105,13 @@ public class GameState {
         if (jsonGameState.getString("type").equals("gameFull")) {
             this.id = jsonGameState.getString("id");
             
-            this.playingWhite = jsonGameState
-                    .getJSONObject("white").optString("id");
-            this.playingBlack = jsonGameState
-                    .getJSONObject("black").optString("id");
+            this.playingWhite = jsonGameState.getJSONObject("white").optString("id");
+            this.playingBlack = jsonGameState.getJSONObject("black").optString("id");
             
-            String[] moves;
-            
+            String[] moves = new String[0];  //lisätty new osa         
             if (!jsonGameState.getJSONObject("state").getString("moves").isEmpty()) {
-                moves = jsonGameState
-                        .getJSONObject("state").getString("moves").trim().split(" ");
-            } else {
-                moves = new String[0];
-            }
+                moves = jsonGameState.getJSONObject("state").getString("moves").trim().split(" ");
+            } 
             
             this.moves = new ArrayList<>(Arrays.asList(moves));
             
@@ -188,7 +179,7 @@ public class GameState {
      * Sets the current gamestate with moves passed as the parameters.
      * @param moves 0-n moves in UCI format
      */
-    public void setMoves(String... moves){
+    public void setMoves(String... moves) {
         this.moves = new ArrayList(Arrays.asList(moves));
     }
 }

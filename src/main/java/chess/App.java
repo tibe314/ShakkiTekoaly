@@ -22,15 +22,21 @@ public class App {
         for (String arg : args) {
             if (arg.contains("--lichess")) {
                 isLichess = true;
-                if (env.containsKey("LICHESS_TOKEN")) token = env.get("LICHESS_TOKEN");
+                if (env.containsKey("LICHESS_TOKEN")) {
+                    token = env.get("LICHESS_TOKEN");
+                }
             }
-            if (arg.contains("--token=")) token = arg.substring(8);
+            if (arg.contains("--token=")) {
+                token = arg.substring(8);
+            }
         }
 
         ChessBot bot = new TestBot(token);
 
         if (isLichess) {
-            if (token == null) throw new Error("No token found");
+            if (token == null) {
+                throw new Error("No token found");
+            }
             LichessAPI api = new LichessAPI(bot);
             Profile myProfile = api.getAccount();
             System.out.println("Profile ID: " + myProfile.id);
