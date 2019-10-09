@@ -28,6 +28,8 @@ The project package hierarchy is as follows:
 - chess.logging
     - Logger.java 
 
+![Class diagram](https://raw.githubusercontent.com/TiraLabra/chess/architecture-docs/documentation/pics/Architecture.png)
+
 ## Top level package (chess.*)
 
 The top level package contains the code that initializes the Chess bot and connects to
