@@ -9,59 +9,49 @@ import chess.connection.LichessAPI;
 import chess.model.Profile;
 import chess.connection.*;
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Map;
 
 public class App {
 
     public static void main(String[] args) throws Exception {
-        try {
-            Map<String, String> env = System.getenv();
-            System.out.println(env.get("LICHESS_TOKEN"));
-            String token = null;
-            boolean isLichess = false;
-            // Parse passed parameters.
-            for (String arg : args) {
-                if (arg.contains("--lichess")) {
-                    isLichess = true;
-                    if (env.containsKey("LICHESS_TOKEN")) {
-                        token = env.get("LICHESS_TOKEN");
-                    }
-                }
-                if (arg.contains("--token=")) {
-                    token = arg.substring(8);
+        Map<String, String> env = System.getenv();
+        String token = null;
+        boolean isLichess = false;
+        // Parse passed parameters.
+        for (String arg : args) {
+            if (arg.contains("--lichess")) {
+                isLichess = true;
+                if (env.containsKey("LICHESS_TOKEN")) token = env.get("LICHESS_TOKEN");
+            }
+            if (arg.contains("--token=")) token = arg.substring(8);
+        }
+
+        ChessBot bot = new TestBot(token);
+
+        if (isLichess) {
+            if (token == null) throw new Error("No token found");
+            LichessAPI api = new LichessAPI(bot);
+            Profile myProfile = api.getAccount();
+            System.out.println("Profile ID: " + myProfile.id);
+            api.beginEventLoop();
+            
+        } else {
+
+            Long initialTime = System.currentTimeMillis();
+            BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+            while (System.currentTimeMillis() - initialTime < 2500 && !in.ready()) {
+                Thread.sleep(25);
+            }
+
+            if (in.ready()) {
+                String input = in.readLine();
+                if (input.equalsIgnoreCase("xboard")) {
+                    XBoardHandler xb = new XBoardHandler(bot, in);
+                    xb.run();
                 }
             }
 
-            ChessBot bot = new TestBot(token);
-
-            if (isLichess) {
-
-                LichessAPI api = new LichessAPI(bot);
-                Profile myProfile = api.getAccount();
-                System.out.println("Profile ID: " + myProfile.id);
-                api.beginEventLoop();
-
-            } else {
-
-                Long initialTime = System.currentTimeMillis();
-                BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-                while (System.currentTimeMillis() - initialTime < 2500 && !in.ready()) {
-                    Thread.sleep(25);
-                }
-
-                if (in.ready()) {
-                    String input = in.readLine();
-                    if (input.equalsIgnoreCase("xboard")) {
-                        XBoardHandler xb = new XBoardHandler(bot, in);
-                        xb.run();
-                    }
-                }
-
-            }
-        } catch (IOException | InterruptedException e) {
-            e.printStackTrace();
         }
     }
 }
