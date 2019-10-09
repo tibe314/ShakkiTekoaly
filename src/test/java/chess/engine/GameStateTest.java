@@ -110,17 +110,11 @@ public class GameStateTest {
     }
     
     @Test
-    public void gameStateReadsWhiteTimeCorrectly() {
+    public void gameStateReadsWhiteAndBlackTimesCorrectly() {
         GameState gameState = GameState.parseFromJson(gameStateFullJson);
         
         assert(gameState.whiteTime == 7598040);
-    }
-    
-    @Test
-    public void gameStateReadsBlackTimeCorrectly() {
-        GameState gameState = GameState.parseFromJson(gameStateFullJson);
-        
-        assert(gameState.blackTime == 8395220);
+        assert(gameState.blackTime == 8395220);   
     }
 
     @Test
@@ -164,5 +158,22 @@ public class GameStateTest {
 
         assert(gameState.getTurnCount() == 7);
     }
+    
+    @Test
+    public void gameStateSetWhiteTimeCorrectly() {
+        GameState gameState = GameState.parseFromJson(gameStateFullJson);
+        gameState.playing = Side.WHITE;
+        long someTime = 3;
+        gameState.setTimePlayer(someTime);
+        assert(gameState.getRemainingTime() == 3);
+    }  
 
+    @Test
+    public void gameStateSetBlackOpponentTimeCorrectly() {
+        GameState gameState = GameState.parseFromJson(gameStateFullJson);
+        gameState.playing = Side.WHITE;
+        long someTime = 3;
+        gameState.setTimeOpponent(someTime);
+        assert(gameState.getRemainingTimeOpponent() == 3);
+    }  
 }
