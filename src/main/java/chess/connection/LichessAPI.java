@@ -97,7 +97,14 @@ public class LichessAPI {
                 .get("https://lichess.org/api/stream/event")
                 .setHeaders(headers)
                 .connect();
-
+        
+        if (eventStream.getHTTPStatus() != 200) {
+            logger.logError("Lichess returned Error code " + eventStream.getHTTPStatus() 
+                    + ": your Lichess token might be invalid.");
+            
+            return;
+        }
+        
         handleEventLoop(eventStream.getIterator());
 
         try {
@@ -148,7 +155,14 @@ public class LichessAPI {
                 .get("https://lichess.org/api/bot/game/stream/" + gameId)
                 .setHeaders(headers)
                 .connect();
-
+        
+        if (gameStream.getHTTPStatus() != 200) {
+            logger.logError("Lichess returned Error code " + gameStream.getHTTPStatus() 
+                    + ": your Lichess token might be invalid.");
+            
+            return;
+        }
+        
         playGame(gameStream.getIterator());
 
         try {
