@@ -91,7 +91,7 @@ objects and connect to the relevant Chess platform for playing.
 LichessAPI class is an implementation of a subset of the Lichess.org HTTP API and allows playing Chess over
 the Internet. The API only implements the bare essentials that allow Chess bots to play games.
 
-**In order to use the LichessAPI, a Lichess Token needs to be first generated. Refer to the Beginner's Guide
+**In order to use the LichessAPI, a Lichess Token needs to be first generated. Refer to [the Beginner's Guide](https://github.com/TiraLabra/chess/blob/architecture-docs/documentation/Beginners_guide.md)
 for instructions.**
 
 The LichessAPI provides a constructor that takes a ChessBot as an argument. After constructing a LichessAPI
