@@ -183,4 +183,12 @@ public class GameState {
             });
         }
     }
+    
+    /**
+     * Sets the current gamestate with moves passed as the parameters.
+     * @param moves 0-n moves in UCI format
+     */
+    public void setMoves(String... moves){
+        this.moves = new ArrayList(Arrays.asList(moves));
+    }
 }
