@@ -123,6 +123,13 @@ public class GameStateTest {
         assert(gameState.blackTime == 8395220);
     }
 
+    @Test
+    public void gameStateReadsRemainingTimeCorrectly() {
+        GameState gameState = GameState.parseFromJson(gameStateFullJson);
+        gameState.playing = Side.WHITE;
+        
+        assert(gameState.getRemainingTime() == 7598040);
+    }
     
     @Test
     public void gameStateReadsOpponentTimeCorrectly() {
@@ -130,6 +137,18 @@ public class GameStateTest {
         gameState.playing = Side.WHITE;
         
         assert(gameState.getRemainingTimeOpponent() == 8395220);
+    }
+
+        @Test
+    public void gameStateGivesMyTurnCorrectly() {
+        GameState gameState = GameState.parseFromJson(gameStateFullJson);
+        
+        gameState.playing = Side.WHITE;
+        assert(gameState.myTurn() == true);
+        
+        gameState.playing = Side.BLACK;
+        assert(gameState.myTurn() == false);
+        
     }
     
     @Test
