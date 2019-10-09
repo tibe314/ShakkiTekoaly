@@ -7,7 +7,6 @@ package chess.engine;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import chess.engine.Engine;
 import chess.model.Side;
 
 import org.json.JSONObject;
@@ -54,6 +53,13 @@ public class GameState {
         }
     }
     
+    public long getRemainingTimeOpponent() {
+        if (playing == Side.WHITE) {
+            return this.blackTime;
+        } else {
+            return this.whiteTime;
+        }
+    }
     public boolean myTurn() {
         return this.turn == this.playing;
     }

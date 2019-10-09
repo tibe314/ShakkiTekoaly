@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package chess.model;
-import chess.engine.GameState;
+package chess.engine;
+
+import chess.model.Testdata;
+import chess.model.Side;
 import java.util.ArrayList;
 import java.util.Arrays;
 import org.junit.After;
@@ -81,8 +83,7 @@ public class GameStateTest {
     @Test
     public void gameStateMovesReadCorrectly() {
         GameState gameState = GameState.parseFromJson(gameStateFullJson);
-        String s = "e2e4 c7c5 f2f4 d7d6 g1f3 ";
-        s = s.concat("b8c6 f1c4 g8f6 d2d3 g7g6 e1g1 f8g7");
+        String s = "e2e4 c7c5 f2f4 d7d6 g1f3 b8c6 f1c4 g8f6 d2d3 g7g6 e1g1 f8g7";
         ArrayList<String> moves = new ArrayList<>(Arrays.asList(s.split(" ")));
         
         assertEquals(gameState.moves, moves);
@@ -93,8 +94,7 @@ public class GameStateTest {
         GameState gameState = GameState.parseFromJson(gameStateFullJson);
         
         gameState.updateFromJson(gameStateJson);
-        String s = "e2e4 c7c5 f2f4 d7d6 g1f3 b8c6 f1c4 ";
-        s = s.concat("g8f6 d2d3 g7g6 e1g1 f8g7 b1c3");
+        String s = "e2e4 c7c5 f2f4 d7d6 g1f3 b8c6 f1c4 g8f6 d2d3 g7g6 e1g1 f8g7 b1c3";
         ArrayList<String> moves = new ArrayList<>(Arrays.asList(s.split(" ")));
         
         assertEquals(gameState.moves, moves);
@@ -110,9 +110,59 @@ public class GameStateTest {
     }
     
     @Test
-    public void gameStateReadsTimeCorrectly() {
+    public void gameStateReadsWhiteTimeCorrectly() {
         GameState gameState = GameState.parseFromJson(gameStateFullJson);
         
         assert(gameState.whiteTime == 7598040);
     }
+    
+    @Test
+    public void gameStateReadsBlackTimeCorrectly() {
+        GameState gameState = GameState.parseFromJson(gameStateFullJson);
+        
+        assert(gameState.blackTime == 8395220);
+    }
+
+    @Test
+    public void gameStateReadsRemainingTimeCorrectly() {
+        GameState gameState = GameState.parseFromJson(gameStateFullJson);
+        gameState.playing = Side.WHITE;
+        
+        assert(gameState.getRemainingTime() == 7598040);
+    }
+    
+    @Test
+    public void gameStateReadsOpponentTimeCorrectly() {
+        GameState gameState = GameState.parseFromJson(gameStateFullJson);
+        gameState.playing = Side.WHITE;
+        
+        assert(gameState.getRemainingTimeOpponent() == 8395220);
+    }
+
+        @Test
+    public void gameStateGivesMyTurnCorrectly() {
+        GameState gameState = GameState.parseFromJson(gameStateFullJson);
+        
+        gameState.playing = Side.WHITE;
+        assert(gameState.myTurn() == true);
+        
+        gameState.playing = Side.BLACK;
+        assert(gameState.myTurn() == false);
+        
+    }
+    
+    @Test
+    public void gameStateGivesCorrectMoveCount() {
+        GameState gameState = GameState.parseFromJson(gameStateFullJson);
+
+        assert(gameState.getMoveCount() == 12);
+    }
+
+    @Test
+    public void gameStateGivesCorrectTurnCount() {
+        GameState gameState = GameState.parseFromJson(gameStateFullJson);
+
+        assert(gameState.getTurnCount() == 7);
+    }
+
 }
