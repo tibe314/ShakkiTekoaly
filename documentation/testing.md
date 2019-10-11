@@ -9,7 +9,7 @@ You can then pass these gamestates to your bot or simply get the move list from 
 GameState can also be given arbitrary game times, with setters `setTimePlayer` and `setTimeOpponent`. They are to be given as `long`, in milliseconds.  
 
 You can set the side your bot is playing through variables `turn` and `playing` with the Enums from `model.Side`.
-`turn` represents the side that currently playing, and `playing` is the side that bot that gets these particular GameStates plays.
+`turn` represents the side that currently playing, and `playing` is the side that bot that gets these particular GameStates.
 (I.e. `playing` should stay the same with every GameState and `turn` should change with every other GameState that the bot gets)
 
 
