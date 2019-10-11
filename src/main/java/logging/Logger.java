@@ -9,6 +9,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 // import java.nio.file.Path;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.logging.Level;
 
 /**
@@ -27,7 +28,10 @@ public class Logger {
     
     private boolean useStdOut;
     private boolean useLogFile;
+    private boolean useMemory;
     private String filePath;
+    
+    public ArrayList<String> inMemoryLog;
     
     /**
      * Default constructor, will not log until logging features are manually enabled
@@ -35,6 +39,9 @@ public class Logger {
     public Logger() {
         useStdOut = false;
         useLogFile = false;
+        useMemory = false;
+        
+        this.inMemoryLog = new ArrayList<>();
         filePath = "./log.txt";
     }
     
@@ -44,6 +51,16 @@ public class Logger {
      */
     public Logger useStdOut() {
         this.useStdOut = true;
+        
+        return this;
+    }
+    
+    /**
+     * Turn on logging to a text file
+     * @return 
+     */
+    public Logger useMemory() {
+        this.useMemory = true;
         
         return this;
     }
@@ -81,6 +98,11 @@ public class Logger {
             System.out.println(messageWithDate);
         }
         
+        if (useMemory) {
+            messageWithDate = LocalDateTime.now().toString() + " MESSAGE: " + message;
+            inMemoryLog.add(messageWithDate);
+        }
+        
         if (useLogFile) {
             messageWithDate = LocalDateTime.now().toString() + " MESSAGE: " + message;
             
@@ -111,6 +133,11 @@ public class Logger {
         if (useStdOut) {
             messageWithDate = LocalDateTime.now().toString() + textInRed(" ERROR: ") + message;
             System.out.println(messageWithDate);
+        }
+        
+        if (useMemory) {
+            messageWithDate = LocalDateTime.now().toString() + " ERROR: " + message;
+            inMemoryLog.add(messageWithDate);
         }
         
         if (useLogFile) {
