@@ -2,7 +2,7 @@
 
 ## Writing your own tests
 
-You can pass moves to gamestate with method `setMoves`. The moves are can be completely arbitrary, i.e. the gamestate class has no validation if they are correct chess moves.
+You can pass moves to gamestate with method `setMoves`. The moves can be completely arbitrary, i.e. the gamestate class does not validate if they are correct chess moves.
 The parameter should be a single String with the moves divided with commas, **eg.**`"a1b1,c1d1,e1f1"` is a valid String.  
 You can then pass these gamestates to your bot or simply get the move list from the variable `moves`.
 Game state can also be given arbitrary game times, with setters `setTimePlayer` and `setTimeOpponent`. They are to be given as `long`, in milliseconds.  
@@ -17,10 +17,10 @@ gs.setTimePlayer(299880);   //Optional if your bot doesn't use these
 gs.setTimeOpponent(299830); //Optional if your bot doesn't use these
 ```
 
-Since `GameState` is a static representations of a chess game, you need to create multiple of them to simulate a set of moves.  
+Since `GameState` is a static representation of a chess game, you need to create multiple of them to simulate a set of moves.  
 
 ## PerformanceTest class
-The api contains a class that can be used for testing.
+The API contains a class that can be used for testing.
 The class is `PerformanceTest.java` and it can be found in the `datastructureproject` packet.  
 
 You can execute the class with a gradle task `performanceTest`.  
