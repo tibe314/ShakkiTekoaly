@@ -20,6 +20,12 @@ Then you can push the template to your GitHub repository with the following comm
 
 Remember to replace the README.md file with your own information. You can now begin to make your own changes to the program.
 
+## Enabling Travis CI and Codecov
+
+The project comes with a pre-configured .travis.yml file. This means that if you have registered to Travis CI with
+your GitHub account, Travis should automatically start building the project. By default Travis should also ask
+Codecov.io to generate test coverage reports.
+
 ## Playing on Lichess
 
 The following minimum actions are necessary to run the Tiralabra chess bot app with the Lichess.org application program interface (API). See [Lichess API](https://lichess.org/api) for the full API Reference. 
