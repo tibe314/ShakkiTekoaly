@@ -170,4 +170,21 @@ public class GameStateTest {
         gameState.setTimeOpponent(someTime);
         assert(gameState.getRemainingTimeOpponent() == 3);
     }  
+    
+    @Test
+    public void setMovesSetsMovesCorrectly(){
+        GameState gameState = new GameState();
+        gameState.setMoves("a1,a1,a1");
+        gameState.moves.forEach(moveString -> {
+            assertTrue("Setting moves without brackets", moveString.equals("a1"));
+        });
+    }
+    @Test
+    public void setMovesSetsMovesCorrectlyWithBrackets(){
+        GameState gameState = new GameState();
+        gameState.setMoves("(a1,[a1,{a1,a1),a1],a1}");
+        gameState.moves.forEach(moveString -> {
+            assertTrue("Setting moves without brackets", moveString.equals("a1"));
+        });
+    }
 }
