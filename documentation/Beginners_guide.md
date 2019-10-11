@@ -69,11 +69,11 @@ XBoard is a graphical user interface chessboard for chess engines. Xboard can be
 
 Uncompress it, for example, under the same directory where the chess directory is.
 
-    ```$ tar xvzf xboard-4.9.0.tar.gz```
+    $ tar xvzf xboard-4.9.0.tar.gz
 
 2. Start XBoard:
 
-    ```$ xboard```
+    $ xboard
 
 3. Make sure that you have a jar file for your engine:
 
