@@ -5,6 +5,27 @@ or you can play locally using the program [XBoard](https://www.gnu.org/software/
 
 Below you can find the instructions to configure your project to work with either of these options.
 
+## Forking the project
+
+To begin working on the project, you need to clone the Git repository to your own computer.
+
+    $ git clone https://github.com/TiraLabra/chess.git
+
+You can then create your own GitHub repository but remember to create it without a README file.
+Then you can push the template to your GitHub repository with the following commands:
+
+    $ git remote rename origin old-origin 
+    $ git remote add origin https://github.com/<YourUserName>/<YourRepositoryName>
+    $ git push -u origin master
+
+Remember to replace the README.md file with your own information. You can now begin to make your own changes to the program.
+
+## Enabling Travis CI and Codecov
+
+The project comes with a pre-configured .travis.yml file. This means that if you have registered to Travis CI with
+your GitHub account, Travis should automatically start building the project. By default Travis should also ask
+Codecov.io to generate test coverage reports.
+
 ## Playing on Lichess
 
 The following minimum actions are necessary to run the Tiralabra chess bot app with the Lichess.org application program interface (API). See [Lichess API](https://lichess.org/api) for the full API Reference. 
@@ -25,7 +46,7 @@ By no means, this guideline will not replace the API Reference. We hope that thi
 
 4. Upgrade your account to a bot:
 
-*curl -d '' https<span></span>://lichess.org/api/bot/account/upgrade -H "Authorization: Bearer INSERT YOUR TOKEN HERE"*
+    $ curl -d '' https<span></span>://lichess.org/api/bot/account/upgrade -H "Authorization: Bearer INSERT YOUR TOKEN HERE"
 
 5. Select your way to pass your token to the Tiralabra chess bot. 
 
@@ -34,8 +55,12 @@ By no means, this guideline will not replace the API Reference. We hope that thi
     b) you can supply the token via the LICHESS_TOKEN environment variable
 
 6. Now you can try the Tiralabra chess bot. One possible way to start the bot: after login, select “PLAY WITH THE COMPUTER” at https<span></span>://lichess.org/. 
-Then choose which pieces you want to play. Finally, at the command line, type *./gradlew build*, 
-then if you inserted your token as environment variable App.java *./gradlew run --args="--lichess"* or, if you didn't, *./gradlew run --args="--lichess --token=put_token_here"* .
+Then choose which pieces you want to play. Finally, at the command line, type 
+    *$ ./gradlew build*, 
+then if you inserted your token as environment variable:
+    *./gradlew run --args="--lichess"* 
+or, if you didn't, 
+    *./gradlew run --args="--lichess --token=put_token_here"* .
 
 7. Your chess bot will start playig with random moves, that is, very poorly. Your task is now to create a real A.I. bot!
 
@@ -50,21 +75,21 @@ XBoard is a graphical user interface chessboard for chess engines. Xboard can be
 
 Uncompress it, for example, under the same directory where the chess directory is.
 
-$ tar xvzf xboard-4.9.0.tar.gz
+    $ tar xvzf xboard-4.9.0.tar.gz
 
-2. Start XBoard
+2. Start XBoard:
 
-$ xboard
+    $ xboard
 
-3. Make sure that you have a jar file for your engine
+3. Make sure that you have a jar file for your engine:
 
-$ ./gradlew build
+    $ ./gradlew build
 
 4. Under Engine tab, select Edit Engine List..
 
 5. Add the path of the chess engine's jar file in the list
 
-"tira-chess" -fcp "java -jar /home/local/..your path../chess/build/libs/chess-all.jar"
+    "tira-chess" -fcp "java -jar /home/local/..your path../chess/build/libs/chess-all.jar"
 
 You can replace "tira-chess" with any unique name.
 Then click 'commit changes' and 'OK'.

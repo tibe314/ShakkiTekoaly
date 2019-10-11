@@ -27,6 +27,8 @@ public class TestBot implements ChessBot {
 
     @Override
     public String nextMove(GameState gs) {
+        parseLatestMove(gs);
+
         Move myMove;
         try {
             myMove = this.getMove();
@@ -67,6 +69,26 @@ public class TestBot implements ChessBot {
         return this.b;
     }
     
+    /**
+     * Parses a move in UCI move into the chess engine's move data type and
+     * updates the engine's board state
+     */
+    public void parseLatestMove(GameState gs) {
+        this.b = new Board();
+
+        // We play all of the moves onto a new board to ensure a previously
+        // started game can be resumed correctly, inefficient but it works
+        if (!gs.moves.isEmpty()) {
+            gs.moves.forEach(moveString -> {
+                String startingString = moveString.substring(0, 2).toUpperCase();
+                String endingString = moveString.substring(2, 4).toUpperCase();
+                String promoteString = moveString.length() > 4 ? moveString
+                        .substring(4).toUpperCase() : "".toUpperCase();
+                this.setMove(startingString, endingString, promoteString);
+            });
+        }
+    }
+
     public void setMove(String starting, String ending, String promote) {
         String promotionPiece = "";
         if (promote.length() > 0) {

@@ -10,6 +10,7 @@ import java.util.Arrays;
 import chess.model.Side;
 import chess.bot.TestBot;
 import java.util.stream.Collectors;
+
 import org.json.JSONObject;
 
 /**
@@ -31,8 +32,6 @@ public class GameState {
     public long blackTime;
     
     public ArrayList<String> moves;
-    
-    public TestBot engine = new TestBot("");
     
     public GameState() {
         this.moves = new ArrayList();
@@ -132,8 +131,6 @@ public class GameState {
         } else {
             // This would only have chat stuff, we probably don't need it.
         }
-        
-        parseLatestMove();
     }
     /**
      * Sets time for Player, used by XBoardHandler
@@ -155,24 +152,6 @@ public class GameState {
             this.whiteTime = time;
         } else {
             this.blackTime = time;
-        }
-    }
-    /**
-     * Parses a move in UCI move into the chess engine's move data type and
-     * updates the engine's board state
-     */
-    public void parseLatestMove() {
-        this.engine = new TestBot("");
-        // We play all of the moves onto a new board to ensure a previously
-        // started game can be resumed correctly, inefficient but it works
-        if (!this.moves.isEmpty()) {
-            this.moves.forEach(moveString -> {
-                String startingString = moveString.substring(0, 2).toUpperCase();
-                String endingString = moveString.substring(2, 4).toUpperCase();
-                String promoteString = moveString.length() > 4 ? moveString
-                        .substring(4).toUpperCase() : "".toUpperCase();
-                this.engine.setMove(startingString, endingString, promoteString);
-            });
         }
     }
     
