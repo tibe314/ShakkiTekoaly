@@ -179,6 +179,7 @@ public class GameStateTest {
             assertTrue("Setting moves without brackets", moveString.equals("a1"));
         });
     }
+    
     @Test
     public void setMovesSetsMovesCorrectlyWithBrackets(){
         GameState gameState = new GameState();
