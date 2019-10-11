@@ -67,11 +67,11 @@ Uncompress it, for example, under the same directory where the chess directory i
 
     $ tar xvzf xboard-4.9.0.tar.gz
 
-2. Start XBoard
+2. Start XBoard:
 
     $ xboard
 
-3. Make sure that you have a jar file for your engine
+3. Make sure that you have a jar file for your engine:
 
     $ ./gradlew build
 
