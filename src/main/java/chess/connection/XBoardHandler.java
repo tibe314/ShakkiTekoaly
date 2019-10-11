@@ -100,7 +100,6 @@ public class XBoardHandler {
      */
     public void handleMove(String move) {
         this.gamestate.moves.add(move);
-        gamestate.parseLatestMove();
         this.logger.logMessage(gamestate.moves.toString());
     }
     
@@ -111,7 +110,6 @@ public class XBoardHandler {
     public String nextMove() {
         String move = bot.nextMove(gamestate);
         gamestate.moves.add(move);
-        gamestate.parseLatestMove();
         return move;
     }
 
