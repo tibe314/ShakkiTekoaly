@@ -49,8 +49,12 @@ By no means, this guideline will not replace the API Reference. We hope that thi
     b) you can supply the token via the LICHESS_TOKEN environment variable
 
 6. Now you can try the Tiralabra chess bot. One possible way to start the bot: after login, select “PLAY WITH THE COMPUTER” at https<span></span>://lichess.org/. 
-Then choose which pieces you want to play. Finally, at the command line, type *./gradlew build*, 
-then if you inserted your token as environment variable App.java *./gradlew run --args="--lichess"* or, if you didn't, *./gradlew run --args="--lichess --token=put_token_here"* .
+Then choose which pieces you want to play. Finally, at the command line, type 
+    *$ ./gradlew build*, 
+then if you inserted your token as environment variable:
+    *./gradlew run --args="--lichess"* 
+or, if you didn't, 
+    *./gradlew run --args="--lichess --token=put_token_here"* .
 
 7. Your chess bot will start playig with random moves, that is, very poorly. Your task is now to create a real A.I. bot!
 
@@ -65,11 +69,11 @@ XBoard is a graphical user interface chessboard for chess engines. Xboard can be
 
 Uncompress it, for example, under the same directory where the chess directory is.
 
-    $ tar xvzf xboard-4.9.0.tar.gz
+    ```$ tar xvzf xboard-4.9.0.tar.gz```
 
 2. Start XBoard:
 
-    $ xboard
+    ```$ xboard```
 
 3. Make sure that you have a jar file for your engine:
 
