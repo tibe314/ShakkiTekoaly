@@ -10,12 +10,15 @@ import chess.engine.GameState;
 import chess.model.Profile;
 import chess.model.Testdata;
 import static chess.model.Testdata.profileJson;
+import static chess.model.Testdata.gameNotStartedJSON;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.function.Predicate;
+import java.util.stream.Stream;
 import logging.Logger;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -45,7 +48,7 @@ public class LichessApiTest {
     @Before
     public void setUp() {
         this.bot = new TestBot("");
-        this.logger = new Logger().useLogFile();
+        this.logger = new Logger().useMemory();
         this.httpFactory = new MockHTTPIOFactory();
         this.api = new LichessAPI(bot, logger, httpFactory);
     }
@@ -133,6 +136,25 @@ public class LichessApiTest {
     }
 
     @Test
+    public void apiAcceptsChallenge() {
+        MockHTTPIO mockEventStream = new MockHTTPIO();
+
+        ArrayList<String> events = new ArrayList<>();
+        events.add(gameNotStartedJSON[0]);
+
+        mockEventStream.setOutput(events.iterator());
+
+        MockHTTPIO mockResponseStream = new MockHTTPIO();
+
+        httpFactory.addMockHTTPIOToQueue(mockEventStream);
+        httpFactory.addMockHTTPIOToQueue(mockResponseStream);
+
+        api.beginEventLoop();
+
+        assert(mockResponseStream.url.contains("/accept"));
+    }
+
+    @Test
     public void playGameLegalMoves() throws IOException {
         this.api = new LichessAPI(new MockBot(Arrays.asList("d7d5", "c7c5", "b7b5", "d8d7", "e8d7")), logger, this.httpFactory);
         Iterator<String> iterator = new ArrayList<>(Arrays.asList(Testdata.testGameJSON)).iterator();
@@ -185,6 +207,120 @@ public class LichessApiTest {
 
         this.api = new LichessAPI(new MockBot(Arrays.asList("d7d5", "c7c5", "b7b5", "d8d7", "e8d7")), this.logger, this.httpFactory);
         this.api.beginEventLoop();
+    }
 
+    @Test
+    public void playingStopsIfBotReturnsNull() {
+        this.httpFactory = new MockHTTPIOFactory();
+
+        ArrayList<String> list = new ArrayList<>();
+        list.addAll(Arrays.asList(Testdata.gameStartJSON));
+        Iterator<String> iterator = list.iterator();
+        MockHTTPIO io = new MockHTTPIO();
+        io.setOutput(iterator);
+
+        this.httpFactory.addMockHTTPIOToQueue(io);
+
+        list = new ArrayList<>();
+        list.addAll(Arrays.asList(Testdata.profileJson));
+        iterator = list.iterator();
+        io = new MockHTTPIO();
+        io.setOutput(iterator);
+
+        this.httpFactory.addMockHTTPIOToQueue(io);
+
+        list = new ArrayList<>();
+        list.addAll(Arrays.asList(Testdata.testGameJSON));
+        iterator = list.iterator();
+        io = new MockHTTPIO();
+        io.setOutput(iterator);
+
+        this.httpFactory.addMockHTTPIOToQueue(io);
+
+        this.api = new LichessAPI(new NullBot(), this.logger, this.httpFactory);
+        this.api.beginEventLoop();
+
+        assert(anyMatch(logger.inMemoryLog.iterator(), line -> line.contains("Bot returned null move")));
+    }
+    
+    @Test
+    public void lichessGetAccountLogsAnErrorOnEmptyAccount() {
+        MockHTTPIO mockStream = new MockHTTPIO();
+        
+        mockStream.setStatusCode(200);
+
+        ArrayList<String> list = new ArrayList<>();
+
+        list.add("{}");
+
+        mockStream.setOutput(list.iterator());
+        
+        this.httpFactory.addMockHTTPIOToQueue(mockStream);
+        
+        this.api.getAccount();
+        
+        assert(anyMatch(logger.inMemoryLog.iterator(), line -> line.contains("ERROR")));
+    }
+    
+    @Test
+    public void lichessGetAccountLogsAnErrorOnHTTPErrorCode() {
+        MockHTTPIO mockStream = new MockHTTPIO();
+        
+        mockStream.setStatusCode(401);
+        
+        this.httpFactory.addMockHTTPIOToQueue(mockStream);
+        
+        this.api.getAccount();
+        
+        assert(anyMatch(logger.inMemoryLog.iterator(), line -> line.contains("ERROR")));
+    }
+
+    @Test
+    public void lichessBeginEventLoopLogsAnErrorOnHTTPErrorCode() {
+        MockHTTPIO mockStream = new MockHTTPIO();
+        
+        mockStream.setStatusCode(401);
+        
+        this.httpFactory.addMockHTTPIOToQueue(mockStream);
+        
+        this.api.beginEventLoop();
+        
+        assert(anyMatch(logger.inMemoryLog.iterator(), line -> line.contains("ERROR")));
+    }
+
+    @Test
+    public void lichessOpenGameLogsAnErrorOnHTTPErrorCode() {
+        MockHTTPIO io;
+        Iterator<String> iterator;
+        
+        ArrayList<String> list = new ArrayList<>();
+        list.addAll(Arrays.asList(Testdata.profileJson));
+        iterator = list.iterator();
+        io = new MockHTTPIO();
+        io.setOutput(iterator);
+
+        this.httpFactory.addMockHTTPIOToQueue(io);
+
+        MockHTTPIO mockStream = new MockHTTPIO();
+        
+        mockStream.setStatusCode(401);
+        
+        this.httpFactory.addMockHTTPIOToQueue(mockStream);
+        
+        this.api.openGame();
+        
+        assert(anyMatch(logger.inMemoryLog.iterator(), line -> line.contains("ERROR")));
+    }
+    
+    public boolean anyMatch(Iterator<String> iterator, Predicate<String> pred) {
+        while (iterator.hasNext()) {
+            String value = iterator.next();
+            
+            if (pred.test(value)) {
+                return true;
+            }
+        }
+        
+        return false;
     }
 }

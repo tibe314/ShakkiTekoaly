@@ -116,4 +116,13 @@ public class LoggerTest {
             }
         }
     }
+    
+    @Test
+    public void writingToInMemoryLogWorks() {
+        logger.useMemory();
+        
+        logger.logMessage("Hello, World!");
+        
+        assert(logger.inMemoryLog.size() > 0);
+    }
 }
