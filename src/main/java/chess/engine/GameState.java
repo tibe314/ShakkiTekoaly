@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import chess.model.Side;
 import chess.bot.TestBot;
+import java.util.stream.Collectors;
 import org.json.JSONObject;
 
 /**
@@ -188,7 +189,11 @@ public class GameState {
      * Sets the current gamestate with moves passed as the parameters.
      * @param moves 0-n moves in UCI format
      */
-    public void setMoves(String... moves){
-        this.moves = new ArrayList(Arrays.asList(moves));
+    public void setMoves(String moves){
+        ArrayList<String> moveList = new ArrayList(Arrays.asList(moves.split(",")));
+        this.moves = moveList.stream().map((String string) -> {
+            return string.trim().replaceAll("^\\W|\\W$", "");
+        }).collect(Collectors
+                .toCollection(ArrayList::new));
     }
 }
