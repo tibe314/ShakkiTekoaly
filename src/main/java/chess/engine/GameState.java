@@ -8,7 +8,6 @@ package chess.engine;
 import java.util.ArrayList;
 import java.util.Arrays;
 import chess.model.Side;
-import chess.bot.TestBot;
 import org.json.JSONObject;
 
 /**
@@ -30,8 +29,6 @@ public class GameState {
     public long blackTime;
     
     public ArrayList<String> moves;
-    
-    public TestBot engine = new TestBot("");
     
     public GameState() {
         this.moves = new ArrayList();
