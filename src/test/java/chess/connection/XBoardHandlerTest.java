@@ -21,7 +21,7 @@ public class XBoardHandlerTest {
 
     @Before
     public void setUp() {
-        this.bot = new TestBot("");   
+        this.bot = new TestBot();   
     }
     
     @After

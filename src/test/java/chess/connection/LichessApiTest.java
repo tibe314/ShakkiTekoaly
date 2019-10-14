@@ -47,10 +47,10 @@ public class LichessApiTest {
 
     @Before
     public void setUp() {
-        this.bot = new TestBot("");
+        this.bot = new TestBot();
         this.logger = new Logger().useMemory();
         this.httpFactory = new MockHTTPIOFactory();
-        this.api = new LichessAPI(bot, logger, httpFactory);
+        this.api = new LichessAPI(bot, "fake-token", logger, httpFactory);
     }
 
     @After
@@ -156,7 +156,7 @@ public class LichessApiTest {
 
     @Test
     public void playGameLegalMoves() throws IOException {
-        this.api = new LichessAPI(new MockBot(Arrays.asList("d7d5", "c7c5", "b7b5", "d8d7", "e8d7")), logger, this.httpFactory);
+        this.api = new LichessAPI(new MockBot(Arrays.asList("d7d5", "c7c5", "b7b5", "d8d7", "e8d7")), "fake-token", logger, this.httpFactory);
         Iterator<String> iterator = new ArrayList<>(Arrays.asList(Testdata.testGameJSON)).iterator();
         this.logger.useStdOut();
         this.api.playGame(iterator);
@@ -170,7 +170,7 @@ public class LichessApiTest {
 
     @Test
     public void correctErrorMessageWhenTryingToMakeMoveTooQuick() throws IOException {
-        this.api = new LichessAPI(new MockBot(Arrays.asList("d7d5", "c7c5", "b7b5", "d8d7", "e8d7")), logger, this.httpFactory);
+        this.api = new LichessAPI(new MockBot(Arrays.asList("d7d5", "c7c5", "b7b5", "d8d7", "e8d7")), "fake-token", logger, this.httpFactory);
         Iterator<String> iterator = new ArrayList<>(Arrays.asList(Testdata.testGameJSONStops)).iterator();
         this.logger.useStdOut();
         this.api.playGame(iterator);
@@ -205,7 +205,7 @@ public class LichessApiTest {
 
         this.httpFactory.addMockHTTPIOToQueue(io);
 
-        this.api = new LichessAPI(new MockBot(Arrays.asList("d7d5", "c7c5", "b7b5", "d8d7", "e8d7")), this.logger, this.httpFactory);
+        this.api = new LichessAPI(new MockBot(Arrays.asList("d7d5", "c7c5", "b7b5", "d8d7", "e8d7")), "fake-token", this.logger, this.httpFactory);
         this.api.beginEventLoop();
     }
 
@@ -237,7 +237,7 @@ public class LichessApiTest {
 
         this.httpFactory.addMockHTTPIOToQueue(io);
 
-        this.api = new LichessAPI(new NullBot(), this.logger, this.httpFactory);
+        this.api = new LichessAPI(new NullBot(), "fake-token", this.logger, this.httpFactory);
         this.api.beginEventLoop();
 
         assert(anyMatch(logger.inMemoryLog.iterator(), line -> line.contains("Bot returned null move")));
