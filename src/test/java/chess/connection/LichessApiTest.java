@@ -244,25 +244,6 @@ public class LichessApiTest {
     }
     
     @Test
-    public void lichessGetAccountLogsAnErrorOnEmptyAccount() {
-        MockHTTPIO mockStream = new MockHTTPIO();
-        
-        mockStream.setStatusCode(200);
-
-        ArrayList<String> list = new ArrayList<>();
-
-        list.add("{}");
-
-        mockStream.setOutput(list.iterator());
-        
-        this.httpFactory.addMockHTTPIOToQueue(mockStream);
-        
-        this.api.getAccount();
-        
-        assert(anyMatch(logger.inMemoryLog.iterator(), line -> line.contains("ERROR")));
-    }
-    
-    @Test
     public void lichessGetAccountLogsAnErrorOnHTTPErrorCode() {
         MockHTTPIO mockStream = new MockHTTPIO();
         

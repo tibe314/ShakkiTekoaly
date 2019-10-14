@@ -31,15 +31,16 @@ public class XBoardHandler {
         while (true) {
             try {
                 input = this.in.readLine();
+
+                // Configure XBoard with desired options
                 if (input.startsWith("protover")) {
                     System.out.println("feature done=0 sigint=0 sigterm=0 reuse=0 "
                             + "usermove=1 myname=\"tira-chess\" done=1\n");
-                    //set reuse=1 if bot is able to play multiple games in a session
                     System.out.flush();
                     break;
                 }
             } catch (IOException e) {
-                e.printStackTrace();
+                logger.logError(e.toString());
             }
         }
     }
@@ -80,6 +81,7 @@ public class XBoardHandler {
                         gamestate.setTimeOpponent(10 * Long.parseLong(command.split(" ")[1]));
                         break;
 
+                    // This is used for tests
                     case "endloop":
                         run = false;
                         break;
@@ -89,7 +91,7 @@ public class XBoardHandler {
                 }
                 
             } catch (IOException e) { 
-                e.printStackTrace();
+                logger.logError(e.toString());
             }
         }
     }
@@ -105,7 +107,7 @@ public class XBoardHandler {
     
     /**
      * Asks the chess bot for a move and updates the GameState
-     * @return 
+     * @return Bot's move in UCI format
      */
     public String nextMove() {
         String move = bot.nextMove(gamestate);
@@ -113,6 +115,10 @@ public class XBoardHandler {
         return move;
     }
 
+    /**
+     * Getter for the current GameState
+     * @return Current gamestate
+     */
     public GameState getGameState() {
         return this.gamestate;
     }
