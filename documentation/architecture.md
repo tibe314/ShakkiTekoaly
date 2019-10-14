@@ -61,16 +61,20 @@ communication layer with the current state of the game. The function must return
 chess move in [the UCI format](https://en.wikipedia.org/wiki/Universal_Chess_Interface) or null if
 the bot cannot find a legitimate move or wants to forfeit the game.
 
+### TestBot.java
+
+TestBot.java is an implementation of the ChessBot interface and is used for testing the APIs.
+It also serves as an example implementation of a simple Chess bot.
+
+The TestBot does not contain its own Chess logic, but instead uses the chesslib library to
+pick a random move in a given game state. This also means that the TestBot generally plays
+very poorly.
+
+**Data Structures and Algorithms projects may not use chesslib in this manner.**
+
 ## Chess engine and gamestate package (chess.engine.*)
 
 The engine package deals with the state of a Chess game.
-
-### Engine.java
-
-The Engine.java class is used for keeping track of the current board state. It uses chesslib in the background
-to handle local Chess logic and is mainly used as a validation and testing component.
-
-**Data Structures and Algorithms projects should not use the Engine class directly**
 
 ### GameState.java
 
