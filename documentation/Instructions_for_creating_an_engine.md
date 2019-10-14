@@ -12,8 +12,7 @@ that provides these, but **these are not intended to be used by a student for th
 ## What does your engine need to do?
 
 Your bot should be an implementation of the ChessBot interface. This means it needs to have an implementation of the method 
-```String nextMove(GameState gamestate)```which requires your bot to output UCI formatted String representations of moves, 
-when prompted. In this format a move is simply the starting square followed by the destination square. For example ```e2e4```.
+```String nextMove(GameState gamestate)```which receives a gamestate instance and requires your bot to output UCI formatted String representations of moves, when prompted. In this format a move is simply the starting square followed by the destination square. For example ```e2e4```.
 
 
 A notable exception to this are promotion moves,which have an additional 5th character representing which piece a pawn is 
