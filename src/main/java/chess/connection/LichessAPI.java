@@ -175,7 +175,7 @@ public class LichessAPI {
             String line = gameStream.next();
             if (!line.isEmpty()) {
                 String move = getNextMove(line, gs, playerId);
-
+                
                 if (move == null) {
                     gameRunning = false;
                     logger.logMessage("Bot returned null move - Game ends.");
@@ -214,6 +214,7 @@ public class LichessAPI {
                 }
             }
         }
+        logger.logMessage("Moves: " + gamestate.moves.toString());
         
         // White moves are even numbered, black moves are odd numbered
         if (gamestate.getMoveCount() % 2 == 0) {

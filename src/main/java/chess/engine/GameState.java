@@ -44,6 +44,10 @@ public class GameState {
         return 1 + moves.size() / 2;
     }
     
+    public String getLatestMove() {
+        return this.moves.get(this.moves.size() - 1);
+    }
+    
     public long getRemainingTime() {
         if (playing == Side.WHITE) {
             return this.whiteTime;
