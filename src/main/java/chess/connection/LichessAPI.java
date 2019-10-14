@@ -32,16 +32,16 @@ public class LichessAPI {
 
     private HashMap<String, String> headers;
 
-    public LichessAPI(ChessBot bot) {
-        this(bot, new Logger().useStdOut(), new HTTPStreamFactory());
+    public LichessAPI(ChessBot bot, String token) {
+        this(bot, token, new Logger().useStdOut(), new HTTPStreamFactory());
     }
 
-    public LichessAPI(ChessBot bot, Logger logger, HTTPIOFactory httpFactory) {
+    public LichessAPI(ChessBot bot, String token, Logger logger, HTTPIOFactory httpFactory) {
         this.bot = bot;
         this.logger = logger;
         this.httpFactory = httpFactory;
 
-        this.token = bot.getToken();
+        this.token = token;
 
         headers = new HashMap<>();
 

@@ -18,9 +18,4 @@ public class MockBot implements ChessBot {
         return this.movesToMake.hasNext() ? this.movesToMake.next() : "No more testmoves!";
     }
 
-    @Override
-    public String getToken() {
-        return "";
-    }
-
 }

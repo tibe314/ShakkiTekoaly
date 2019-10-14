@@ -15,12 +15,10 @@ import java.util.Random;
 import com.github.bhlangonijr.chesslib.*;
     
 public class TestBot implements ChessBot {
-    private String token;
     private Random random; 
     private Board b;
 
-    public TestBot(String token) {
-        this.token = token;
+    public TestBot() {
         this.random = new Random();
         this.b = new Board();
     }
@@ -43,11 +41,6 @@ public class TestBot implements ChessBot {
         }
         
         return null;
-    }
-    
-    @Override
-    public String getToken() {
-        return this.token;
     }
        
     /**

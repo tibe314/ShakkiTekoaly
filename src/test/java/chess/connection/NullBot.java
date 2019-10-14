@@ -14,10 +14,4 @@ public class NullBot implements ChessBot {
     public String nextMove(GameState gamestate) {
         return null;
     }
-
-    @Override
-    public String getToken() {
-        return "";
-    }
-
 }

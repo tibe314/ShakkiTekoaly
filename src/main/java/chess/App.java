@@ -31,13 +31,13 @@ public class App {
             }
         }
 
-        ChessBot bot = new TestBot(token);
+        ChessBot bot = new TestBot();
 
         if (isLichess) {
             if (token == null) {
                 throw new Error("No token found");
             }
-            LichessAPI api = new LichessAPI(bot);
+            LichessAPI api = new LichessAPI(bot, token);
             Profile myProfile = api.getAccount();
             System.out.println("Profile ID: " + myProfile.id);
             api.beginEventLoop();
