@@ -6,7 +6,7 @@ setting up this functionality can be found
 
 ## What does the template not handle?
 
-The template does not provide the rules of chess, those are left for you to write yourself. The TestBot class uses a library
+The template does not provide the rules of chess, those are left for you to handle. The TestBot class uses a library
 that provides these, but **these are not intended to be used by a student for the project.**
 
 ## What does your engine need to do?
@@ -21,7 +21,7 @@ promoted to, for example ```e7e8Q```. An example of how to handle this can be fo
 
 Additionally, your bot should be able to keep track of the boardstate so it can make valid moves. The GameState class keeps
 track of all the moves made in the game so far with an ArrayList. You can get the latest move with the method 
-***INSERT NAME HERE*** and use it to update your own Board, however you choose to implement it. This is all your bot really
+```getLatestMove()``` and use it to update your own Board, however you choose to implement it. This is all your bot really
 needs to do to be able to use the template. 
 
 ### What else can your engine do?
@@ -29,3 +29,7 @@ needs to do to be able to use the template.
 The GameState class also keeps track of time (in milliseconds) remaining for each player, as provided by either Lichess or 
 XBoard. This can be accessed with the methods ```getRemainingTime()``` and ```getRemainingTimeOpponent()```. This is not 
 strictly required for writing a bot, but might be useful. 
+
+### Where to write your code
+
+Of course, where you choose to write your code is up to you, but our intent is that you use the datastructureproject package for all your code, so that it is clearly separate from the template itself.
