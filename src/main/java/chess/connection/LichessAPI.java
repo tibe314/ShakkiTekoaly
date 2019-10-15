@@ -6,7 +6,6 @@
 package chess.connection;
 
 import chess.bot.ChessBot;
-//import chess.TestBot;
 import chess.model.Event;
 import chess.engine.GameState;
 import chess.model.Profile;
@@ -77,10 +76,6 @@ public class LichessAPI {
         }
 
         Profile profile = Profile.parseFromJson(json);
-
-        if (profile.id.isEmpty()) {
-            logger.logError("Returned profile does not have an ID, is your Lichess token valid?");
-        }
 
         return profile;
     }
@@ -180,17 +175,16 @@ public class LichessAPI {
             String line = gameStream.next();
             if (!line.isEmpty()) {
                 String move = getNextMove(line, gs, playerId);
-
+                
                 if (move == null) {
                     gameRunning = false;
                     logger.logMessage("Bot returned null move - Game ends.");
-                } else if (move.equals("nomove")) {
-                    
-                } else {
+                } else if (!move.equals("nomove")) {
                     int statusCode = makeMove(move);
 
                     if (statusCode != 200) {
-                        logger.logError("Lichess returned Bad Request status code, illegal move? Move was: " + move);
+                        logger.logError("Lichess returned Bad Request status code, illegal move? Move was: " + move 
+                                + " Statuscode: " + statusCode);
                     }
                 }
             }
@@ -220,8 +214,10 @@ public class LichessAPI {
                 }
             }
         }
+        logger.logMessage("Moves: " + gamestate.moves.toString());
         
-        if (gamestate.moves.size() % 2 == 0) {
+        // White moves are even numbered, black moves are odd numbered
+        if (gamestate.getMoveCount() % 2 == 0) {
             gamestate.turn = Side.WHITE;
         } else {
             gamestate.turn = Side.BLACK;
@@ -234,6 +230,7 @@ public class LichessAPI {
             if (move == null) {
                 logger.logMessage("Bot returned no moves.");
 
+                return null;
             } else {
                 logger.logMessage("Bot made move: " + move);
                 return move;
@@ -241,8 +238,6 @@ public class LichessAPI {
         } else {
             return "nomove";
         }
-        
-        return null;
     }
 
     /**
