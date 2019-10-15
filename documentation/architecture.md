@@ -139,11 +139,7 @@ Also contains a function to parse the profile from JSON.
 
 Simple enum for representing the sides of a Chess game (WHITE and BLACK).
 
-## Logging package (logging.*)
-
-The logging package provides access to a Logger class for writing log messages to standard output or log files.
-
-### Datastructureproject package
+### Project package (datastructureproject.*)
 
 This package is set up to be the initial location for your code. Ultimately, where you choose to write your code is completely up to you, as long as it is clearly separated from this project template. 
 
@@ -151,6 +147,9 @@ This package is set up to be the initial location for your code. Ultimately, whe
 
 This class provides a basic setup for performance testing. See [Documentation for testing](https://github.com/TiraLabra/chess/blob/master/documentation/testing.md).
 
+## Logging package (logging.*)
+
+The logging package provides access to a Logger class for writing log messages to standard output or log files.
 ### Logger.java
 
 The Logger class provides a simple way to log messages and errors to standard output or a file.
