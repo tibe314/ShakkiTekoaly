@@ -1,7 +1,6 @@
 # Beginner's guide for chess bot setup
 
-This template provides two ways for your bots to interact with other bots or players. You can either play online on [Lichess](https://lichess.org)
-or you can play locally using the program [XBoard](https://www.gnu.org/software/xboard/).
+This template provides two ways for your bots to interact with other bots or players. You can either play online on [Lichess](https://lichess.org) chess server or you can play locally using the [XBoard](https://www.gnu.org/software/xboard/) program.
 
 Below you can find the instructions to configure your project to work with either of these options.
 
@@ -22,8 +21,7 @@ Remember to replace the README.md file with your own information. You can now be
 
 ## Enabling Travis CI and Codecov
 
-The project comes with a pre-configured .travis.yml file. This means that if you have registered to Travis CI with
-your GitHub account, Travis should automatically start building the project. By default Travis should also ask
+The project comes with a pre-configured .travis.yml file. This means that if you have registered to Travis CI continuous integration service with your GitHub account, Travis should start automatically when you build your project. By default, Travis should also ask
 Codecov.io to generate test coverage reports.
 
 ## Playing on Lichess
@@ -89,7 +87,7 @@ Uncompress it, for example, under the same directory where the chess directory i
 
 5. Add the path of the chess engine's jar file in the list
 
-    "tira-chess" -fcp "java -jar /home/local/..your path../chess/build/libs/chess-all.jar"
+    "tira-chess" -fcp "java -jar /home/local/ ..your path.. /chess/build/libs/chess-all.jar"
 
 You can replace "tira-chess" with any unique name.
 Then click 'commit changes' and 'OK'.
