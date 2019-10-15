@@ -2,8 +2,10 @@
 
 ## Writing your own tests
 
-You can pass moves to `GameState` class with method `setMoves`. These moves can be completely arbitrary, i.e. GameState has no validation whether they are valid chess moves or not.
-The parameter `moves` should be a single String with the moves separated by commas. For example, `"a1b1,c1d1,e1f1"` is a valid String. You can then pass these gamestates to your bot or simply get the move list from the variable `moves`.  
+This document explains some basic tools to carry out performance testing. In your project, you may be required to analyze, how your intelligent bot will behave in various specific game situations.
+
+You can pass moves to `GameState` class with method `setMoves`. These moves can be completely arbitrary, meaning that GameState has no validation whether they are valid chess moves or not.
+The parameter `moves` should be a single String with moves separated by commas. For example, `"a1b1,c1d1,e1f1"` is a valid String. You can then pass these gamestates to your bot or simply get the move list from the variable `moves`.  
 
 GameState can also be given arbitrary game times, with setters `setTimePlayer` and `setTimeOpponent`. They are to be given as type `long`, in milliseconds.  
 
