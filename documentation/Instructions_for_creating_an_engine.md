@@ -11,7 +11,6 @@ The template does not provide the rules of chess, those are left for you to hand
 
 Your bot should be an implementation of the ChessBot interface. This means it needs to have an implementation of the method ```String nextMove(GameState gamestate)``` which receives a gamestate instance and requires your bot to output Universal Chess Interface (UCI) formatted String representations of moves, when prompted. In this format, a move is simply the starting square followed by the destination square, for example ```e2e4```.
 
-
 A notable exception to this move format are promotion moves, which have an additional 5th character representing which piece a pawn is promoted to, for example ```e7e8Q```. An example of how to handle this action can be found in the TestBot class.
 
 Additionally, your bot should be able to keep track of the boardstate so that it can make valid moves. The GameState class keeps track of all of the moves made in the game so far with an ArrayList. You can get the latest move with the method ```getLatestMove()``` and use it to update your own Board, however you choose to implement it. This is all your bot really

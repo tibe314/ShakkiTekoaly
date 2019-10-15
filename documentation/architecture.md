@@ -11,7 +11,6 @@ The project package hierarchy is as follows:
     - ChessBot.java
     - TestBot.java
 - chess.engine
-    - Engine.java
     - GameState.java
 - chess.connection
     - HTTPIO.java
@@ -25,7 +24,9 @@ The project package hierarchy is as follows:
     - EventType.java
     - Profile.java 
     - Side.java
-- chess.logging
+- datastructureproject
+    - PerformanceTest.java
+- logging
     - Logger.java 
 
 ![Class diagram](https://raw.githubusercontent.com/TiraLabra/chess/architecture-docs/documentation/pics/Architecture.png)
@@ -140,17 +141,21 @@ Simple enum for representing the sides of a Chess game (WHITE and BLACK).
 
 ## Logging package (logging.*)
 
-The logging package provides access to a Logger class for writing log messages to standard output
-or log files.
+The logging package provides access to a Logger class for writing log messages to standard output or log files.
+
+### Datastructureproject package
+
+This package is set up to be the initial location for your code. Ultimately, where you choose to write your code is completely up to you, as long as it is clearly separated from this project template. 
+
+## PerformanceTest.java
+
+This class provides a basic setup for performance testing. See [Documentation for testing](https://github.com/TiraLabra/chess/blob/master/documentation/testing.md).
 
 ### Logger.java
 
 The Logger class provides a simple way to log messages and errors to standard output or a file.
 
-The Logger uses a builder pattern for configuring and has methods for configuring the functionality
-of the logger. The useStdOut() and useLogFile() enable logging to standard output and to a log file
-respectively. The alternatePath() method allows defining an alternative path for the log file.
-If a log file already exists, the messages will be appended to the end of the that file.
+The Logger uses a builder pattern for configuring and has methods for configuring the functionality of the logger. The useStdOut() and useLogFile() enable logging to standard output and to a log file respectively. The alternatePath() method allows defining an alternative path for the log file. If a log file already exists, the messages will be appended to the end of the that file.
 
 Messages can be logged using the logMessage() function and errors can be logged using logError().
 A timestamp will be included along with the given message.
