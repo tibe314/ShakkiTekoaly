@@ -102,6 +102,15 @@ public class GameStateTest {
         
         assert (true);
     }
+
+    @Test
+    public void gameStateUpdateFromEmptyMovesWorks() {
+        GameState gameState = GameState.parseFromJson(gameStateJsonShort);
+        
+        gameState.updateFromJson(gameStateJsonShort);
+        
+        assert (true);
+    }
     
     @Test
     public void gameStateReadsWhiteAndBlackTimesCorrectly() {
@@ -127,7 +136,7 @@ public class GameStateTest {
         assert(gameState.getRemainingTimeOpponent() == 8395220);
     }
 
-        @Test
+    @Test
     public void gameStateGivesMyTurnCorrectly() {
         GameState gameState = GameState.parseFromJson(gameStateFullJson);
         
@@ -136,7 +145,6 @@ public class GameStateTest {
         
         gameState.playing = Side.BLACK;
         assert(gameState.myTurn() == false);
-        
     }
     
     @Test
@@ -146,6 +154,13 @@ public class GameStateTest {
         assert(gameState.getMoveCount() == 12);
     }
 
+    @Test
+    public void gameStateGivesLatestMoveCorrectly() {
+        GameState gameState = GameState.parseFromJson(gameStateFullJson);
+
+        assert(gameState.getLatestMove().equals("f8g7"));
+    }
+    
     @Test
     public void gameStateGivesCorrectTurnCount() {
         GameState gameState = GameState.parseFromJson(gameStateFullJson);
