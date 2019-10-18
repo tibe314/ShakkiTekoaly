@@ -27,3 +27,4 @@ Where you choose to write your code is of course up to you, but our intent is th
 ## IMPORTANT NOTICE!
 
 **You need to place your own chessbot implementation to ``ChessBot bot `` variable located in the ``App.java `` class**
+**Don't change the name of the variable or anything else in ``App.java``to ensure the program stays operational**
