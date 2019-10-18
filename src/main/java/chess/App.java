@@ -30,8 +30,12 @@ public class App {
                 token = arg.substring(8);
             }
         }
-
-        ChessBot bot = new TestBot();
+        
+        /*
+        You need to place your bot implementation to the variable below.
+        Make sure it implements the interface ChessBot, and don't change the variable name!
+        */
+        ChessBot bot = new TestBot(); // Your bot here!
 
         if (isLichess) {
             if (token == null) {
