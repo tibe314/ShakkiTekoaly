@@ -36,3 +36,33 @@ You can also pass parameters to the task and handle them in the ´main´ method 
 **eg.** `./gradlew performanceTest args="argument1 argument2 ... argument"`  
 
 **What you test and how you test it is entirely up to you.**
+
+
+## Excluding files from jacoco coverage.
+Files that are excluded from coverage report can be added to ``build.gradle`` file, to block 
+```java
+jacocoTestReport {
+    ...
+    ...
+    afterEvaluate {
+        classDirectories.setFrom(files(classDirectories.files.collect {
+            fileTree(dir: it, exclude: 'chess/App*') //add them here, as an array
+        }))
+    } 
+}
+```
+for example:
+```java
+jacocoTestReport {
+    ...
+    ...
+    afterEvaluate {
+        classDirectories.setFrom(files(classDirectories.files.collect {
+            fileTree(dir: it, exclude: ['chess/App*, 
+                                         chess/model/event/Profile* , 
+                                         chess/bot/TestBot*]') //ike this
+        }))
+    } 
+}
+```
+
