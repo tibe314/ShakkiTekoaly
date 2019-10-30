@@ -22,9 +22,10 @@ The GameState class also keeps track of time (in milliseconds) remaining for eac
 
 ### Where to write your code
 
-Where you choose to write your code is of course up to you, but our intent is that you will use the ```datastructureproject``` package for all of your code, so that it is clearly separated from the template itself.
+Where you choose to write your code is of course up to you, but our intent is that you will use the ```datastructureproject``` package for all of your code, so that it is clearly separated from the template itself. Thus you will not use the ``TestBot.java `` class in the ``chess.bot `` package.
 
 ## IMPORTANT NOTICE!
 
-**You need to place your own chessbot implementation to ``ChessBot bot `` variable located in the ``App.java `` class**
-**Don't change the name of the variable or anything else in ``App.java``to ensure the program stays operational**
+**You need to place your own chessbot implementation to ``ChessBot bot `` variable located in the ``App.java `` class.**
+**Don't change the name of the variable or anything else in ``App.java``to ensure the program stays operational.**
+**One exception: you will need to import the ```datastructureproject``` package to ``App.java ``.**
