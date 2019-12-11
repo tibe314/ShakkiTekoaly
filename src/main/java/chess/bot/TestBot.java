@@ -23,6 +23,10 @@ public class TestBot implements ChessBot {
         this.b = new Board();
     }
     
+    /**
+     * @param gs Current gamestate
+     * @return UCI String representation of a mvoe
+     */
     @Override
     public String nextMove(GameState gs) {
         parseLatestMove(gs);
@@ -70,6 +74,7 @@ public class TestBot implements ChessBot {
     /**
      * Parses a move in UCI move into the chess engine's move data type and
      * updates the engine's board state
+     * @param gs Current gamestate
      */
     public void parseLatestMove(GameState gs) {
         this.b = new Board();
@@ -89,6 +94,9 @@ public class TestBot implements ChessBot {
 
     /**
      * Transforms a move from UCI to a chesslib move and makes the move
+     * @param starting UCI String starting square
+     * @param ending UCI String ending square
+     * @param promote UCI String for potential promotion moves
      */
     public void setMove(String starting, String ending, String promote) {
         String promotionPiece = "";
