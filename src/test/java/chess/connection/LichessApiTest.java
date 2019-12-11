@@ -73,6 +73,14 @@ public class LichessApiTest {
     }
 
     @Test
+    public void getNextMoveReturnsValidMove2() {
+        GameState gameState = GameState.parseFromJson(Testdata.gameStateFullJson);
+        api.setPlayerId("lovlas");
+        String botmove = api.getNextMove(Testdata.gameStateJson, gameState, api.getPlayerId());
+        assertNotNull(botmove);
+    }
+    
+    @Test
     public void getProfileMakesGetRequest() {
         MockHTTPIO mockStream = new MockHTTPIO();
 

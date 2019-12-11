@@ -65,7 +65,7 @@ public class GameStateTest {
         
         assertEquals(gameState.id, "NCCbuaQM");
     }
-    
+
     @Test
     public void gameStatePlayersReadCorrectly() {
         GameState gameState = GameState.parseFromJson(gameStateFullJson);
