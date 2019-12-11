@@ -70,10 +70,12 @@ application {
 }
 
 checkstyle {
+    toolVersion '8.17'
     ignoreFailures = true
 }
 
 check.dependsOn jacocoTestReport
+build.dependsOn javadoc
 
 task performanceTest(type:JavaExec) {
    classpath = sourceSets.main.runtimeClasspath

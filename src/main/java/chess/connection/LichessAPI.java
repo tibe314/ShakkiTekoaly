@@ -18,7 +18,6 @@ import logging.Logger;
 
 /**
  * Java implementation of the Lichess.org HTTP API for chess bots
- *
  */
 public class LichessAPI {
 
@@ -31,10 +30,27 @@ public class LichessAPI {
 
     private HashMap<String, String> headers;
 
+    /**
+     * Create a LichessAPI object with a given bot and a bot token
+     *
+     * @param bot ChessBot implementation to be used for this Lichess session
+     * @param token Lichess API token with bot permission
+     */
     public LichessAPI(ChessBot bot, String token) {
         this(bot, token, new Logger().useStdOut(), new HTTPStreamFactory());
     }
 
+    /**
+     * Base constructor for a LichessAPI object
+     *
+     * Allows injecting a custom HTTPIOFactory for mocking the API
+     * and a logger for custom logging
+     *
+     * @param bot ChessBot implementation to be used
+     * @param token Lichess API token with bot permission
+     * @param logger Pre-configured Logger for logging to files etc.
+     * @param httpFactory HTTPIOFactory that can generate HTTPIO objects, used for API mocking
+     */
     public LichessAPI(ChessBot bot, String token, Logger logger, HTTPIOFactory httpFactory) {
         this.bot = bot;
         this.logger = logger;
@@ -81,10 +97,7 @@ public class LichessAPI {
     }
 
     /**
-     * Starts reading Lichess events
-     *
-     * Accepts all received Challenge events, on GameStart event enters gameplay
-     * loop
+     * Open a JSON event stream to Lichess.org and begin listening to events
      */
     public void beginEventLoop() {
         HTTPIO eventStream = httpFactory.createNew()
@@ -108,6 +121,13 @@ public class LichessAPI {
         }
     }
 
+    /**
+     * Iterator handler for handling individual event JSON objects in an iterator
+     *
+     * <p>This method has been separated from beginEventLoop() for mocking purposes</p>
+     *
+     * @param eventStream An iterator that produces Strings of JSON according to lichess.org API
+     */
     public void handleEventLoop(Iterator<String> eventStream) {
         while (eventStream.hasNext()) {
             logger.logMessage("Waiting for Lichess events... (press Ctrl-C if you want to quit playing)");
@@ -138,7 +158,7 @@ public class LichessAPI {
     }
 
     /**
-     * Opens the game event stream and starts playing moves from the bot
+     * Opens the game event stream from lichess.org and initiates a gameplay loop with the current bot
      */
     public void openGame() {
         this.playerId = this.getAccount().id;
@@ -166,6 +186,11 @@ public class LichessAPI {
         }
     }
 
+    /**
+     * Process gameplay events from a given Iterator, update the game state and call bot
+     *
+     * @param gameStream Iterator that produces Strings of JSON data according to lichess.org spec
+     */
     public void playGame(Iterator<String> gameStream) {
         GameState gs = new GameState();
 
@@ -174,6 +199,7 @@ public class LichessAPI {
         while (gameRunning && gameStream.hasNext()) {
             String line = gameStream.next();
             if (!line.isEmpty()) {
+                // Update game state and call the bot
                 String move = getNextMove(line, gs, playerId);
                 
                 if (move == null) {
@@ -285,10 +311,19 @@ public class LichessAPI {
         return stream.getHTTPStatus();
     }
 
+    /**
+     * Set the player's ID (profile name)
+     * Used for mocking and testing purposes
+     *
+     * @param newPlayerId A Lichess profile name
+     */
     public void setPlayerId(String newPlayerId) {
         this.playerId = newPlayerId;
     }
 
+    /**
+     * Get the player's ID (profile name)
+     */
     public String getPlayerId() {
         return this.playerId;
     }

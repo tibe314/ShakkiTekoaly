@@ -17,9 +17,9 @@ public class XBoardHandler {
     private Logger logger;
     
     /**
-     * Initializes XBoardHandler with a 
+     * Initializes XBoardHandler with a given Bot and a reader to the input pipe
      * @param bot A chess bot 
-     * @param in Reader for standard input
+     * @param in Reader for the input pipe (standard input)
      */
     public XBoardHandler(ChessBot bot, BufferedReader in) {
         this.bot = bot;
@@ -47,6 +47,11 @@ public class XBoardHandler {
     
     /**
      * Executes the game loop for XBoard
+     *
+     * <p>On each iteration, reads the input from the reader and parses
+     * XBoard commands and updates the gamestate accordingly. When XBoard
+     * indicates player turn, calls the bot and passes the bot move back
+     * to XBoard.</p>
      */
     public void run() {
         Boolean run = true;
