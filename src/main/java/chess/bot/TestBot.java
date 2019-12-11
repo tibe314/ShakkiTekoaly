@@ -22,16 +22,18 @@ public class TestBot implements ChessBot {
         this.random = new Random();
         this.b = new Board();
     }
-
+    
     @Override
     public String nextMove(GameState gs) {
         parseLatestMove(gs);
 
         Move myMove;
         try {
+            //Generate a chesslib move based on the position
             myMove = this.getMove();
             
             if (myMove != null) {
+                //Transform the move into a UCI string representation
                 return myMove.toString();
             }
             
@@ -49,8 +51,11 @@ public class TestBot implements ChessBot {
      * @throws MoveGeneratorException if unable to generate legal moves
      */
     public Move getMove() throws MoveGeneratorException {
+        //Uses chesslib's generateLegalMoves() to provide a list of valid moves in the current position
+        //Chesslib is not intended to be used by the student.
         MoveList moves = MoveGenerator.generateLegalMoves(b);
         
+        //Returns null if no legal moves available, else returns a randomly selected legal move.
         if (moves.size() > 0) {
             return moves.get(random.nextInt(moves.size()));
         } else {
@@ -82,6 +87,9 @@ public class TestBot implements ChessBot {
         }
     }
 
+    /**
+     * Transforms a move from UCI to a chesslib move and makes the move
+     */
     public void setMove(String starting, String ending, String promote) {
         String promotionPiece = "";
         if (promote.length() > 0) {
