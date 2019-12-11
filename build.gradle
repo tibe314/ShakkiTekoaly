@@ -75,6 +75,7 @@ checkstyle {
 }
 
 check.dependsOn jacocoTestReport
+build.dependsOn javadoc
 
 task performanceTest(type:JavaExec) {
    classpath = sourceSets.main.runtimeClasspath
