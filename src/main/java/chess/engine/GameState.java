@@ -18,36 +18,76 @@ import org.json.JSONObject;
  */
 public class GameState {
     
+    /**
+     * Current lichess game id if this gamestate is for lichess game
+     */
     public String id;
     
+    /**
+     * Player name for white side if this is lichess game
+     */
     public String playingBlack;
+    /**
+     * Player name for black side if this is lichess game
+     */
     public String playingWhite;
     
+    /**
+     * The side that the bot, which has this gamestate object, plays (used for both lichess and xboard games)
+     */
     public Side playing;
+    /**
+     * The side that currently has the turn (used for both lichess and xboard games)
+     */
     public Side turn = Side.WHITE;
     
-    // Stores the remaining time in milliseconds
+    /**
+     * Remaining time for white player
+     */
     public long whiteTime;
+
+    /**
+     * Remaining time for the black player
+     */
     public long blackTime;
     
+    /**
+     * All moves made in this game in, UCI notation
+     */
     public ArrayList<String> moves;
     
     public GameState() {
         this.moves = new ArrayList();
     }
     
+    /**
+     * The amount of moves made in this game
+     * @return The amount of moves made in this game
+     */
     public int getMoveCount() {
         return moves.size();
     }
     
+    /**
+     * The amount of current turn number, i.e. when both white and black has made a move it's 1 turn.
+     * @return int representing the current turn number of this game
+     */
     public int getTurnCount() {
         return 1 + moves.size() / 2;
     }
     
+    /**
+     * Return the latest move in UCI format
+     * @return String representation of the latest move (UCI format)
+     */
     public String getLatestMove() {
         return this.moves.get(this.moves.size() - 1);
     }
     
+    /**
+     * The remaining time for the side that the bot, that has this gamestate, plays. In milliseconds
+     * @return remaining time as long, in ms
+     */
     public long getRemainingTime() {
         if (playing == Side.WHITE) {
             return this.whiteTime;
@@ -56,6 +96,10 @@ public class GameState {
         }
     }
     
+    /**
+     * Time for the opponents side. In milliseconds
+     * @return remaining time as long, in ms
+     */
     public long getRemainingTimeOpponent() {
         if (playing == Side.WHITE) {
             return this.blackTime;
